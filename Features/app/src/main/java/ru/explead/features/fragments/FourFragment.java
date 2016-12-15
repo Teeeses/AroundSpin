@@ -6,14 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import ru.explead.features.R;
 
 /**
  * Created by develop on 14.12.2016.
  */
-public class FourFragment extends Fragment {
+public class FourFragment extends LevelsFragment {
 
+    private LinearLayout layoutVertical;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,12 +24,11 @@ public class FourFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_four, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_pager_four, container, false);
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
+        createButtons(getLayoutInflater(getArguments()), layoutVertical, 29);
 
+        return view;
     }
 }

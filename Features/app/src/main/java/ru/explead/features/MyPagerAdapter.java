@@ -53,7 +53,6 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
                 return fragment = new OneFragment();
         }
 
-
     }
 
 }

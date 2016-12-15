@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
 
 import com.google.common.collect.Lists;
 
@@ -18,8 +19,6 @@ import github.chenupt.springindicator.viewpager.ScrollerViewPager;
 public class MainActivity extends AppCompatActivity {
 
     private static Activity activity;
-    private static Fragment fragment;
-
     ScrollerViewPager viewPager;
 
     @Override
@@ -42,9 +41,5 @@ public class MainActivity extends AppCompatActivity {
 
     public static Activity getActivity() {
         return activity;
-    }
-
-    public static Fragment getFragment() {
-        return fragment;
     }
 }
