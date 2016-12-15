@@ -1,15 +1,13 @@
 package ru.explead.features.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 
 /**
@@ -29,7 +27,7 @@ public class TwoFragment extends LevelsFragment {
         View view = inflater.inflate(R.layout.fragment_pager_two, container, false);
 
         layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
-        createButtons(getLayoutInflater(getArguments()), layoutVertical, 15);
+        createButtons(getLayoutInflater(getArguments()), layoutVertical, 16);
 
         return view;
     }

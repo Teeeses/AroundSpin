@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 
 /**
@@ -16,6 +18,7 @@ public class LevelsFragment extends Fragment {
 
     protected ButtonLevel[] buttons;
     private int numberLevelsInLine = 3;
+
 
     public void createButtons(LayoutInflater inflater, LinearLayout layoutVertical, int size) {
         buttons = new ButtonLevel[size];
@@ -51,6 +54,19 @@ public class LevelsFragment extends Fragment {
                 count++;
             }
             layoutVertical.addView(rootHorizontalLayout);
+        }
+
+        setClickListeners();
+    }
+
+    private void setClickListeners() {
+        for(final ButtonLevel button: buttons) {
+            button.getLevelLayout().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), "Номер: " + Integer.toString(button.getNumber()), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

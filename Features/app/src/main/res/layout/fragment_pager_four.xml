@@ -11,13 +11,25 @@
         android:layout_height="match_parent" >
 
         <LinearLayout
-            android:id="@+id/layoutVertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutVertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
 
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:background="@android:color/transparent"/>
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>
