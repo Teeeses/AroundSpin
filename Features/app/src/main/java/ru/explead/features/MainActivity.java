@@ -28,23 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activity = this;
-        openBannerFragment();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, LevelsActivity.class);
-                startActivity(intent);
-            }
-        }, 2000);
-
-    }
-
-    public void openBannerFragment() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        fragment = new BannerFragment();
-        transaction.replace(R.id.fragmentContainer, fragment);
-        transaction.commit();
+        openGameFragment();
     }
 
     public void openGameFragment() {
@@ -52,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         fragment = new GameFragment();
         transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     public static Activity getActivity() {

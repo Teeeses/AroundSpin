@@ -1,15 +1,20 @@
 package ru.explead.features.fragments;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
+import ru.explead.features.Utils.Utils;
 
 /**
  * Created by develop on 15.12.2016.
@@ -18,6 +23,15 @@ public class LevelsFragment extends Fragment {
 
     protected ButtonLevel[] buttons;
     private int numberLevelsInLine = 3;
+    private Handler handler;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            final Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.change_scale);
+            buttons[Utils.getCurrentLevel() - 1].getLevelLayout().startAnimation(anim);
+            handler.postDelayed(runnable, 1000);
+        }
+    };
 
 
     public void createButtons(LayoutInflater inflater, LinearLayout layoutVertical, int size) {
@@ -57,7 +71,10 @@ public class LevelsFragment extends Fragment {
         }
 
         setClickListeners();
+        setAnimation();
     }
+
+    private void setAnimation() {}
 
     private void setClickListeners() {
         for(final ButtonLevel button: buttons) {
@@ -65,10 +82,13 @@ public class LevelsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(getActivity(), "Номер: " + Integer.toString(button.getNumber()), Toast.LENGTH_SHORT).show();
+                    Utils.setCurrentLevel(button.getNumber());
+                    ((LevelsActivity)LevelsActivity.getActivity()).openNewActivity();
                 }
             });
         }
     }
+
 
     class ButtonLevel {
         private int number;
