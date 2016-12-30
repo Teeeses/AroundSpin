@@ -29,10 +29,8 @@ public class GameFragment extends Fragment {
 
         viewSurface = (Surface) view.findViewById(R.id.viewSurface);
 
-        //RelativeLayout rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
-        //rootGameLayout.addView(new Surface(getActivity()));
-
         return view;
     }
+
 
 }

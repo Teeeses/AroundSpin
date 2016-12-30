@@ -1,5 +1,8 @@
 package ru.explead.features.logic;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
 /**
  * Created by develop on 30.12.2016.
  */
@@ -13,12 +16,25 @@ public class Circle {
     private float size;
     private int color;
 
+    private Paint paintCircle;
+
     public Circle(float x, float y, float size, int color) {
         this.x = x;
         this.y = y;
         this.size = size;
         this.color = color;
         this.radius = size/2;
+        createPaint();
+    }
+
+    public void onDraw(Canvas canvas) {
+        canvas.drawCircle(x, y, radius, paintCircle);
+    }
+
+    public void createPaint() {
+        paintCircle = new Paint();
+        paintCircle.setColor(color);
+        paintCircle.setAntiAlias(true);
     }
 
     public float getX() {

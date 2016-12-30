@@ -11,12 +11,12 @@ import android.view.SurfaceView;
 import ru.explead.features.app.App;
 import ru.explead.features.logic.Controller;
 
+
 public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameThread mThread;
     private Controller controller;
 
-    private Paint paintCircle;
 
     public Surface(Context context) {
         super(context);
@@ -44,13 +44,11 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        canvas.drawCircle(controller.getCircle().getX(), controller.getCircle().getY(), controller.getCircle().getRadius(), paintCircle);
+        controller.getCircle().onDraw(canvas);
     }
 
     private void createPaint() {
-        paintCircle = new Paint();
-        paintCircle.setColor(controller.getCircle().getColor());
-        paintCircle.setAntiAlias(true);
+
     }
 
     @SuppressWarnings("deprecation")
