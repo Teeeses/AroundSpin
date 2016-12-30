@@ -3,6 +3,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,7 +16,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
     public GameThread mThread;
     private Controller controller;
 
-
+    private Paint paintCircle;
 
     public Surface(Context context) {
         super(context);
@@ -33,20 +34,23 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void init() {
+        controller = App.getController();
         createPaint();
         createBitmap();
         getHolder().addCallback(this);
-        controller = App.getController();
     }
 
 
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        canvas.drawCircle(controller.getCircle().getX(), controller.getCircle().getY(), controller.getCircle().getRadius(), null);
+        canvas.drawCircle(controller.getCircle().getX(), controller.getCircle().getY(), controller.getCircle().getRadius(), paintCircle);
     }
 
     private void createPaint() {
+        paintCircle = new Paint();
+        paintCircle.setColor(controller.getCircle().getColor());
+        paintCircle.setAntiAlias(true);
     }
 
     @SuppressWarnings("deprecation")

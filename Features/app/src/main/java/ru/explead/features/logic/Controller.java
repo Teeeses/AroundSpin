@@ -13,7 +13,7 @@ public class Controller {
     private Circle circle;
 
     public Controller() {
-        circle = new Circle(App.getHeightScreen()*0.75f, App.getWidthScreen()/2, App.getWidthScreen()/12f, Color.MAGENTA);
+        circle = new Circle(App.getWidthScreen()*0.5f, App.getHeightScreen()*0.6f, App.getWidthScreen()/12f, Color.MAGENTA);
     }
 
     public Circle getCircle() {
