@@ -21,12 +21,16 @@ public class GameFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private Surface viewSurface;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        RelativeLayout rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
-        rootGameLayout.addView(new Surface(getActivity()));
+        viewSurface = (Surface) view.findViewById(R.id.viewSurface);
+
+        //RelativeLayout rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
+        //rootGameLayout.addView(new Surface(getActivity()));
 
         return view;
     }

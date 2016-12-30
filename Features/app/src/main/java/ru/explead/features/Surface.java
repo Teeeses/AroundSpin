@@ -3,22 +3,47 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import ru.explead.features.app.App;
+import ru.explead.features.logic.Controller;
 
 public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameThread mThread;
+    private Controller controller;
+
+
 
     public Surface(Context context) {
         super(context);
+        init();
+    }
+
+    public Surface(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public Surface(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+
+    private void init() {
         createPaint();
         createBitmap();
         getHolder().addCallback(this);
+        controller = App.getController();
     }
 
+
+
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.CYAN);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawCircle(controller.getCircle().getX(), controller.getCircle().getY(), controller.getCircle().getRadius(), null);
     }
 
     private void createPaint() {
@@ -28,14 +53,11 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
     private void createBitmap() {
     }
 
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
+    public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
         mThread.setRunning(false);
-        while (retry)
-        {
-            try
-            {
+        while (retry) {
+            try {
                 mThread.join();
                 retry = false;
             }
@@ -43,8 +65,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    public void surfaceCreated(SurfaceHolder holder)
-    {
+    public void surfaceCreated(SurfaceHolder holder) {
         mThread = new GameThread(getHolder(), this);
         mThread.setRunning(true);
         mThread.start();
@@ -52,14 +73,13 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
-    public class GameThread extends Thread
-    {
+    public class GameThread extends Thread {
+
         private SurfaceView view;
         private SurfaceHolder surfaceHolder;
         public boolean running = false;
 
-        public GameThread(SurfaceHolder surfaceHolder, SurfaceView view)
-        {
+        public GameThread(SurfaceHolder surfaceHolder, SurfaceView view) {
             this.surfaceHolder = surfaceHolder;
             this.view = view;
         }
@@ -70,27 +90,20 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         @SuppressLint("WrongCall")
-        public void run()
-        {
+        public void run() {
             Canvas canvas;
-            while (running)
-            {
+            while (running) {
                 canvas = null;
-                try
-                {
+                try {
                     canvas = surfaceHolder.lockCanvas();
-                    synchronized (view.getHolder())
-                    {
+                    synchronized (view.getHolder()) {
                         onDraw(canvas);
                     }
                 }
                 catch (Exception e) { }
-                finally
-                {
-                    if (canvas != null)
-                    {
-                        try
-                        {
+                finally {
+                    if (canvas != null) {
+                        try {
                             surfaceHolder.unlockCanvasAndPost(canvas);
                         }catch(Exception e) {}
                     }

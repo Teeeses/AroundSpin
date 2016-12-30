@@ -7,4 +7,8 @@
     android:clickable="true"
     android:background="@color/colorPrimary">
 
+    <ru.explead.features.Surface
+        android:id="@+id/viewSurface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

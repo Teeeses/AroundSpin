@@ -7,10 +7,13 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 
+import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 import ru.explead.features.fragments.GameFragment;
+import ru.explead.features.logic.Controller;
 
 
 /**
@@ -28,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activity = this;
+
+        DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
+        App.setWidthScreen(displaymetrics.widthPixels);
+        App.setHeightScreen(displaymetrics.heightPixels);
+
+        App.setController(new Controller());
+
         openGameFragment();
     }
 
