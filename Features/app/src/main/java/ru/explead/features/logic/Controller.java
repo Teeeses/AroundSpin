@@ -1,8 +1,6 @@
 package ru.explead.features.logic;
 
-import android.graphics.Color;
-
-import ru.explead.features.app.App;
+import java.util.ArrayList;
 
 /**
  * Created by develop on 30.12.2016.
@@ -10,17 +8,12 @@ import ru.explead.features.app.App;
 
 public class Controller {
 
-    private Circle circle;
+    private Level level;
+    private Field field;
+    private Cubes cubes;
 
     public Controller() {
-        circle = new Circle(App.getWidthScreen()*0.5f, App.getHeightScreen()*0.6f, App.getWidthScreen()/12f, Color.MAGENTA);
+
     }
 
-    public Circle getCircle() {
-        return circle;
-    }
-
-    public void setCircle(Circle circle) {
-        this.circle = circle;
-    }
 }
