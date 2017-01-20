@@ -2,6 +2,7 @@ package ru.explead.features;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Activity activity;
     private static Fragment fragment;
+    private static Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activity = this;
+        res = getResources();
 
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
@@ -66,5 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static Fragment getFragment() {
         return fragment;
+    }
+
+    public static Resources getRes() {
+        return res;
     }
 }

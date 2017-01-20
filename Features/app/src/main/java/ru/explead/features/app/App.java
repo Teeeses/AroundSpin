@@ -3,6 +3,7 @@ package ru.explead.features.app;
 import android.app.Application;
 
 import ru.explead.features.logic.Controller;
+import ru.explead.features.logic.Level;
 
 /**
  * Created by develop on 30.12.2016.
@@ -14,6 +15,7 @@ public class App extends Application {
     private static float heightScreen;
 
     private static Controller controller;
+    private static Level level;
 
 
     public static float getWidthScreen() {
@@ -38,5 +40,13 @@ public class App extends Application {
 
     public static void setController(Controller controller) {
         App.controller = controller;
+    }
+
+    public static Level getLevel() {
+        return level;
+    }
+
+    public static void setLevel(Level level) {
+        App.level = level;
     }
 }

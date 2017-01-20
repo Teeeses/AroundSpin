@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import ru.explead.features.R;
+import ru.explead.features.logic.Level;
 
 /**
  * Created by develop on 14.12.2016.
@@ -27,7 +28,7 @@ public class TwoFragment extends LevelsFragment {
         View view = inflater.inflate(R.layout.fragment_pager_two, container, false);
 
         layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
-        createButtons(getLayoutInflater(getArguments()), layoutVertical, 16);
+        createButtons(getLayoutInflater(getArguments()), layoutVertical, 16, Level.MEDIUM);
 
         return view;
     }

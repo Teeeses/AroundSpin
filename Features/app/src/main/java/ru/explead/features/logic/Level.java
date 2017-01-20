@@ -6,42 +6,21 @@ package ru.explead.features.logic;
 
 public class Level {
 
-    private int EASY = 0, MEDIUM = 1, HARD = 2, VERY_HARD = 3;
+    public static int EASY = 0, MEDIUM = 1, HARD = 2, VERY_HARD = 3;
     private int complexity;
 
     private int level;
 
-    public int[][] getFieldLevel(int level) {
-        int[][] field = null;
-        if(complexity == EASY) {
-            getLevelFromEasy(field);
-        }
-        if(complexity == MEDIUM) {
-            getLevelFromMedium(field);
-        }
-        if(complexity == HARD) {
-            getLevelFromHard(field);
-        }
-        if(complexity == VERY_HARD) {
-            getLevelFromVeryHard(field);
-        }
-        return field;
+    public Level(int complexity, int level) {
+        this.complexity = complexity;
+        this.level = level;
     }
 
-    private void getLevelFromEasy(int[][] field) {
-
+    public int getComplexity() {
+        return complexity;
     }
 
-    private void getLevelFromMedium(int[][] field) {
-
+    public int getLevel() {
+        return level;
     }
-
-    private void getLevelFromHard(int[][] field) {
-
-    }
-
-    private void getLevelFromVeryHard(int[][] field) {
-
-    }
-
 }

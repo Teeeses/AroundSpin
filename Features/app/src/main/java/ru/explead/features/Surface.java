@@ -43,7 +43,6 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        controller.getCircle().onDraw(canvas);
     }
 
     private void createPaint() {

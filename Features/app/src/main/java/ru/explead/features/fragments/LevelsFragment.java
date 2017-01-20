@@ -15,6 +15,8 @@ import android.widget.Toast;
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 import ru.explead.features.Utils.Utils;
+import ru.explead.features.app.App;
+import ru.explead.features.logic.Level;
 
 /**
  * Created by develop on 15.12.2016.
@@ -23,7 +25,9 @@ public class LevelsFragment extends Fragment {
 
     protected ButtonLevel[] buttons;
     private int numberLevelsInLine = 3;
-    private Handler handler;
+
+
+    /*private Handler handler;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -31,10 +35,10 @@ public class LevelsFragment extends Fragment {
             buttons[Utils.getCurrentLevel() - 1].getLevelLayout().startAnimation(anim);
             handler.postDelayed(runnable, 1000);
         }
-    };
+    };*/
 
 
-    public void createButtons(LayoutInflater inflater, LinearLayout layoutVertical, int size) {
+    public void createButtons(LayoutInflater inflater, LinearLayout layoutVertical, int size, int complexity) {
         buttons = new ButtonLevel[size];
         int linesSize = size / numberLevelsInLine + 1;
         int count = 0;
@@ -49,21 +53,21 @@ public class LevelsFragment extends Fragment {
                     View viewLevel = routesView.findViewById(R.id.viewOne);
                     tvLevel.setText(Integer.toString(count+1));
                     levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
+                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
                 } else if (i == 1) {
                     TextView tvLevel = (TextView) routesView.findViewById(R.id.tvLevelTwo);
                     RelativeLayout levelLayout = (RelativeLayout) routesView.findViewById(R.id.levelLayout2);
                     View viewLevel = routesView.findViewById(R.id.viewTwo);
                     tvLevel.setText(Integer.toString(count+1));
                     levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
+                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
                 } else if (i == 2) {
                     TextView tvLevel = (TextView) routesView.findViewById(R.id.tvLevelThree);
                     RelativeLayout levelLayout = (RelativeLayout) routesView.findViewById(R.id.levelLayout3);
                     View viewLevel = routesView.findViewById(R.id.viewThree);
                     tvLevel.setText(Integer.toString(count+1));
                     levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
+                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel, ButtonLevel.STATUS_OPEN);
                 }
                 count++;
             }
@@ -83,6 +87,7 @@ public class LevelsFragment extends Fragment {
                 public void onClick(View view) {
                     Toast.makeText(getActivity(), "Номер: " + Integer.toString(button.getNumber()), Toast.LENGTH_SHORT).show();
                     Utils.setCurrentLevel(button.getNumber());
+                    App.setLevel(new Level(button.getComplexity(), button.number));
                     ((LevelsActivity)LevelsActivity.getActivity()).openNewActivity();
                 }
             });
@@ -92,6 +97,7 @@ public class LevelsFragment extends Fragment {
 
     class ButtonLevel {
         private int number;
+        private int complexity;
         private TextView text;
         private View view;
         private RelativeLayout levelLayout;
@@ -99,7 +105,8 @@ public class LevelsFragment extends Fragment {
         public static final int STATUS_OPEN = 1, STATUS_CURRENT = 2, STATUS_CLOSE = 3;
         private int status;
 
-        public ButtonLevel(int number, TextView text, RelativeLayout levelLayout, View view, int status) {
+        public ButtonLevel(int complexity, int number, TextView text, RelativeLayout levelLayout, View view, int status) {
+            this.complexity = complexity;
             this.number = number;
             this.text = text;
             this.levelLayout = levelLayout;
@@ -125,6 +132,10 @@ public class LevelsFragment extends Fragment {
 
         public int getNumber() {
             return number;
+        }
+
+        public int getComplexity() {
+            return complexity;
         }
     }
 }

@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import github.chenupt.springindicator.SpringIndicator;
 import github.chenupt.springindicator.viewpager.ScrollerViewPager;
 import ru.explead.features.Utils.Const;
 import ru.explead.features.Utils.Utils;
+import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 
 
@@ -29,6 +31,11 @@ public class LevelsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_levels);
 
         activity = this;
+
+        DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
+        App.setWidthScreen(displaymetrics.widthPixels);
+        App.setHeightScreen(displaymetrics.heightPixels);
+
         Utils.setPref(getSharedPreferences(Const.SPREF, MODE_PRIVATE));
 
         viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
