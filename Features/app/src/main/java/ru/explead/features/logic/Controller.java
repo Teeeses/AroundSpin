@@ -1,5 +1,8 @@
 package ru.explead.features.logic;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+
 import java.util.ArrayList;
 
 import ru.explead.features.app.App;
@@ -15,9 +18,16 @@ public class Controller {
 
     private ArrayList<Cube> cubes = new ArrayList<>();
 
-    public Controller() {
+    public Controller(int sizeSurface) {
         level = App.getLevel();
-        field = new Field(level);
+        field = new Field(level, sizeSurface);
+        cubes.add(new Cube(3, 3, Color.CYAN, field));
+    }
+
+    public void onDraw(Canvas canvas) {
+        for(int i = 0; i < cubes.size(); i++) {
+            cubes.get(i).onDraw(canvas);
+        }
     }
 
     public Level getLevel() {

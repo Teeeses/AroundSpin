@@ -1,5 +1,7 @@
 package ru.explead.features.logic;
 
+import android.util.Log;
+
 import ru.explead.features.Utils.UtilsFieldLevel;
 
 /**
@@ -14,10 +16,12 @@ public class Field {
 
     private int[][] field;
 
-    public Field(Level level) {
+    public Field(Level level, int width) {
         field = UtilsFieldLevel.getFieldLevel(level.getLevel(), level.getComplexity());
+        this.width = width;
         numberCell = field.length;
         widthCell = width/ numberCell;
+        Log.d("TAG", "Width: " + width + " widthCell: " + widthCell);
     }
 
     public int getWidth() {

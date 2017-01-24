@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
+import ru.explead.features.logic.Controller;
 
 /**
  * Created by develop on 15.12.2016.
@@ -39,8 +40,8 @@ public class GameFragment extends Fragment {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
                 params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
                 viewSurface.setLayoutParams(params);
-                App.getController().getField().setWidth(size);
 
+                App.setController(new Controller(size));
                 return true;
             }
         });

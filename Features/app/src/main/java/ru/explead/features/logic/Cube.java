@@ -2,6 +2,7 @@ package ru.explead.features.logic;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import ru.explead.features.app.App;
 
@@ -24,17 +25,22 @@ public class Cube {
 
     private Field field;
 
-    public Cube(int x, int y) {
+    public Cube(int x, int y, int color, Field field) {
         this.x = x;
         this.y = y;
-        field = App.getController().getField();
+        this.color = color;
+        this.field = field;
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
+
+        Log.d("TAG", "SIZE: " + xPixels + " "  + yPixels);
+        createPaint();
     }
 
 
     public void onDraw(Canvas canvas) {
         canvas.drawRect(xPixels, yPixels, xPixels + field.getWidthCell(), yPixels + field.getWidthCell(), paint);
+        //canvas.drawCircle(40, 40, 30, paint);
     }
 
     public void createPaint() {

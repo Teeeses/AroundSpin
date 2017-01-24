@@ -34,19 +34,14 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     private void init() {
         controller = App.getController();
-        createPaint();
         createBitmap();
         getHolder().addCallback(this);
     }
 
 
-
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-    }
-
-    private void createPaint() {
-
+        controller.onDraw(canvas);
     }
 
     @SuppressWarnings("deprecation")

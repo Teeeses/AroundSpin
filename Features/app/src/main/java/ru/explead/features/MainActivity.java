@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private static Fragment fragment;
     private static Resources res;
 
+    int start_x, start_y, end_x, end_y;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
         App.setHeightScreen(displaymetrics.heightPixels);
-
-        App.setController(new Controller());
 
         openGameFragment();
     }
@@ -54,6 +54,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                start_x = (int)event.getX();
+                start_y = (int)event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                end_x = (int)event.getX();
+                end_y = (int)event.getY();
+                int side1 = (start_x - end_x);
+                int side2 = (start_y - end_y);
+                int hypotenuse = (int) (Math.sqrt(Math.abs(side1*side1) + Math.abs(side2*side2)));
+                double angle = (Math.asin((double) side2/hypotenuse))*57.295f;
+                if (hypotenuse > 30 && ((angle < 30 && angle > -30) || (angle > 60) || (angle < -60))) {
+                    //TODO
+                }
+                break;
+            default:
+                break;
+        }
+
         return super.onTouchEvent(event);
     }
 
@@ -62,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
 
     public static Activity getActivity() {
         return activity;
