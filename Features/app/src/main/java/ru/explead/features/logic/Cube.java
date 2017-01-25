@@ -17,13 +17,17 @@ public class Cube {
     private int x;
     private int y;
 
-    private int xPixels;
-    private int yPixels;
+    private float xPixels;
+    private float yPixels;
 
     private int color;
     private Paint paint;
 
     private Field field;
+
+    private int status;
+    private float speed;
+
 
     public Cube(int x, int y, int color, Field field) {
         this.x = x;
@@ -39,13 +43,20 @@ public class Cube {
 
 
     public void onDraw(Canvas canvas) {
-        canvas.drawRect(xPixels, yPixels, xPixels + field.getWidthCell(), yPixels + field.getWidthCell(), paint);
-        //canvas.drawCircle(40, 40, 30, paint);
+        canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
     }
 
     public void createPaint() {
         paint = new Paint();
         paint.setColor(color);
         paint.setAntiAlias(true);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

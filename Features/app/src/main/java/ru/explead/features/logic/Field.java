@@ -10,25 +10,25 @@ import ru.explead.features.Utils.UtilsFieldLevel;
 
 public class Field {
 
-    private int width;
+    private float width;
     private int numberCell;
-    private int widthCell;
+    private float widthCell;
 
     private int[][] field;
 
-    public Field(Level level, int width) {
-        field = UtilsFieldLevel.getFieldLevel(level.getLevel(), level.getComplexity());
+    public Field(float width, int[][] field) {
+        this.field = field;
         this.width = width;
         numberCell = field.length;
         widthCell = width/ numberCell;
         Log.d("TAG", "Width: " + width + " widthCell: " + widthCell);
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
@@ -40,7 +40,7 @@ public class Field {
         this.numberCell = numberCell;
     }
 
-    public int getWidthCell() {
+    public float getWidthCell() {
         return widthCell;
     }
 

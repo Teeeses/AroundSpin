@@ -3,7 +3,9 @@ package ru.explead.features.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -24,30 +26,70 @@ public class GameFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private Surface viewSurface;
+    private RelativeLayout rootGameLayout;
+
+    int start_x, start_y, end_x, end_y;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        viewSurface = (Surface) view.findViewById(R.id.viewSurface);
+        rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
 
-        ViewTreeObserver vto = viewSurface.getViewTreeObserver();
-        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            public boolean onPreDraw() {
-                viewSurface.getViewTreeObserver().removeOnPreDrawListener(this);
-                int size = (int)App.getWidthScreen() - 20;
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
-                params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                viewSurface.setLayoutParams(params);
+        int size = (int)App.getWidthScreen() - 20;
+        Controller controller = new Controller(size);
+        App.setController(controller);
 
-                App.setController(new Controller(size));
-                return true;
-            }
-        });
+        Surface surface = new Surface(getActivity());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        surface.setLayoutParams(params);
+
+        rootGameLayout.addView(surface);
+
+        onTouch(view);
 
         return view;
     }
 
+    public void onTouch(View view) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        start_x = (int)event.getX();
+                        start_y = (int)event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        end_x = (int)event.getX();
+                        end_y = (int)event.getY();
+                        int side1 = (start_x - end_x);
+                        int side2 = (start_y - end_y);
+                        int hypotenuse = (int) (Math.sqrt(Math.abs(side1*side1) + Math.abs(side2*side2)));
+                        double angle = (Math.asin((double) side2/hypotenuse))*57.295f;
+                        if (hypotenuse > 50 && ((angle < 30 && angle > -30) || (angle > 60) || (angle < -60))) {
+                            if ((side1 <= 0 && side2 >= 0 && angle < 30) || (side1 <= 0 && side2 <= 0 && angle > -30)) {
+                                App.getController().onMoveRight();
+                            }
+                            if ((side1 <= 0 && side2 >= 0 && angle > 60) || (side1 >= 0 && side2 >= 0 && angle > 60 )) {
+                                App.getController().onMoveUp();
+                            }
+                            if ((side1 >= 0 && side2 >= 0 && angle < 30) || (side1 >= 0 && side2 <= 0 && angle > -30)) {
+                                App.getController().onMoveLeft();
+                            }
+                            if ((side1 >= 0 && side2 <= 0 && angle < -60) || (side1 <= 0 && side2 <= 0 && angle < -60)) {
+                                App.getController().onMoveDown();
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                return true;
+            }
+        });
+    }
 
 }

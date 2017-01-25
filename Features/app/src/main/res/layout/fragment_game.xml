@@ -7,9 +7,4 @@
     android:clickable="true"
     android:background="@color/colorPrimary">
 
-    <ru.explead.features.Surface
-        android:id="@+id/viewSurface"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
 </RelativeLayout>
