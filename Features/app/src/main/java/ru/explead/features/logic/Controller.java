@@ -25,16 +25,16 @@ public class Controller {
      * левый нижний угол - (0, *), координаты.
      */
 
-
+    public int CUBE = 99;
     public static int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
     private Level level;
     private Field field;
 
     private Paint paintWall;
-
     private int sizeSurface;
 
     private ArrayList<Cube> cubes = new ArrayList<>();
+    private int[][] fieldCubes;
 
     public Controller(int sizeSurface) {
         this.sizeSurface = sizeSurface;
@@ -42,6 +42,14 @@ public class Controller {
         LevelData data = UtilsFieldLevel.getDataLevel(level.getLevel(), level.getComplexity(), sizeSurface);
         field = data.getField();
         cubes = data.getCubes();
+
+        fieldCubes = new int[field.getField().length][field.getField().length];
+        for(int i = 0; i < fieldCubes.length; i++) {
+            for (int j = 0; j < fieldCubes.length; j++) {
+                fieldCubes[i][j] = field.getField()[i][j];
+            }
+        }
+        changeFieldCubes();
 
         createPaint();
     }
@@ -65,14 +73,23 @@ public class Controller {
         }
     }
 
+    private boolean checkPlaceCube(int n, int placeX, int placeY) {
+        for(int i = n; i >= 0; i--) {
+            if(placeX == cubes.get(i).getX() && placeY == cubes.get(i).getY()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void onMoveUp() {
         Log.d("TAG", "move up");
         Collections.sort(cubes, new Comparator<Cube>() {
             @Override
             public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getY() > cubeTwo.getY())
+                if(cubeOne.getX() > cubeTwo.getX())
                     return 1;
-                if(cubeOne.getY() < cubeTwo.getY())
+                if(cubeOne.getX() < cubeTwo.getX())
                     return -1;
                 return 0;
             }
@@ -83,12 +100,8 @@ public class Controller {
             int x = cubes.get(i).getX();
             int y = cubes.get(i).getY();
 
-            Log.d("TAG", "d: " + x + " " + y + " " + count);
-            while (x - count > 0 && field.getField()[x - count][y] < 5) {
+            while (x - count - 1 >= 0 && field.getField()[x - count - 1][y] < 5 && checkPlaceCube(i, x - count - 1, y)) {
                 count++;
-            }
-            if(field.getField()[x - count][y] >= 5) {
-                count--;
             }
             cubes.get(i).setMoveParams(UP, count, 0);
         }
@@ -99,9 +112,9 @@ public class Controller {
         Collections.sort(cubes, new Comparator<Cube>() {
             @Override
             public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getY() < cubeTwo.getY())
+                if(cubeOne.getX() < cubeTwo.getX())
                     return 1;
-                if(cubeOne.getY() > cubeTwo.getY())
+                if(cubeOne.getX() > cubeTwo.getX())
                     return -1;
                 return 0;
             }
@@ -112,13 +125,16 @@ public class Controller {
             int x = cubes.get(i).getX();
             int y = cubes.get(i).getY();
 
-            while (x + count < field.getField().length - 1 && field.getField()[x + count][y] < 5) {
+            while (x + count + 1 < field.getField().length && field.getField()[x + count + 1][y] < 5 && checkPlaceCube(i, x + count + 1, y)) {
                 count++;
             }
-            if(field.getField()[x + count][y] >= 5) {
-                count--;
-            }
             cubes.get(i).setMoveParams(DOWN, count, 0);
+        }
+    }
+
+    private void changeFieldCubes() {
+        for(int i =0; i < cubes.size(); i++) {
+            fieldCubes[cubes.get(i).getX()][cubes.get(i).getY()] = CUBE;
         }
     }
 
@@ -151,18 +167,4 @@ public class Controller {
         return field;
     }
 
-
-
-    /*class CubeComparator implements Comparator<Cube>{
-
-        public int compare(Cube cubeOne, Cube cubeTwo){
-            if(cubeOne.getY() > cubeTwo.getY() ){
-                return 1;
-            }else if(cubeOne.getY() < cubeTwo.getY() ){
-                return -1;
-            }else{
-                return 0;
-            }
-        }
-    */
 }
