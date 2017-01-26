@@ -34,22 +34,13 @@ public class Controller {
     private int sizeSurface;
 
     private ArrayList<Cube> cubes = new ArrayList<>();
-    private int[][] fieldCubes;
 
     public Controller(int sizeSurface) {
         this.sizeSurface = sizeSurface;
         level = App.getLevel();
         LevelData data = UtilsFieldLevel.getDataLevel(level.getLevel(), level.getComplexity(), sizeSurface);
         field = data.getField();
-        cubes = data.getCubes();
-
-        fieldCubes = new int[field.getField().length][field.getField().length];
-        for(int i = 0; i < fieldCubes.length; i++) {
-            for (int j = 0; j < fieldCubes.length; j++) {
-                fieldCubes[i][j] = field.getField()[i][j];
-            }
-        }
-        changeFieldCubes();
+        cubes = data.getCubes();;
 
         createPaint();
     }
@@ -132,18 +123,54 @@ public class Controller {
         }
     }
 
-    private void changeFieldCubes() {
-        for(int i =0; i < cubes.size(); i++) {
-            fieldCubes[cubes.get(i).getX()][cubes.get(i).getY()] = CUBE;
-        }
-    }
-
     public void onMoveRight() {
         Log.d("TAG", "move right");
+        Collections.sort(cubes, new Comparator<Cube>() {
+            @Override
+            public int compare(Cube cubeOne, Cube cubeTwo) {
+                if(cubeOne.getY() < cubeTwo.getY())
+                    return 1;
+                if(cubeOne.getY() > cubeTwo.getY())
+                    return -1;
+                return 0;
+            }
+        });
+
+        for(int i = 0; i < cubes.size(); i++) {
+            int count = 0;
+            int x = cubes.get(i).getX();
+            int y = cubes.get(i).getY();
+
+            while (y + count + 1 < field.getField().length && field.getField()[x][y + count + 1] < 5 && checkPlaceCube(i, x, y + count + 1)) {
+                count++;
+            }
+            cubes.get(i).setMoveParams(RIGHT, 0, count);
+        }
     }
 
     public void onMoveLeft() {
         Log.d("TAG", "move left");
+        Collections.sort(cubes, new Comparator<Cube>() {
+            @Override
+            public int compare(Cube cubeOne, Cube cubeTwo) {
+                if(cubeOne.getY() > cubeTwo.getY())
+                    return 1;
+                if(cubeOne.getY() < cubeTwo.getY())
+                    return -1;
+                return 0;
+            }
+        });
+
+        for(int i = 0; i < cubes.size(); i++) {
+            int count = 0;
+            int x = cubes.get(i).getX();
+            int y = cubes.get(i).getY();
+
+            while (y - count - 1 >= 0 && field.getField()[x][y - count - 1] < 5 && checkPlaceCube(i, x, y - count - 1)) {
+                count++;
+            }
+            cubes.get(i).setMoveParams(LEFT, 0, count);
+        }
     }
 
     public void writeList() {
