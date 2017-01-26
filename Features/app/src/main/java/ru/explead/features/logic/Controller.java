@@ -26,7 +26,7 @@ public class Controller {
      */
 
     public int CUBE = 99;
-    public static int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
+    public static int UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, NO_ACTIVE = 0;
     private Level level;
     private Field field;
 
@@ -73,103 +73,116 @@ public class Controller {
         return true;
     }
 
-    public void onMoveUp() {
-        Log.d("TAG", "move up");
-        Collections.sort(cubes, new Comparator<Cube>() {
-            @Override
-            public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getX() > cubeTwo.getX())
-                    return 1;
-                if(cubeOne.getX() < cubeTwo.getX())
-                    return -1;
-                return 0;
-            }
-        });
-
+    private boolean checkNoActiveMove() {
         for(int i = 0; i < cubes.size(); i++) {
-            int count = 0;
-            int x = cubes.get(i).getX();
-            int y = cubes.get(i).getY();
-
-            while (x - count - 1 >= 0 && field.getField()[x - count - 1][y] < 5 && checkPlaceCube(i, x - count - 1, y)) {
-                count++;
+            if(cubes.get(i).getStatus() != NO_ACTIVE) {
+                return false;
             }
-            cubes.get(i).setMoveParams(UP, count, 0);
+        }
+        return true;
+    }
+
+    public void onMoveUp() {
+        if(checkNoActiveMove()) {
+            Collections.sort(cubes, new Comparator<Cube>() {
+                @Override
+                public int compare(Cube cubeOne, Cube cubeTwo) {
+                    if (cubeOne.getX() > cubeTwo.getX())
+                        return 1;
+                    if (cubeOne.getX() < cubeTwo.getX())
+                        return -1;
+                    return 0;
+                }
+            });
+
+            for (int i = 0; i < cubes.size(); i++) {
+                int count = 0;
+                int x = cubes.get(i).getX();
+                int y = cubes.get(i).getY();
+
+                while (x - count - 1 >= 0 && field.getField()[x - count - 1][y] < 5 && checkPlaceCube(i, x - count - 1, y)) {
+                    count++;
+                }
+                cubes.get(i).setMoveParams(UP, count, 0);
+            }
         }
     }
 
     public void onMoveDown() {
-        Log.d("TAG", "down up");
-        Collections.sort(cubes, new Comparator<Cube>() {
-            @Override
-            public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getX() < cubeTwo.getX())
-                    return 1;
-                if(cubeOne.getX() > cubeTwo.getX())
-                    return -1;
-                return 0;
-            }
-        });
+        if(checkNoActiveMove()) {
+            Collections.sort(cubes, new Comparator<Cube>() {
+                @Override
+                public int compare(Cube cubeOne, Cube cubeTwo) {
+                    if (cubeOne.getX() < cubeTwo.getX())
+                        return 1;
+                    if (cubeOne.getX() > cubeTwo.getX())
+                        return -1;
+                    return 0;
+                }
+            });
 
-        for(int i = 0; i < cubes.size(); i++) {
-            int count = 0;
-            int x = cubes.get(i).getX();
-            int y = cubes.get(i).getY();
+            for (int i = 0; i < cubes.size(); i++) {
+                int count = 0;
+                int x = cubes.get(i).getX();
+                int y = cubes.get(i).getY();
 
-            while (x + count + 1 < field.getField().length && field.getField()[x + count + 1][y] < 5 && checkPlaceCube(i, x + count + 1, y)) {
-                count++;
+                while (x + count + 1 < field.getField().length && field.getField()[x + count + 1][y] < 5 && checkPlaceCube(i, x + count + 1, y)) {
+                    count++;
+                }
+                cubes.get(i).setMoveParams(DOWN, count, 0);
             }
-            cubes.get(i).setMoveParams(DOWN, count, 0);
         }
     }
 
     public void onMoveRight() {
-        Log.d("TAG", "move right");
-        Collections.sort(cubes, new Comparator<Cube>() {
-            @Override
-            public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getY() < cubeTwo.getY())
-                    return 1;
-                if(cubeOne.getY() > cubeTwo.getY())
-                    return -1;
-                return 0;
-            }
-        });
+        if(checkNoActiveMove()) {
+            Collections.sort(cubes, new Comparator<Cube>() {
+                @Override
+                public int compare(Cube cubeOne, Cube cubeTwo) {
+                    if (cubeOne.getY() < cubeTwo.getY())
+                        return 1;
+                    if (cubeOne.getY() > cubeTwo.getY())
+                        return -1;
+                    return 0;
+                }
+            });
 
-        for(int i = 0; i < cubes.size(); i++) {
-            int count = 0;
-            int x = cubes.get(i).getX();
-            int y = cubes.get(i).getY();
+            for (int i = 0; i < cubes.size(); i++) {
+                int count = 0;
+                int x = cubes.get(i).getX();
+                int y = cubes.get(i).getY();
 
-            while (y + count + 1 < field.getField().length && field.getField()[x][y + count + 1] < 5 && checkPlaceCube(i, x, y + count + 1)) {
-                count++;
+                while (y + count + 1 < field.getField().length && field.getField()[x][y + count + 1] < 5 && checkPlaceCube(i, x, y + count + 1)) {
+                    count++;
+                }
+                cubes.get(i).setMoveParams(RIGHT, 0, count);
             }
-            cubes.get(i).setMoveParams(RIGHT, 0, count);
         }
     }
 
     public void onMoveLeft() {
-        Log.d("TAG", "move left");
-        Collections.sort(cubes, new Comparator<Cube>() {
-            @Override
-            public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getY() > cubeTwo.getY())
-                    return 1;
-                if(cubeOne.getY() < cubeTwo.getY())
-                    return -1;
-                return 0;
-            }
-        });
+        if(checkNoActiveMove()) {
+            Collections.sort(cubes, new Comparator<Cube>() {
+                @Override
+                public int compare(Cube cubeOne, Cube cubeTwo) {
+                    if (cubeOne.getY() > cubeTwo.getY())
+                        return 1;
+                    if (cubeOne.getY() < cubeTwo.getY())
+                        return -1;
+                    return 0;
+                }
+            });
 
-        for(int i = 0; i < cubes.size(); i++) {
-            int count = 0;
-            int x = cubes.get(i).getX();
-            int y = cubes.get(i).getY();
+            for (int i = 0; i < cubes.size(); i++) {
+                int count = 0;
+                int x = cubes.get(i).getX();
+                int y = cubes.get(i).getY();
 
-            while (y - count - 1 >= 0 && field.getField()[x][y - count - 1] < 5 && checkPlaceCube(i, x, y - count - 1)) {
-                count++;
+                while (y - count - 1 >= 0 && field.getField()[x][y - count - 1] < 5 && checkPlaceCube(i, x, y - count - 1)) {
+                    count++;
+                }
+                cubes.get(i).setMoveParams(LEFT, 0, count);
             }
-            cubes.get(i).setMoveParams(LEFT, 0, count);
         }
     }
 

@@ -2,9 +2,6 @@ package ru.explead.features.logic;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
-
-import ru.explead.features.app.App;
 
 /**
  * Created by develop on 20.01.2017.
@@ -50,6 +47,7 @@ public class Cube {
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;
+        status = Controller.NO_ACTIVE;
         createPaint();
     }
 
@@ -73,6 +71,8 @@ public class Cube {
                 yPixels = yPixels - speed;
             }
             numberFrame--;
+        } else {
+            status = Controller.NO_ACTIVE;
         }
     }
 
@@ -111,5 +111,9 @@ public class Cube {
 
     public int getY() {
         return y;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
