@@ -25,8 +25,21 @@ public class Cube {
 
     private Field field;
 
+    /**
+     * Статус движения(UP, DOWN, RIGHT, LEFT)
+     */
     private int status;
+
     private float speed;
+    /**
+     * Количество отрисовок на все движение
+     */
+    private int numberFrame;
+
+    /**
+     * Количество отрисовок на одну клетку
+     */
+    private int numberFrameCell = 3;
 
 
     public Cube(int x, int y, int color, Field field) {
@@ -36,14 +49,54 @@ public class Cube {
         this.field = field;
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
-
-        Log.d("TAG", "SIZE: " + xPixels + " "  + yPixels);
+        speed = field.getWidthCell()/numberFrameCell;
         createPaint();
     }
 
 
     public void onDraw(Canvas canvas) {
         canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+    }
+
+    public void onMove() {
+        if(numberFrame > 0) {
+            if (status == Controller.UP) {
+                xPixels = xPixels - speed;
+            }
+            if (status == Controller.RIGHT) {
+                yPixels = yPixels + speed;
+            }
+            if (status == Controller.DOWN) {
+                xPixels = xPixels + speed;
+            }
+            if (status == Controller.LEFT) {
+                yPixels = yPixels - speed;
+            }
+            numberFrame--;
+        }
+    }
+
+    public void setMoveParams(int move, int changeX, int changeY) {
+        if(move == Controller.UP) {
+            status = Controller.UP;
+            numberFrame = changeX * numberFrameCell;
+            x = x - changeX;
+        }
+        if(move == Controller.RIGHT) {
+            status = Controller.RIGHT;
+            numberFrame = changeY * numberFrameCell;
+            y = y + changeY;
+        }
+        if(move == Controller.DOWN) {
+            status = Controller.DOWN;
+            numberFrame = changeX * numberFrameCell;
+            x = x + changeX;
+        }
+        if(move == Controller.LEFT) {
+            status = Controller.LEFT;
+            numberFrame = changeY * numberFrameCell;
+            y = y - changeY;
+        }
     }
 
     public void createPaint() {

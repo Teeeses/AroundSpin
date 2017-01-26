@@ -59,24 +59,67 @@ public class Controller {
         }
     }
 
+    public void onTick() {
+        for(int  i = 0; i < cubes.size(); i++) {
+            cubes.get(i).onMove();
+        }
+    }
+
     public void onMoveUp() {
         Log.d("TAG", "move up");
-        writeList();
         Collections.sort(cubes, new Comparator<Cube>() {
             @Override
             public int compare(Cube cubeOne, Cube cubeTwo) {
-                if(cubeOne.getX() > cubeTwo.getX())
+                if(cubeOne.getY() > cubeTwo.getY())
                     return 1;
-                if(cubeOne.getX() < cubeTwo.getX())
+                if(cubeOne.getY() < cubeTwo.getY())
                     return -1;
                 return 0;
             }
         });
-        writeList();
+
+        for(int i = 0; i < cubes.size(); i++) {
+            int count = 0;
+            int x = cubes.get(i).getX();
+            int y = cubes.get(i).getY();
+
+            Log.d("TAG", "d: " + x + " " + y + " " + count);
+            while (x - count > 0 && field.getField()[x - count][y] < 5) {
+                count++;
+            }
+            if(field.getField()[x - count][y] >= 5) {
+                count--;
+            }
+            cubes.get(i).setMoveParams(UP, count, 0);
+        }
     }
 
     public void onMoveDown() {
-        Log.d("TAG", "move down");
+        Log.d("TAG", "down up");
+        Collections.sort(cubes, new Comparator<Cube>() {
+            @Override
+            public int compare(Cube cubeOne, Cube cubeTwo) {
+                if(cubeOne.getY() < cubeTwo.getY())
+                    return 1;
+                if(cubeOne.getY() > cubeTwo.getY())
+                    return -1;
+                return 0;
+            }
+        });
+
+        for(int i = 0; i < cubes.size(); i++) {
+            int count = 0;
+            int x = cubes.get(i).getX();
+            int y = cubes.get(i).getY();
+
+            while (x + count < field.getField().length - 1 && field.getField()[x + count][y] < 5) {
+                count++;
+            }
+            if(field.getField()[x + count][y] >= 5) {
+                count--;
+            }
+            cubes.get(i).setMoveParams(DOWN, count, 0);
+        }
     }
 
     public void onMoveRight() {

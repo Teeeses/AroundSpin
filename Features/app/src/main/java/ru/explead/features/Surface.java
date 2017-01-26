@@ -92,6 +92,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
                 try {
                     canvas = surfaceHolder.lockCanvas();
                     synchronized (view.getHolder()) {
+                        controller.onTick();
                         onDraw(canvas);
                     }
                 }
