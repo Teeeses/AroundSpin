@@ -13,18 +13,18 @@ import ru.explead.features.logic.Field;
 public class LevelData {
 
     private Field field;
-    private ArrayList<Cube> cubes = new ArrayList<>();
+    private ArrayList<CubeData> cubeData = new ArrayList<>();
 
-    public LevelData(Field field, ArrayList<Cube> cubes) {
+    public LevelData(Field field, ArrayList<CubeData> cubeData) {
         this.field = field;
-        this.cubes = cubes;
+        this.cubeData = cubeData;
     }
 
     public Field getField() {
         return field;
     }
 
-    public ArrayList<Cube> getCubes() {
-        return cubes;
+    public ArrayList<CubeData> getCubeData() {
+        return cubeData;
     }
 }

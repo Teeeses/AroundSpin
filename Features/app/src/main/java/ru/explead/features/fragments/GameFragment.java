@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import ru.explead.features.R;
 import ru.explead.features.Surface;
@@ -37,7 +38,7 @@ public class GameFragment extends Fragment {
         rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
 
         int size = (int)App.getWidthScreen() - 20;
-        Controller controller = new Controller(size);
+        Controller controller = new Controller(size, getActivity());
         App.setController(controller);
 
         Surface surface = new Surface(getActivity());
@@ -90,6 +91,12 @@ public class GameFragment extends Fragment {
                 return true;
             }
         });
+    }
+
+    public void onWin() {
+        Log.d("TAG", "WIN");
+        getActivity().onBackPressed();
+        Toast.makeText(getActivity(), "WIN", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -5,6 +5,8 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 
+import ru.explead.features.beans.CubeData;
+import ru.explead.features.beans.EndPosition;
 import ru.explead.features.beans.LevelData;
 import ru.explead.features.logic.Cube;
 import ru.explead.features.logic.Field;
@@ -47,10 +49,10 @@ public class UtilsFieldLevel {
                     {0, 0, 6, 6, 6, 6}
             };
             Field field = new Field(sizeSurface, mass);
-            ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(5, 0, Color.MAGENTA, field));
-            cubeList.add(new Cube(5, 1, Color.RED, field));
-            levelData = new LevelData(field, cubeList);
+            ArrayList<CubeData> cubeDataList = new ArrayList<>();
+            cubeDataList.add(new CubeData(new Cube(5, 0, Color.MAGENTA, field), new EndPosition(5, 1)));
+            cubeDataList.add(new CubeData(new Cube(5, 1, Color.RED, field), new EndPosition(5, 0)));
+            levelData = new LevelData(field, cubeDataList);
         }
     }
 
