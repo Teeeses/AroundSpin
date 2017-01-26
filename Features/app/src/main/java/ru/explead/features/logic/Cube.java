@@ -73,6 +73,8 @@ public class Cube {
             numberFrame--;
         } else {
             status = Controller.NO_ACTIVE;
+            xPixels = x*field.getWidthCell();
+            yPixels = y*field.getWidthCell();
         }
     }
 
