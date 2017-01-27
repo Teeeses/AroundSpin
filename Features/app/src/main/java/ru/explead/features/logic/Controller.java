@@ -31,7 +31,7 @@ public class Controller {
     private Level level;
     private Field field;
     private ArrayList<Cube> cube = new ArrayList<>();
-    
+
     private Paint paintWall;
 
     public Controller() {

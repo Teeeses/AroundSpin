@@ -1,5 +1,6 @@
 package ru.explead.features.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
+import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.Controller;
 
 /**
@@ -97,8 +99,8 @@ public class GameFragment extends Fragment {
 
     public void onWin() {
         Log.d("TAG", "WIN");
-        getActivity().onBackPressed();
-        Toast.makeText(getActivity(), "WIN", Toast.LENGTH_SHORT).show();
+        DialogMenu dialog = new DialogMenu(getActivity());
+        dialog.show();
     }
 
 }

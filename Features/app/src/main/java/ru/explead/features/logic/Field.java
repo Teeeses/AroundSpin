@@ -22,7 +22,6 @@ public class Field {
         this.width = App.getSizeSurface();
         numberCell = field.length;
         widthCell = width/ numberCell;
-        Log.d("TAG", "Width: " + width + " widthCell: " + widthCell);
     }
 
     public float getWidth() {

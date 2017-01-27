@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
@@ -69,5 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static Resources getRes() {
         return res;
+    }
+
+    public void showToast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 }

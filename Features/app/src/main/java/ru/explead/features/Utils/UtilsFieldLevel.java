@@ -36,6 +36,25 @@ public class UtilsFieldLevel {
     private static void getLevelFromEasy(int level) {
         if(level == 1) {
             int[][] mass = new int[][] {
+                    {6, 6, 6, 0, 0, 0, 0, 0},
+                    {6, 6, 0, 0, 0, 0, 0, 0},
+                    {6, 0, 0, 0, 6, 6, 6, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {6, 0, 0, 0, 0, 0, 0, 6},
+                    {6, 6, 0, 0, 0, 0, 0, 6},
+                    {6, 6, 6, 0, 0, 0, 0, 6}
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(3, 0, Color.MAGENTA, new EndPosition(3, 6)));
+            cubeList.add(new Cube(4, 0, Color.RED, new EndPosition(3, 6)));
+            App.getController().setCube(cubeList);
+        }
+
+        if(level == 2) {
+            int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0},
                     {6, 0, 6, 6, 0, 0},
                     {0, 0, 6, 6, 0, 0},
@@ -48,7 +67,22 @@ public class UtilsFieldLevel {
             ArrayList<Cube> cubeList = new ArrayList<>();
             cubeList.add(new Cube(5, 0, Color.MAGENTA, new EndPosition(5, 1)));
             cubeList.add(new Cube(5, 1, Color.RED, new EndPosition(5, 0)));
-            cubeList.add(new Cube(4, 1, Color.BLACK, new EndPosition(4, 1)));
+            App.getController().setCube(cubeList);
+        }
+
+        if(level == 3) {
+            int[][] mass = new int[][] {
+                    {0, 0, 0, 0, 6},
+                    {0, 6, 0, 0, 0},
+                    {0, 0, 0, 6, 0},
+                    {0, 0, 6, 6, 0},
+                    {0, 0, 0, 6, 0},
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(4, 4, Color.MAGENTA, new EndPosition(0, 0)));
+            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(0, 0)));
             App.getController().setCube(cubeList);
         }
     }
