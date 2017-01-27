@@ -3,6 +3,7 @@ package ru.explead.features.logic;
 import android.util.Log;
 
 import ru.explead.features.Utils.UtilsFieldLevel;
+import ru.explead.features.app.App;
 
 /**
  * Created by develop on 20.01.2017.
@@ -16,9 +17,9 @@ public class Field {
 
     private int[][] field;
 
-    public Field(float width, int[][] field) {
+    public Field(int[][] field) {
         this.field = field;
-        this.width = width;
+        this.width = App.getSizeSurface();
         numberCell = field.length;
         widthCell = width/ numberCell;
         Log.d("TAG", "Width: " + width + " widthCell: " + widthCell);

@@ -38,8 +38,10 @@ public class GameFragment extends Fragment {
         rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
 
         int size = (int)App.getWidthScreen() - 20;
-        Controller controller = new Controller(size, getActivity());
+        App.setSizeSurface(size);
+        Controller controller = new Controller();
         App.setController(controller);
+        controller.startGame();
 
         Surface surface = new Surface(getActivity());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);

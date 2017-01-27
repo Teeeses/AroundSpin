@@ -3,6 +3,9 @@ package ru.explead.features.logic;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import ru.explead.features.app.App;
+import ru.explead.features.beans.EndPosition;
+
 /**
  * Created by develop on 20.01.2017.
  */
@@ -21,6 +24,7 @@ public class Cube {
     private Paint paint;
 
     private Field field;
+    private EndPosition endPosition;
 
     /**
      * Статус движения(UP, DOWN, RIGHT, LEFT)
@@ -39,11 +43,12 @@ public class Cube {
     private int numberFrameCell = 3;
 
 
-    public Cube(int x, int y, int color, Field field) {
+    public Cube(int x, int y, int color, EndPosition endPosition) {
+        field = App.getController().getField();
         this.x = x;
         this.y = y;
         this.color = color;
-        this.field = field;
+        this.endPosition = endPosition;
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;
@@ -117,5 +122,9 @@ public class Cube {
 
     public int getStatus() {
         return status;
+    }
+
+    public EndPosition getEndPosition() {
+        return endPosition;
     }
 }
