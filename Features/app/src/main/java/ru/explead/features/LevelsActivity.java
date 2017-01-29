@@ -47,6 +47,7 @@ public class LevelsActivity extends AppCompatActivity {
 
         // just set viewPager
         springIndicator.setViewPager(viewPager);
+
     }
 
     public void openBannerFragment() {
@@ -63,7 +64,6 @@ public class LevelsActivity extends AppCompatActivity {
     public void openNewActivity() {
         Intent intent = new Intent(LevelsActivity.this, MainActivity.class);
         startActivity(intent);
-
     }
 
 }

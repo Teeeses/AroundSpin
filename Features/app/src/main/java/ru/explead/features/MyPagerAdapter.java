@@ -3,9 +3,11 @@ package ru.explead.features;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import ru.explead.features.fragments.FourFragment;
 import ru.explead.features.fragments.OneFragment;
+import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.fragments.ThreeFragment;
 import ru.explead.features.fragments.TwoFragment;
 
@@ -14,7 +16,7 @@ import ru.explead.features.fragments.TwoFragment;
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private static int NUM_ITEMS = 4;
+    private static int NUM_ITEMS = 5;
     private Fragment fragment;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
@@ -47,6 +49,10 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
             case 3:
                 fragment = new FourFragment();
+                return fragment;
+
+            case 4:
+                fragment = new TestFragment();
                 return fragment;
 
             default:

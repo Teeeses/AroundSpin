@@ -2,11 +2,13 @@ package ru.explead.features.Utils;
 
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 import ru.explead.features.app.App;
 import ru.explead.features.beans.EndPosition;
+import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.logic.Cube;
 import ru.explead.features.logic.Field;
 import ru.explead.features.logic.Level;
@@ -85,6 +87,22 @@ public class UtilsFieldLevel {
             cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(0, 0)));
             App.getController().setCube(cubeList);
         }
+
+        if(level == 4) {
+            int[][] mass = new int[][] {
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 6, 0},
+                    {6, 6, 0, 6, 6},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 6, 0},
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(1, 4, Color.MAGENTA, new EndPosition(4, 4)));
+            cubeList.add(new Cube(4, 4, Color.RED, new EndPosition(1, 4)));
+            App.getController().setCube(cubeList);
+        }
     }
 
 
@@ -103,5 +121,11 @@ public class UtilsFieldLevel {
 
     private static void getLevelFromVeryHard(int level) {
 
+        if(level == 99) {
+            Field field = new Field(TestFragment.removeInTableCube());
+            App.getController().setField(field);
+            App.getController().setCube(TestFragment.addCunes());
+
+        }
     }
 }

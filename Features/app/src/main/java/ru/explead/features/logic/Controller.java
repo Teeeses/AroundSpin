@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import ru.explead.features.MainActivity;
+import ru.explead.features.R;
 import ru.explead.features.Utils.UtilsFieldLevel;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.GameFragment;
@@ -222,7 +223,7 @@ public class Controller {
 
     private void createPaint() {
         paintWall = new Paint();
-        paintWall.setColor(Color.GRAY);
+        paintWall.setColor(MainActivity.getActivity().getResources().getColor(R.color.colorPrimary));
         paintWall.setAntiAlias(true);
     }
 

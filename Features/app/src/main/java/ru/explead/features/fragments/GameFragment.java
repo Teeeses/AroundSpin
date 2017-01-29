@@ -13,6 +13,7 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
@@ -99,7 +100,7 @@ public class GameFragment extends Fragment {
 
     public void onWin() {
         Log.d("TAG", "WIN");
-        DialogMenu dialog = new DialogMenu(getActivity());
+        DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
         dialog.show();
     }
 

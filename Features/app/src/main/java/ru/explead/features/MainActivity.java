@@ -17,6 +17,7 @@ import android.widget.Toast;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 import ru.explead.features.fragments.GameFragment;
+import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.logic.Controller;
 
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public void openGameFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
-        transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.add(R.id.fragmentContainer, fragment);
         transaction.commit();
     }
 
