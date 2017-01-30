@@ -54,6 +54,12 @@ public class GridAdapter extends BaseAdapter {
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
             viewHolder.view.setBackgroundColor(LevelsActivity.getActivity().getResources().getColor(R.color.green));
         }
+        if(buttonLevel.getStatus() == ButtonLevel.STATUS_CLOSE) {
+            viewHolder.view.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_button));
+        }
+        if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN) {
+            viewHolder.view.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_button));
+        }
 
 
         viewHolder.levelLayout.setOnClickListener(new View.OnClickListener() {

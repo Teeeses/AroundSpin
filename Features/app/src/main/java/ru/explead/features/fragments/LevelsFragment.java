@@ -25,4 +25,17 @@ public class LevelsFragment extends Fragment {
         gvMain.setNumColumns(3);
     }
 
+    public void refreshStatus() {
+        for(int i = 0; i < array.size(); i++) {
+            array.get(i).findStatus();
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        refreshStatus();
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
 }

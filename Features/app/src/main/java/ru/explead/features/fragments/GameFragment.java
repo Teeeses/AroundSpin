@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import ru.explead.features.LevelsActivity;
-import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
-import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.Controller;
 
 /**

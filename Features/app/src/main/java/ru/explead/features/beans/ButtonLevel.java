@@ -9,6 +9,7 @@ import ru.explead.features.logic.Level;
  */
 
 public class ButtonLevel {
+
     private int number;
     private int complexity;
 
@@ -24,7 +25,6 @@ public class ButtonLevel {
     public void findStatus() {
         if(complexity == Level.EASY) {
             int easy_current_level = LevelsActivity.getPref().getInt(Utils.EASY_CURRENT_LEVEL, 1);
-            System.out.println(easy_current_level + " " + number);
             if(number == easy_current_level) {
                 status = STATUS_CURRENT;
             }

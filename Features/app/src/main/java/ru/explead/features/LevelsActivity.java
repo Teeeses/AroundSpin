@@ -45,9 +45,7 @@ public class LevelsActivity extends AppCompatActivity  {
         viewPager.setAdapter(adapter);
         viewPager.fixScrollSpeed();
 
-        // just set viewPager
         springIndicator.setViewPager(viewPager);
-
     }
 
     public void openBannerFragment() {
