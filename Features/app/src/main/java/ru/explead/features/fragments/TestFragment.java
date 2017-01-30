@@ -1,7 +1,9 @@
 package ru.explead.features.fragments;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
@@ -12,8 +14,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.MainActivity;
@@ -91,16 +97,42 @@ public class TestFragment extends LevelsFragment {
             @Override
             public void onClick(View v) {
                 App.setLevel(new Level(Level.VERY_HARD, 99));
-
-                System.out.println();
-                for(int i = 0; i < number; i++) {
-                    for(int j = 0; j < number; j++) {
-                        System.out.print(table[i][j] + " ");
-                    }
-                    System.out.println();
-                }
                 cubes.clear();
                 ((LevelsActivity)getActivity()).openNewActivity();
+            }
+        });
+
+        Button btnPhoto = (Button) view.findViewById(R.id.btnPhoto);
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date now = new Date();
+                android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+                try {
+                    // image naming and path  to include sd card  appending name you choose for file
+                    String mPath = Environment.getExternalStorageDirectory() + "/Pictures/Screens/" + now + ".jpg";
+
+                    // create bitmap screen capture
+                    View v1 = getActivity().getWindow().getDecorView().getRootView();
+                    v1.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+                    v1.setDrawingCacheEnabled(false);
+
+                    File imageFile = new File(mPath);
+
+                    FileOutputStream outputStream = new FileOutputStream(imageFile);
+                    int quality = 100;
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                    Toast.makeText(getActivity(), "Готово", Toast.LENGTH_SHORT).show();
+
+                } catch (Throwable e) {
+                    // Several error may come out with file handling or OOM
+                    Toast.makeText(getActivity(), "Не получилось", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         });
 

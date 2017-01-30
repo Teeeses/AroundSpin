@@ -82,5 +82,12 @@
             android:text="СТАРТ"
             android:id="@+id/btnStartTest"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Ф"
+            android:id="@+id/btnPhoto"/>
+
     </LinearLayout>
 </RelativeLayout>
