@@ -16,8 +16,6 @@ import ru.explead.features.logic.Level;
  */
 public class OneFragment extends LevelsFragment {
 
-    private LinearLayout layoutVertical;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +27,6 @@ public class OneFragment extends LevelsFragment {
 
 
         gvMain = (GridView) view.findViewById(R.id.gvMain);
-
-        layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
         createButtons(20, Level.EASY);
 
         return view;

@@ -3,10 +3,8 @@ package ru.explead.features;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import ru.explead.features.fragments.FourFragment;
-import ru.explead.features.fragments.LevelsFragment;
 import ru.explead.features.fragments.OneFragment;
 import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.fragments.ThreeFragment;
@@ -41,14 +39,5 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getItemPosition(Object object) {
         return super.getItemPosition(object);
-    }
-
-    public void update() {
-        for(int i = 0; i < 4; i++) {
-            if(i == 0) {
-                Fragment fragment = getItem(i);
-                ((OneFragment) fragment).update();
-            }
-        }
     }
 }
