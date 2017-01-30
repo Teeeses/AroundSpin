@@ -1,18 +1,23 @@
 package ru.explead.features.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import ru.explead.features.LevelsActivity;
+import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
+import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.Controller;
 
 /**
@@ -20,12 +25,8 @@ import ru.explead.features.logic.Controller;
  */
 public class GameFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     private RelativeLayout rootGameLayout;
+    private Button btnRestart;
 
     int start_x, start_y, end_x, end_y;
 
@@ -35,11 +36,9 @@ public class GameFragment extends Fragment {
 
         rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
 
-        int size = (int)App.getWidthScreen() - 20;
+        int size = (int)App.getWidthScreen() - 30;
         App.setSizeSurface(size);
-        Controller controller = new Controller();
-        App.setController(controller);
-        controller.startGame();
+        startGame();
 
         Surface surface = new Surface(getActivity());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
@@ -48,9 +47,23 @@ public class GameFragment extends Fragment {
 
         rootGameLayout.addView(surface);
 
+        btnRestart = (Button) view.findViewById(R.id.btnRestart);
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+
         onTouch(view);
 
         return view;
+    }
+
+    public void startGame() {
+        Controller controller = new Controller();
+        App.setController(controller);
+        controller.startGame();
     }
 
     public void onTouch(View view) {
@@ -72,16 +85,14 @@ public class GameFragment extends Fragment {
                         if (hypotenuse > 50 && ((angle < 30 && angle > -30) || (angle > 60) || (angle < -60))) {
                             if ((side1 <= 0 && side2 >= 0 && angle < 30) || (side1 <= 0 && side2 <= 0 && angle > -30)) {
                                 App.getController().onMoveRight();
-                            }
-                            if ((side1 <= 0 && side2 >= 0 && angle > 60) || (side1 >= 0 && side2 >= 0 && angle > 60 )) {
+                            } else if ((side1 <= 0 && side2 >= 0 && angle > 60) || (side1 >= 0 && side2 >= 0 && angle > 60 )) {
                                 App.getController().onMoveUp();
-                            }
-                            if ((side1 >= 0 && side2 >= 0 && angle < 30) || (side1 >= 0 && side2 <= 0 && angle > -30)) {
+                            } else if ((side1 >= 0 && side2 >= 0 && angle < 30) || (side1 >= 0 && side2 <= 0 && angle > -30)) {
                                 App.getController().onMoveLeft();
-                            }
-                            if ((side1 >= 0 && side2 <= 0 && angle < -60) || (side1 <= 0 && side2 <= 0 && angle < -60)) {
+                            } else if ((side1 >= 0 && side2 <= 0 && angle < -60) || (side1 <= 0 && side2 <= 0 && angle < -60)) {
                                 App.getController().onMoveDown();
                             }
+                            checkWin();
                         }
                         break;
                     default:
@@ -93,12 +104,26 @@ public class GameFragment extends Fragment {
         });
     }
 
+    public void checkWin() {
+        if(App.getController().getStatus() == Controller.FINISH) {
+            /*new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                        System.out.println("WIN");
+                        DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
+                        dialog.show();
+                }
+            }, 2500);*/
+            System.out.println("WIN");
+            //DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
+            //dialog.show();
+            Toast.makeText(MainActivity.getActivity(), "Победа", Toast.LENGTH_SHORT).show();
+            ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel() + 1);
+        }
+    }
+
     public void onWin() {
         System.out.println("WIN");
-        //DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
-        //dialog.show();
-
-        ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel() + 1);
     }
 
 }

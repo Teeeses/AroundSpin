@@ -14,7 +14,6 @@ import ru.explead.features.logic.Controller;
 public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameThread mThread;
-    private Controller controller;
 
 
     public Surface(Context context) {
@@ -33,7 +32,6 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void init() {
-        controller = App.getController();
         createBitmap();
         getHolder().addCallback(this);
     }
@@ -41,7 +39,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        controller.onDraw(canvas);
+        App.getController().onDraw(canvas);
     }
 
     @SuppressWarnings("deprecation")
@@ -92,7 +90,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
                 try {
                     canvas = surfaceHolder.lockCanvas();
                     synchronized (view.getHolder()) {
-                        controller.onTick();
+                        App.getController().onTick();
                         onDraw(canvas);
                     }
                 }

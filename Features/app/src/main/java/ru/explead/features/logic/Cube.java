@@ -45,10 +45,10 @@ public class Cube {
 
     public Cube(int x, int y, int color, EndPosition endPosition) {
         field = App.getController().getField();
+        this.endPosition = endPosition;
         this.x = x;
         this.y = y;
         this.color = color;
-        this.endPosition = endPosition;
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;

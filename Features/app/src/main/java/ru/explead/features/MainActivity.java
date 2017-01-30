@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public void openGameFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
-        transaction.add(R.id.fragmentContainer, fragment);
+        transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
     }
 

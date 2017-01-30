@@ -47,6 +47,9 @@ public class Controller {
 
     public void onDraw(Canvas canvas) {
         for(int i = 0; i < cube.size(); i++) {
+            cube.get(i).getEndPosition().onDraw(canvas);
+        }
+        for(int i = 0; i < cube.size(); i++) {
             cube.get(i).onDraw(canvas);
         }
         for(int i = 0; i < field.getField().length; i++) {
@@ -62,7 +65,7 @@ public class Controller {
      * Каждый тик потока отрисовки
      */
     public void onTick() {
-        for(int i = 0; i < cube.size(); i++) {
+        for (int i = 0; i < cube.size(); i++) {
             cube.get(i).onMove();
         }
         checkWin();
@@ -102,17 +105,14 @@ public class Controller {
      * @return - true - если кубики на своих местах
      */
     public boolean checkWin() {
+        if(status == FINISH)
         for(int i = 0; i < cube.size(); i++) {
             if(cube.get(i).getX() != cube.get(i).getEndPosition().getX() ||
                     cube.get(i).getY() != cube.get(i).getEndPosition().getY()) {
                 return false;
             }
         }
-
-        if(status == ACTIVE_GAME) {
-            status = FINISH;
-            ((GameFragment)MainActivity.getFragment()).onWin();
-        }
+        status = FINISH;
         return true;
     }
 

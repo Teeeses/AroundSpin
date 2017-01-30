@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ru.explead.features.LevelsActivity;
-import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.app.App;
 import ru.explead.features.beans.EndPosition;
@@ -225,18 +224,24 @@ public class TestFragment extends LevelsFragment {
     }
 
     public static ArrayList<Cube> addCubes() {
+        int xr = 0, yr = 0, xg = 0, yg = 0;
         for(int i = 0; i < number; i++) {
             for(int j = 0; j < number; j++) {
                 if(table[i][j] > 0 && table[i][j] < 6) {
                     if(table[i][j] == 1) {
-                        cubes.add(new Cube(i, j, Color.RED, new EndPosition(j, i)));
+                        xr = i;
+                        yr = j;
                     }
                     if(table[i][j] == 2) {
-                        cubes.add(new Cube(i, j, Color.GREEN, new EndPosition(j, i)));
+                        xg = i;
+                        yg = j;
                     }
                 }
             }
         }
+        cubes.add(new Cube(xr, yr, Color.RED, new EndPosition(xg, yg, Color.RED)));
+        cubes.add(new Cube(xg, yg, Color.GREEN, new EndPosition(xr, yr, Color.GREEN)));
+
         return cubes;
     }
 

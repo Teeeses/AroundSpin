@@ -35,7 +35,11 @@ public class LevelsFragment extends Fragment {
     @Override
     public void onResume() {
         refreshStatus();
-        adapter.notifyDataSetChanged();
+        try {
+            adapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onResume();
     }
 }
