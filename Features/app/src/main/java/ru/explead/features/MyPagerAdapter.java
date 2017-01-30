@@ -43,4 +43,12 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         return super.getItemPosition(object);
     }
 
+    public void update() {
+        for(int i = 0; i < 4; i++) {
+            if(i == 0) {
+                Fragment fragment = getItem(i);
+                ((OneFragment) fragment).update();
+            }
+        }
+    }
 }

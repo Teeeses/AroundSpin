@@ -35,4 +35,8 @@ public class OneFragment extends LevelsFragment {
 
         return view;
     }
+
+    public void update() {
+        createButtons(20, Level.EASY);
+    }
 }

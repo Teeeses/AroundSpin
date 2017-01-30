@@ -61,6 +61,7 @@ public class LevelsActivity extends AppCompatActivity  {
         SharedPreferences.Editor editor = sPref.edit();
         editor.putInt(Utils.EASY_CURRENT_LEVEL, currentLevel);
         editor.apply();
+        adapter.update();
     }
 
     public static SharedPreferences getPref() {
