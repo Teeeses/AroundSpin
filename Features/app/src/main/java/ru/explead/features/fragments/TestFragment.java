@@ -39,15 +39,11 @@ public class TestFragment extends LevelsFragment {
     private int color = R.color.colorPrimary;
     private static int number = 5;
 
-    private Button btnStartTest;
-
 
     private ArrayList<Cell> views = new ArrayList<>();
 
     public static int[][] table;
-
     public static ArrayList<Cube> cubes = new ArrayList<>();
-
     private static int id = 0;
 
     @Override
@@ -90,7 +86,7 @@ public class TestFragment extends LevelsFragment {
             }
         });
 
-        btnStartTest = (Button) view.findViewById(R.id.btnStartTest);
+        Button btnStartTest = (Button) view.findViewById(R.id.btnStartTest);
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,15 +192,15 @@ public class TestFragment extends LevelsFragment {
         return result;
     }
 
-    public static ArrayList<Cube> addCunes() {
+    public static ArrayList<Cube> addCubes() {
         for(int i = 0; i < number; i++) {
             for(int j = 0; j < number; j++) {
                 if(table[i][j] > 0 && table[i][j] < 6) {
                     if(table[i][j] == 1) {
-                        cubes.add(new Cube(i, j, Color.MAGENTA, new EndPosition(j, i)));
+                        cubes.add(new Cube(i, j, Color.RED, new EndPosition(j, i)));
                     }
                     if(table[i][j] == 2) {
-                        cubes.add(new Cube(i, j, Color.RED, new EndPosition(j, i)));
+                        cubes.add(new Cube(i, j, Color.GREEN, new EndPosition(j, i)));
                     }
                 }
             }
@@ -216,10 +212,8 @@ public class TestFragment extends LevelsFragment {
     class Cell {
 
         private View view;
-
         private int x;
         private int y;
-
 
         public Cell(View view, int x, int y) {
             this.view = view;
