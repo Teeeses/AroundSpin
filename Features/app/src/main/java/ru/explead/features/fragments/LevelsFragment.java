@@ -1,16 +1,27 @@
 package ru.explead.features.fragments;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import java.util.ArrayList;
 
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.MainActivity;
@@ -24,86 +35,30 @@ import ru.explead.features.logic.Level;
  */
 public class LevelsFragment extends Fragment {
 
-    protected ButtonLevel[] buttons;
-    private int numberLevelsInLine = 3;
+    protected ArrayList<ButtonLevel> array = new ArrayList<>();
+    protected GridView gvMain;
+    protected GridAdapter adapter;
 
-
-
-    public void createButtons(LayoutInflater inflater, LinearLayout layoutVertical, int size, int complexity) {
-        buttons = new ButtonLevel[size];
-        int linesSize = size / numberLevelsInLine + 1;
-        int count = 0;
-        for (int j = 0; j < linesSize; j++) {
-            View routesView = inflater.inflate(R.layout.horizontal_levels, null, false);
-            LinearLayout rootHorizontalLayout = (LinearLayout) routesView.findViewById(R.id.rootHorizontalLayout);
-            int k = (size - count);
-            for (int i = 0; i < (k >= numberLevelsInLine ? numberLevelsInLine : k % numberLevelsInLine); i++) {
-                if (i == 0) {
-                    TextView tvLevel = (TextView) routesView.findViewById(R.id.tvLevelOne);
-                    RelativeLayout levelLayout = (RelativeLayout) routesView.findViewById(R.id.levelLayout1);
-                    View viewLevel = routesView.findViewById(R.id.viewOne);
-                    tvLevel.setText(Integer.toString(count+1));
-                    levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel);
-                } else if (i == 1) {
-                    TextView tvLevel = (TextView) routesView.findViewById(R.id.tvLevelTwo);
-                    RelativeLayout levelLayout = (RelativeLayout) routesView.findViewById(R.id.levelLayout2);
-                    View viewLevel = routesView.findViewById(R.id.viewTwo);
-                    tvLevel.setText(Integer.toString(count+1));
-                    levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel);
-                } else if (i == 2) {
-                    TextView tvLevel = (TextView) routesView.findViewById(R.id.tvLevelThree);
-                    RelativeLayout levelLayout = (RelativeLayout) routesView.findViewById(R.id.levelLayout3);
-                    View viewLevel = routesView.findViewById(R.id.viewThree);
-                    tvLevel.setText(Integer.toString(count+1));
-                    levelLayout.setVisibility(View.VISIBLE);
-                    buttons[count] = new ButtonLevel(complexity, count + 1, tvLevel, levelLayout, viewLevel);
-                }
-                count++;
-            }
-            layoutVertical.addView(rootHorizontalLayout);
+    public void createButtons(int size, int complexity) {
+        this.array.clear();
+        for(int i = 0; i < size; i++) {
+            array.add(new ButtonLevel(complexity, i + 1));
         }
-
-        setClickListeners();
-        setAnimation();
+        adapter = new GridAdapter(array);
+        gvMain.setAdapter(adapter);
+        gvMain.setNumColumns(3);
     }
-
-    private void setAnimation() {}
-
-    private void setClickListeners() {
-        for(final ButtonLevel button: buttons) {
-            button.getLevelLayout().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(button.getStatus() == ButtonLevel.STATUS_OPEN || button.getStatus() == ButtonLevel.STATUS_CURRENT) {
-                        App.setLevel(new Level(button.getComplexity(), button.getNumber()));
-                        ((LevelsActivity) LevelsActivity.getActivity()).openNewActivity();
-                    } else {
-                        Toast.makeText(LevelsActivity.getActivity(), "Уровень закрыт", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
-
 
     class ButtonLevel {
         private int number;
         private int complexity;
-        private TextView text;
-        private View view;
-        private RelativeLayout levelLayout;
 
         public static final int STATUS_OPEN = 1, STATUS_CURRENT = 2, STATUS_CLOSE = 3;
         private int status;
 
-        public ButtonLevel(int complexity, int number, TextView text, RelativeLayout levelLayout, View view) {
+        public ButtonLevel(int complexity, int number) {
             this.complexity = complexity;
             this.number = number;
-            this.text = text;
-            this.levelLayout = levelLayout;
-            this.view = view;
             findStatus();
         }
 
@@ -112,7 +67,6 @@ public class LevelsFragment extends Fragment {
                 int easy_current_level = LevelsActivity.getPref().getInt(Utils.EASY_CURRENT_LEVEL, 1);
                 System.out.println(easy_current_level + " " + number);
                 if(number == easy_current_level) {
-                    view.setBackgroundColor(LevelsActivity.getActivity().getResources().getColor(R.color.green));
                     status = STATUS_CURRENT;
                 }
                 if(number > easy_current_level) {
@@ -133,17 +87,8 @@ public class LevelsFragment extends Fragment {
             }
         }
 
-
         public int getStatus() {
             return status;
-        }
-
-        public RelativeLayout getLevelLayout() {
-            return levelLayout;
-        }
-
-        public View getView() {
-            return view;
         }
 
         public int getNumber() {
@@ -152,6 +97,81 @@ public class LevelsFragment extends Fragment {
 
         public int getComplexity() {
             return complexity;
+        }
+    }
+
+
+
+    class GridAdapter extends BaseAdapter {
+
+        ArrayList<ButtonLevel> array =  new ArrayList<>();
+        private LayoutInflater lInflater;
+        private ViewHolder viewHolder;
+
+        public GridAdapter(ArrayList<ButtonLevel> array){
+            this.array.clear();
+            this.array.addAll(array);
+            lInflater = (LayoutInflater) LevelsActivity.getActivity()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = lInflater.inflate(R.layout.item_level, parent, false);
+                viewHolder = new ViewHolder();
+
+                viewHolder.levelLayout = (RelativeLayout) convertView.findViewById(R.id.levelLayout);
+                viewHolder.tvLevel = (TextView) convertView.findViewById(R.id.tvLevel);
+                viewHolder.view = convertView.findViewById(R.id.view);
+
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            final ButtonLevel buttonLevel = (ButtonLevel) getItem(position);
+            viewHolder.tvLevel.setText(Integer.toString(buttonLevel.getNumber()));
+            if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
+                viewHolder.view.setBackgroundColor(LevelsActivity.getActivity().getResources().getColor(R.color.green));
+            }
+
+
+            viewHolder.levelLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN || buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
+                        App.setLevel(new Level(buttonLevel.getComplexity(), buttonLevel.getNumber()));
+                        ((LevelsActivity) LevelsActivity.getActivity()).openNewActivity();
+                    } else {
+                        Toast.makeText(LevelsActivity.getActivity(), "Уровень закрыт", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            System.out.println("return");
+            return convertView;
+        }
+
+        @Override
+        public int getCount() {
+            return array.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return array.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        class ViewHolder {
+            TextView tvLevel;
+            View view;
+            RelativeLayout levelLayout;
         }
     }
 }

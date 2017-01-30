@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import ru.explead.features.R;
@@ -26,8 +27,11 @@ public class OneFragment extends LevelsFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pager_one, container, false);
 
+
+        gvMain = (GridView) view.findViewById(R.id.gvMain);
+
         layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
-        createButtons(getLayoutInflater(getArguments()), layoutVertical, 20, Level.EASY);
+        createButtons(20, Level.EASY);
 
         return view;
     }
