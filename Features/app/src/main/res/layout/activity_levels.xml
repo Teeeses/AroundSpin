@@ -21,7 +21,7 @@
         app:siSelectedTextColor="@android:color/black"
         app:siIndicatorColor="@color/colorAccent"
         android:background="@android:color/black"
-        android:alpha="0.3"
+        android:alpha="0.8"
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="88dp"

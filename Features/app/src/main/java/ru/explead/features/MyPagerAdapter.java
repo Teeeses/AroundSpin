@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
 import ru.explead.features.fragments.FourFragment;
+import ru.explead.features.fragments.LevelsFragment;
 import ru.explead.features.fragments.OneFragment;
 import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.fragments.ThreeFragment;
@@ -17,7 +18,7 @@ import ru.explead.features.fragments.TwoFragment;
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
     private static int NUM_ITEMS = 5;
-    private Fragment fragment;
+    private Fragment[] fragments = {new OneFragment(), new TwoFragment(), new ThreeFragment(), new FourFragment(), new TestFragment()};
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -34,31 +35,12 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                fragment = new OneFragment();
-                return fragment;
+        return fragments[position];
+    }
 
-            case 1:
-                fragment = new TwoFragment();
-                return fragment;
-
-            case 2:
-                fragment = new ThreeFragment();
-                return fragment;
-
-            case 3:
-                fragment = new FourFragment();
-                return fragment;
-
-            case 4:
-                fragment = new TestFragment();
-                return fragment;
-
-            default:
-                return fragment = new OneFragment();
-        }
-
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
     }
 
 }

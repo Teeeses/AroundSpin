@@ -27,9 +27,8 @@ public class OneFragment extends LevelsFragment {
         View view = inflater.inflate(R.layout.fragment_pager_one, container, false);
 
         layoutVertical = (LinearLayout) view.findViewById(R.id.layoutVertical);
-        createButtons(getLayoutInflater(getArguments()), layoutVertical, 7, Level.EASY);
+        createButtons(getLayoutInflater(getArguments()), layoutVertical, 20, Level.EASY);
 
         return view;
     }
-
 }

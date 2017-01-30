@@ -7,23 +7,8 @@ import android.content.SharedPreferences;
  */
 public class Utils {
 
-    private static SharedPreferences sPref;
 
-    public static int getCurrentLevel() {
-        return sPref.getInt(Const.LEVEL, 1);
-    }
+    public final static String EASY_CURRENT_LEVEL = "easy_current_level";
+    public static final String APP_PREFERENCES = "mysettings";
 
-    public static void setCurrentLevel(int currentLevel) {
-        SharedPreferences.Editor editor = sPref.edit();
-        editor.putInt(Const.LEVEL, currentLevel);
-        editor.apply();
-    }
-
-    public static SharedPreferences getPref() {
-        return sPref;
-    }
-
-    public static void setPref(SharedPreferences sPref) {
-        Utils.sPref = sPref;
-    }
 }

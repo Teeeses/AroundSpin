@@ -2,6 +2,7 @@ package ru.explead.features;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 import ru.explead.features.fragments.GameFragment;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static Activity activity;
     private static Fragment fragment;
     private static Resources res;
+
 
 
     @Override
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
 
     public static Activity getActivity() {
         return activity;
