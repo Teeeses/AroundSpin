@@ -36,18 +36,18 @@ public class UtilsFieldLevel {
 
     private static void getLevelFromEasy(int level) {
         if(level == 1) {
-            System.out.println("UTILS GAME LEVEL 1");
             int[][] mass = new int[][] {
-                    {0, 0, 0, 0},
-                    {6, 0, 6, 0},
-                    {0, 0, 0, 0},
-                    {6, 0, 6, 0}
+                    {0, 0, 0, 0, 0},
+                    {6, 0, 6, 6, 6},
+                    {6, 0, 6, 0, 0},
+                    {0, 0, 6, 6, 0},
+                    {0, 0, 0, 0, 0}
             };
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(3, 1, Color.RED)));
-            cubeList.add(new Cube(3, 1, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(2, 3, Color.RED)));
+            cubeList.add(new Cube(2, 3, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
             App.getController().setCube(cubeList);
         }
 
