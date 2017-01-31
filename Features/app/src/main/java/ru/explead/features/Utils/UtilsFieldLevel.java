@@ -220,7 +220,7 @@ public class UtilsFieldLevel {
         if(level == 12) {
             int[][] mass = new int[][] {
                     {0, 0, 6, 6, 6, 6},
-                    {6, 0, 0, 0, 6, 0},
+                    {6, 0, 0, 0, 6, 6},
                     {0, 0, 6, 0, 0, 0},
                     {0, 6, 6, 6, 6, 0},
                     {0, 0, 6, 0, 0, 0},
@@ -302,8 +302,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 2, Color.RED, new EndPosition(5, 6, Color.RED)));
-            cubeList.add(new Cube(5, 6, Color.GREEN, new EndPosition(1, 2, Color.GREEN)));
+            cubeList.add(new Cube(1, 2, Color.RED, new EndPosition(5, 5, Color.RED)));
+            cubeList.add(new Cube(5, 5, Color.GREEN, new EndPosition(1, 2, Color.GREEN)));
             App.getController().setCube(cubeList);
         }
 
