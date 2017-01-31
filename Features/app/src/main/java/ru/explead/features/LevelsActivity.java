@@ -56,6 +56,7 @@ public class LevelsActivity extends AppCompatActivity  {
     }
 
     public void setCurrentEasyLevel(int currentLevel) {
+        System.out.println("Сохранение нового текущего уровня");
         SharedPreferences.Editor editor = sPref.edit();
         editor.putInt(Utils.EASY_CURRENT_LEVEL, currentLevel);
         editor.apply();

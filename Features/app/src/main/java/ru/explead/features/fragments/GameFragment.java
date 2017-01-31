@@ -1,7 +1,7 @@
 package ru.explead.features.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,11 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import ru.explead.features.LevelsActivity;
-import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
-import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.Controller;
 
 /**
@@ -29,6 +27,7 @@ public class GameFragment extends Fragment {
     private Button btnRestart;
 
     int start_x, start_y, end_x, end_y;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,33 +69,34 @@ public class GameFragment extends Fragment {
         view.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
 
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        start_x = (int)event.getX();
-                        start_y = (int)event.getY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        end_x = (int)event.getX();
-                        end_y = (int)event.getY();
-                        int side1 = (start_x - end_x);
-                        int side2 = (start_y - end_y);
-                        int hypotenuse = (int) (Math.sqrt(Math.abs(side1*side1) + Math.abs(side2*side2)));
-                        double angle = (Math.asin((double) side2/hypotenuse))*57.295f;
-                        if (hypotenuse > 50 && ((angle < 30 && angle > -30) || (angle > 60) || (angle < -60))) {
-                            if ((side1 <= 0 && side2 >= 0 && angle < 30) || (side1 <= 0 && side2 <= 0 && angle > -30)) {
-                                App.getController().onMoveRight();
-                            } else if ((side1 <= 0 && side2 >= 0 && angle > 60) || (side1 >= 0 && side2 >= 0 && angle > 60 )) {
-                                App.getController().onMoveUp();
-                            } else if ((side1 >= 0 && side2 >= 0 && angle < 30) || (side1 >= 0 && side2 <= 0 && angle > -30)) {
-                                App.getController().onMoveLeft();
-                            } else if ((side1 >= 0 && side2 <= 0 && angle < -60) || (side1 <= 0 && side2 <= 0 && angle < -60)) {
-                                App.getController().onMoveDown();
+                if(App.getController().getStatus() == Controller.ACTIVE_GAME) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            start_x = (int) event.getX();
+                            start_y = (int) event.getY();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            end_x = (int) event.getX();
+                            end_y = (int) event.getY();
+                            int side1 = (start_x - end_x);
+                            int side2 = (start_y - end_y);
+                            int hypotenuse = (int) (Math.sqrt(Math.abs(side1 * side1) + Math.abs(side2 * side2)));
+                            double angle = (Math.asin((double) side2 / hypotenuse)) * 57.295f;
+                            if (hypotenuse > 50 && ((angle < 30 && angle > -30) || (angle > 60) || (angle < -60))) {
+                                if ((side1 <= 0 && side2 >= 0 && angle < 30) || (side1 <= 0 && side2 <= 0 && angle > -30)) {
+                                    App.getController().onMoveRight();
+                                } else if ((side1 <= 0 && side2 >= 0 && angle > 60) || (side1 >= 0 && side2 >= 0 && angle > 60)) {
+                                    App.getController().onMoveUp();
+                                } else if ((side1 >= 0 && side2 >= 0 && angle < 30) || (side1 >= 0 && side2 <= 0 && angle > -30)) {
+                                    App.getController().onMoveLeft();
+                                } else if ((side1 >= 0 && side2 <= 0 && angle < -60) || (side1 <= 0 && side2 <= 0 && angle < -60)) {
+                                    App.getController().onMoveDown();
+                                }
                             }
-                            checkWin();
-                        }
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 return true;
@@ -104,26 +104,25 @@ public class GameFragment extends Fragment {
         });
     }
 
-    public void checkWin() {
-        if(App.getController().getStatus() == Controller.FINISH) {
-            /*new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                        System.out.println("WIN");
-                        DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
-                        dialog.show();
-                }
-            }, 2500);*/
-            System.out.println("WIN");
-            //DialogMenu dialog = new DialogMenu(MainActivity.getActivity());
-            //dialog.show();
-            Toast.makeText(MainActivity.getActivity(), "Победа", Toast.LENGTH_SHORT).show();
-            ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel() + 1);
-        }
-    }
-
     public void onWin() {
-        System.out.println("WIN");
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                SystemClock.sleep(1000);
+                System.out.println("WIN");
+                Toast.makeText(getActivity(), "Победа", Toast.LENGTH_SHORT).show();
+                ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel() + 1);
+            }
+        });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 }

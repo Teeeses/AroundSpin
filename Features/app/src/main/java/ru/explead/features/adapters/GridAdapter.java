@@ -74,7 +74,6 @@ public class GridAdapter extends BaseAdapter {
             }
         });
 
-        System.out.println("return");
         return convertView;
     }
 

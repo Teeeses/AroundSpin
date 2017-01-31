@@ -68,7 +68,9 @@ public class Controller {
         for (int i = 0; i < cube.size(); i++) {
             cube.get(i).onMove();
         }
-        checkWin();
+        if(status == ACTIVE_GAME) {
+            checkWin();
+        }
     }
 
     /**
@@ -105,7 +107,6 @@ public class Controller {
      * @return - true - если кубики на своих местах
      */
     public boolean checkWin() {
-        if(status == FINISH)
         for(int i = 0; i < cube.size(); i++) {
             if(cube.get(i).getX() != cube.get(i).getEndPosition().getX() ||
                     cube.get(i).getY() != cube.get(i).getEndPosition().getY()) {
@@ -113,6 +114,7 @@ public class Controller {
             }
         }
         status = FINISH;
+        ((GameFragment)MainActivity.getFragment()).onWin();
         return true;
     }
 
