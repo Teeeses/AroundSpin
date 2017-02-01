@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import ru.explead.features.LevelsActivity;
 import ru.explead.features.MainActivity;
 import ru.explead.features.R;
 import ru.explead.features.Utils.UtilsFieldLevel;
@@ -225,7 +226,7 @@ public class Controller {
 
     private void createPaint() {
         paintWall = new Paint();
-        paintWall.setColor(MainActivity.getActivity().getResources().getColor(R.color.colorPrimary));
+        paintWall.setColor(LevelsActivity.getActivity().getResources().getColor(R.color.colorPrimary));
         paintWall.setAntiAlias(true);
     }
 

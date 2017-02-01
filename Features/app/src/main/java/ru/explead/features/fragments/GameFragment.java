@@ -16,14 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.nightonke.boommenu.BoomButtons.BoomButtonBuilder;
-import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
-import com.nightonke.boommenu.BoomMenuButton;
-import com.nightonke.boommenu.ButtonEnum;
-import com.nightonke.boommenu.Piece.PiecePlaceEnum;
-
-import java.util.ArrayList;
-
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
