@@ -7,6 +7,14 @@
     android:clickable="true"
     android:background="@color/colorPrimary">
 
+    <TextView
+        android:id="@+id/tvLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mini_margin"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/standard_text"
+        android:textColor="@color/white"/>
     <Button
         android:id="@+id/btnRestart"
         android:layout_width="wrap_content"
@@ -16,4 +24,5 @@
         android:textAllCaps="false"
         android:layout_margin="@dimen/mini_margin"
         android:layout_alignParentRight="true"/>
+
 </RelativeLayout>

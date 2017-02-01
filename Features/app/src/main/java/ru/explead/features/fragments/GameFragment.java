@@ -1,21 +1,34 @@
 package ru.explead.features.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+
+import com.nightonke.boommenu.BoomButtons.BoomButtonBuilder;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+
+import java.util.ArrayList;
 
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
 import ru.explead.features.app.App;
+import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.Controller;
 
 /**
@@ -25,7 +38,7 @@ public class GameFragment extends Fragment {
 
     private RelativeLayout rootGameLayout;
     private Button btnRestart;
-
+    private TextView tvLevel;
     int start_x, start_y, end_x, end_y;
 
 
@@ -34,6 +47,7 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
+        tvLevel = (TextView) view.findViewById(R.id.tvLevel);
 
         int size = (int)App.getWidthScreen() - 30;
         App.setSizeSurface(size);
@@ -63,6 +77,7 @@ public class GameFragment extends Fragment {
         Controller controller = new Controller();
         App.setController(controller);
         controller.startGame();
+        tvLevel.setText(String.format("Уровень %d", App.getLevel().getLevel()));
     }
 
     public void onTouch(View view) {
@@ -111,7 +126,9 @@ public class GameFragment extends Fragment {
                 SystemClock.sleep(1000);
                 System.out.println("WIN");
                 Toast.makeText(getActivity(), "Победа", Toast.LENGTH_SHORT).show();
-                ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel() + 1);
+                ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel());
+                DialogMenu dialog = new DialogMenu(getActivity());
+                dialog.show();
             }
         });
     }
