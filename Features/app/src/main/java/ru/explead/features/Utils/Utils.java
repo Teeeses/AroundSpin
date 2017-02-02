@@ -1,6 +1,7 @@
 package ru.explead.features.Utils;
+import android.util.Log;
 
-import android.content.SharedPreferences;
+import java.util.ArrayList;
 
 /**
  * Created by develop on 16.12.2016.
@@ -18,6 +19,15 @@ public class Utils {
                 System.out.print(table[i][j] + " ");
             }
             System.out.println();
+        }
+    }
+
+    public static void writeArrayList(ArrayList<String> array) {
+        String str = "";
+        for(int i = 0; i < array.size(); i++) {
+            System.out.print("ArrayList: " + array.get(i) + " ");
+            str += array.get(i) + " ";
+            Log.d("TAG", str);
         }
     }
 }

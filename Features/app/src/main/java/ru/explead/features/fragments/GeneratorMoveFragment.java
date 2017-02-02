@@ -61,7 +61,7 @@ public class GeneratorMoveFragment extends LevelsFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generator_move, container, false);
 
 
@@ -111,10 +111,7 @@ public class GeneratorMoveFragment extends LevelsFragment {
                 UtilsFieldLevel.getDataLevel(App.getLevel().getLevel(), App.getLevel().getComplexity());
                 cubes.clear();
                 addCubes();
-
-                int lastDirection = NO;
-                currentIteration = 0;
-                algoritm(lastDirection);
+                controller.startTest();
             }
         });
 
@@ -228,32 +225,6 @@ public class GeneratorMoveFragment extends LevelsFragment {
     }
 
 
-
-    public void findEmptyDirection(int lastDirection) {
-        int[][] field = App.getController().getField().getField();
-        directions[0] = false;
-        directions[1] = false;
-        directions[2] = false;
-        directions[3] = false;
-        for(int i = 0; i < cubes.size(); i++) {
-            if(cubes.get(i).getX() != 0 && field[cubes.get(i).getX() - 1][cubes.get(i).getY()] == 0) {
-                directions[UP] = true;
-            }
-            if(cubes.get(i).getX() != number-1 && field[cubes.get(i).getX() + 1][cubes.get(i).getY()] == 0) {
-                directions[DOWN] = true;
-            }
-            if(cubes.get(i).getY() != 0 && field[cubes.get(i).getX()][cubes.get(i).getY() - 1] == 0) {
-                directions[LEFT] = true;
-            }
-            if(cubes.get(i).getY() != number-1 && field[cubes.get(i).getX()][cubes.get(i).getY() + 1] == 0) {
-                directions[RIGHT] = true;
-            }
-        }
-        if(lastDirection != NO) {
-            directions[lastDirection] = false;
-        }
-    }
-
     public static ArrayList<Cube> addCubes() {
         int xr = 0, yr = 0, xg = 0, yg = 0;
         for(int i = 0; i < number; i++) {
@@ -276,29 +247,6 @@ public class GeneratorMoveFragment extends LevelsFragment {
         return cubes;
     }
 
-    public void algoritm(int lastDirection) {
-        findEmptyDirection(lastDirection);
-        if(directions[UP] = true) {
-            lastDirection = UP;
-            App.getController().onMoveUp();
-            algoritm(lastDirection);
-        }
-        if(directions[RIGHT] = true) {
-            lastDirection = RIGHT;
-            App.getController().onMoveRight();
-            algoritm(lastDirection);
-        }
-        if(directions[DOWN] = true) {
-            lastDirection = DOWN;
-            App.getController().onMoveDown();
-            algoritm(lastDirection);
-        }
-        if(directions[LEFT] = true) {
-            lastDirection = LEFT;
-            App.getController().onMoveLeft();
-            algoritm(lastDirection);
-        }
-    }
 
     class Cell {
 
