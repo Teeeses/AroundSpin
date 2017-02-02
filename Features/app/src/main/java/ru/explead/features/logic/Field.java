@@ -1,8 +1,6 @@
 package ru.explead.features.logic;
 
-import android.util.Log;
 
-import ru.explead.features.Utils.UtilsFieldLevel;
 import ru.explead.features.app.App;
 
 /**
@@ -12,47 +10,22 @@ import ru.explead.features.app.App;
 public class Field {
 
     private float width;
-    private int numberCell;
     private float widthCell;
 
-    private int[][] field;
+    private int[][] emptyField;
 
-    public Field(int[][] field) {
-        this.field = field;
+    public Field(int[][] emptyField) {
+        this.emptyField = emptyField;
         this.width = App.getSizeSurface();
-        numberCell = field.length;
-        widthCell = width/ numberCell;
+        widthCell = width/ emptyField.length;
     }
 
-    public float getWidth() {
-        return width;
-    }
-
-    public void setWidth(float width) {
-        this.width = width;
-    }
-
-    public int getNumberCell() {
-        return numberCell;
-    }
-
-    public void setNumberCell(int numberCell) {
-        this.numberCell = numberCell;
-    }
 
     public float getWidthCell() {
         return widthCell;
     }
 
-    public void setWidthCell(int widthCell) {
-        this.widthCell = widthCell;
-    }
-
-    public int[][] getField() {
-        return field;
-    }
-
-    public void setField(int[][] field) {
-        this.field = field;
+    public int[][] getEmptyField() {
+        return emptyField;
     }
 }

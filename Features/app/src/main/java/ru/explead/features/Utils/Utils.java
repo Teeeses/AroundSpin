@@ -23,11 +23,8 @@ public class Utils {
     }
 
     public static void writeArrayList(ArrayList<String> array) {
-        String str = "";
         for(int i = 0; i < array.size(); i++) {
-            System.out.print("ArrayList: " + array.get(i) + " ");
-            str += array.get(i) + " ";
-            Log.d("TAG", str);
+            System.out.print(array.get(i) + " ");
         }
     }
 }

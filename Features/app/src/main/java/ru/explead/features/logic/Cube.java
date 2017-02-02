@@ -83,26 +83,23 @@ public class Cube {
         }
     }
 
-    public void setMoveParams(int move, int changeX, int changeY) {
+    public void setMoveParams(int move, int count) {
+        numberFrame = count * numberFrameCell;
         if(move == Controller.UP) {
             status = Controller.UP;
-            numberFrame = changeX * numberFrameCell;
-            x = x - changeX;
+            x = x - count;
         }
         if(move == Controller.RIGHT) {
             status = Controller.RIGHT;
-            numberFrame = changeY * numberFrameCell;
-            y = y + changeY;
+            y = y + count;
         }
         if(move == Controller.DOWN) {
             status = Controller.DOWN;
-            numberFrame = changeX * numberFrameCell;
-            x = x + changeX;
+            x = x + count;
         }
         if(move == Controller.LEFT) {
             status = Controller.LEFT;
-            numberFrame = changeY * numberFrameCell;
-            y = y - changeY;
+            y = y - count;
         }
     }
 
@@ -132,7 +129,19 @@ public class Cube {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setNumberFrame(int numberFrame) {
+        this.numberFrame = numberFrame;
+    }
+
     public EndPosition getEndPosition() {
         return endPosition;
+    }
+
+    public int getNumberFrameCell() {
+        return numberFrameCell;
     }
 }
