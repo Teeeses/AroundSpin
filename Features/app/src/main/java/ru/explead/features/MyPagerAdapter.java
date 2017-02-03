@@ -5,9 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ru.explead.features.fragments.FourFragment;
-import ru.explead.features.fragments.GeneratorMoveFragment;
 import ru.explead.features.fragments.OneFragment;
-import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.fragments.ThreeFragment;
 import ru.explead.features.fragments.TwoFragment;
 
@@ -16,8 +14,8 @@ import ru.explead.features.fragments.TwoFragment;
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private static int NUM_ITEMS = 6;
-    private Fragment[] fragments = {new OneFragment(), new TwoFragment(), new ThreeFragment(), new FourFragment(), new TestFragment(), new GeneratorMoveFragment()};
+    private static int NUM_ITEMS = 4;
+    private Fragment[] fragments = {new OneFragment(), new TwoFragment(), new ThreeFragment(), new FourFragment()};
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);

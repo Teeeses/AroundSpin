@@ -1,26 +1,16 @@
 package ru.explead.features;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
-import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
-import ru.explead.features.fragments.BannerFragment;
 import ru.explead.features.fragments.GameFragment;
-import ru.explead.features.fragments.TestFragment;
-import ru.explead.features.logic.Controller;
 
 
 /**

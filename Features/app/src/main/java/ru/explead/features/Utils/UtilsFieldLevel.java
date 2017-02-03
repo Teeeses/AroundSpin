@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import ru.explead.features.app.App;
 import ru.explead.features.beans.EndPosition;
-import ru.explead.features.fragments.GeneratorMoveFragment;
-import ru.explead.features.fragments.TestFragment;
 import ru.explead.features.logic.Cube;
 import ru.explead.features.logic.Field;
 import ru.explead.features.logic.Level;
@@ -399,16 +397,6 @@ public class UtilsFieldLevel {
 
     private static void getLevelFromVeryHard(int level) {
 
-        if(level == 99) {
-            Field field = new Field(TestFragment.removeInTableCube());
-            App.getController().setField(field);
-            App.getController().setCube(TestFragment.addCubes());
-        }
 
-        if(level == 100) {
-            Field field = new Field(GeneratorMoveFragment.table);
-            App.getController().setField(field);
-            App.getController().setCube(GeneratorMoveFragment.addCubes());
-        }
     }
 }
