@@ -25,9 +25,8 @@ public class OneFragment extends LevelsFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pager_one, container, false);
 
-
         gvMain = (GridView) view.findViewById(R.id.gvMain);
-        createButtons(20, Level.EASY);
+        createButtons(28, Level.EASY);
 
         return view;
     }
