@@ -236,6 +236,22 @@ public class UtilsFieldLevel {
 
         if(level == 13) {
             int[][] mass = new int[][] {
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 6, 6},
+                    {0, 6, 0, 6, 0},
+                    {0, 0, 0, 0, 0},
+                    {6, 6, 0, 6, 6}
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(0, 4, Color.RED, new EndPosition(4, 2, Color.RED)));
+            cubeList.add(new Cube(4, 2, Color.GREEN, new EndPosition(0, 4, Color.GREEN)));
+            App.getController().setCube(cubeList);
+        }
+
+        if(level == 14) {
+            int[][] mass = new int[][] {
                     {0, 0, 0, 6, 0, 0},
                     {0, 6, 0, 6, 6, 0},
                     {0, 6, 0, 6, 0, 0},
@@ -251,7 +267,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 14) {
+        if(level == 15) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 6},
                     {6, 6, 0, 0, 0},
@@ -267,7 +283,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 15) {
+        if(level == 16) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 6, 6, 6, 6, 6, 6, 6, 0},
@@ -287,7 +303,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 16) {
+        if(level == 17) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 6, 0, 0, 0, 0, 0},
                     {0, 6, 0, 6, 0, 0, 0, 0, 0},
@@ -307,7 +323,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 17) {
+        if(level == 18) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 6, 0},
                     {0, 6, 0, 6, 0},
@@ -323,7 +339,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 18) {
+        if(level == 19) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 6, 6, 6, 6},
                     {0, 6, 6, 0, 0, 0, 0, 0},
@@ -342,7 +358,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 19) {
+        if(level == 20) {
             int[][] mass = new int[][] {
                     {6, 6, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 6, 0, 0, 0, 0},
@@ -362,7 +378,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 20) {
+        if(level == 21) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 6, 0, 6, 0, 6, 0, 0},
@@ -381,7 +397,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 21) {
+        if(level == 22) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 6, 6, 6, 6, 6, 6, 6, 6},
@@ -401,7 +417,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 22) {
+        if(level == 23) {
             int[][] mass = new int[][] {
                     {0, 0, 6, 6, 6, 6},
                     {0, 0, 0, 0, 0, 0},
@@ -418,7 +434,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 23) {
+        if(level == 24) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0},
                     {6, 6, 0, 6, 0},
@@ -434,7 +450,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 24) {
+        if(level == 25) {
             int[][] mass = new int[][] {
                     {6, 0, 0, 0, 0, 0, 0},
                     {0, 0, 6, 0, 6, 0, 0},
@@ -452,7 +468,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 25) {
+        if(level == 26) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0, 0},
                     {6, 0, 0, 0, 6, 0, 0},
@@ -470,7 +486,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 26) {
+        if(level == 27) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 6, 0, 0, 0},
                     {0, 6, 0, 6, 6, 6, 0},
@@ -488,7 +504,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 27) {
+        if(level == 28) {
             int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 6, 0, 6, 6, 0},
@@ -507,7 +523,7 @@ public class UtilsFieldLevel {
             App.getController().setCube(cubeList);
         }
 
-        if(level == 28) {
+        if(level == 29) {
             int[][] mass = new int[][] {
                     {6, 0, 0, 0, 0, 0, 6},
                     {6, 0, 0, 0, 0, 6, 6},
@@ -527,17 +543,14 @@ public class UtilsFieldLevel {
     }
 
 
-
     private static void getLevelFromMedium(int level) {
 
     }
 
 
-
     private static void getLevelFromHard(int level) {
 
     }
-
 
 
     private static void getLevelFromVeryHard(int level) {
