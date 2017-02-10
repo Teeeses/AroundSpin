@@ -25,24 +25,23 @@ public class ButtonLevel {
     public void findStatus() {
         if(complexity == Level.EASY) {
             int easy_current_level = LevelsActivity.getPref().getInt(Utils.EASY_CURRENT_LEVEL, 1);
-            if(number == easy_current_level) {
-                status = STATUS_CURRENT;
-            }
-            if(number > easy_current_level) {
-                status = STATUS_CLOSE;
-            }
-            if(number < easy_current_level) {
-                status = STATUS_OPEN;
-            }
+            installStatus(easy_current_level);
         }
         if(complexity == Level.MEDIUM) {
-
+            int medium_current_level = LevelsActivity.getPref().getInt(Utils.MEDIUM_CURRENT_LEVEL, 0);
+            installStatus(medium_current_level);
         }
-        if(complexity == Level.HARD) {
+    }
 
+    private void installStatus(int current) {
+        if(number == current) {
+            status = STATUS_CURRENT;
         }
-        if(complexity == Level.VERY_HARD) {
-
+        if(number > current) {
+            status = STATUS_CLOSE;
+        }
+        if(number < current) {
+            status = STATUS_OPEN;
         }
     }
 

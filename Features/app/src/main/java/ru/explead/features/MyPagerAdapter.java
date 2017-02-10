@@ -14,8 +14,8 @@ import ru.explead.features.fragments.TwoFragment;
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private static int NUM_ITEMS = 4;
-    private Fragment[] fragments = {new OneFragment(), new TwoFragment(), new ThreeFragment(), new FourFragment()};
+    private static int NUM_ITEMS = 2;
+    private Fragment[] fragments = {new OneFragment(), new TwoFragment()};
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);

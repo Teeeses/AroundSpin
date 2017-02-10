@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,11 +28,14 @@ public class GridAdapter extends BaseAdapter {
     private LayoutInflater lInflater;
     private ViewHolder viewHolder;
 
+    private int widthCell;
+
     public GridAdapter(ArrayList<ButtonLevel> array){
         this.array.clear();
         this.array.addAll(array);
         lInflater = (LayoutInflater) LevelsActivity.getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        widthCell = (int)(App.getWidthScreen() - LevelsActivity.getActivity().getResources().getDimension(R.dimen.standard_margin)*8)/3;
     }
 
     @Override
@@ -41,8 +45,9 @@ public class GridAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
 
             viewHolder.levelLayout = (RelativeLayout) convertView.findViewById(R.id.levelLayout);
+            viewHolder.levelLayout.setLayoutParams(new RelativeLayout.LayoutParams(widthCell, widthCell));
+            viewHolder.ivLevel = (ImageView) convertView.findViewById(R.id.ivLevel);
             viewHolder.tvLevel = (TextView) convertView.findViewById(R.id.tvLevel);
-            viewHolder.view = convertView.findViewById(R.id.view);
 
             convertView.setTag(viewHolder);
         } else {
@@ -52,13 +57,13 @@ public class GridAdapter extends BaseAdapter {
         final ButtonLevel buttonLevel = (ButtonLevel) getItem(position);
         viewHolder.tvLevel.setText(Integer.toString(buttonLevel.getNumber()));
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
-            viewHolder.view.setBackgroundColor(LevelsActivity.getActivity().getResources().getColor(R.color.green));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.green_circle));
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CLOSE) {
-            viewHolder.view.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_button));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.gray_circle));
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN) {
-            viewHolder.view.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_button));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.purple_circle));
         }
 
 
@@ -94,7 +99,7 @@ public class GridAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView tvLevel;
-        View view;
+        ImageView ivLevel;
         RelativeLayout levelLayout;
     }
 }

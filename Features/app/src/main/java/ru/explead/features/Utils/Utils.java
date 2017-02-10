@@ -10,6 +10,7 @@ public class Utils {
 
 
     public final static String EASY_CURRENT_LEVEL = "easy_current_level";
+    public final static String MEDIUM_CURRENT_LEVEL = "medium_current_level";
     public static final String APP_PREFERENCES = "mysettings";
 
     public static void writeTable(int[][] table) {
