@@ -9,8 +9,19 @@ import ru.explead.features.app.App;
 
 public class Field {
 
+    /**
+     * Длинна поля
+     */
     private float width;
+    /**
+     * Длинна клетки
+     */
     private float widthCell;
+
+    /**
+     * Длинна пол клетки
+     */
+    private float mid;
 
     private int[][] emptyField;
 
@@ -20,6 +31,10 @@ public class Field {
         widthCell = width/ emptyField.length;
     }
 
+
+    public float getMid() {
+        return mid;
+    }
 
     public float getWidthCell() {
         return widthCell;

@@ -1,9 +1,11 @@
 package ru.explead.features.logic;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import ru.explead.features.app.App;
+import ru.explead.features.app.Helper;
 import ru.explead.features.beans.EndPosition;
 
 /**
@@ -22,9 +24,11 @@ public class Cube {
 
     private int color;
     private Paint paint;
+    private Paint paintblackLine;
 
     private Field field;
     private EndPosition endPosition;
+    private Helper helper;
 
     /**
      * Статус движения(UP, DOWN, RIGHT, LEFT)
@@ -56,8 +60,26 @@ public class Cube {
         createPaint();
     }
 
+    public Cube(int x, int y, int color, EndPosition endPosition, Helper helper) {
+        field = App.getController().getField();
+        this.endPosition = endPosition;
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.helper = helper;
+        xPixels = x*field.getWidthCell();
+        yPixels = y*field.getWidthCell();
+        speed = field.getWidthCell()/numberFrameCell;
+        status = Controller.NO_ACTIVE;
+        createPaint();
+    }
+
 
     public void onDraw(Canvas canvas) {
+        if(helper != null) {
+            canvas.drawLine(yPixels + field.getMid(), xPixels + field.getMid(),
+                    helper.getY()*field.getWidthCell() + field.getMid(), helper.getX()*field.getWidthCell() + field.getMid(), paintblackLine);
+        }
         canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
     }
 
@@ -105,8 +127,12 @@ public class Cube {
 
     public void createPaint() {
         paint = new Paint();
+        paintblackLine = new Paint();
+        paintblackLine.setStrokeWidth(3);
         paint.setColor(color);
+        paintblackLine.setColor(Color.BLACK);
         paint.setAntiAlias(true);
+        paintblackLine.setAntiAlias(true);
     }
 
     public int getX() {

@@ -20,6 +20,7 @@ import ru.explead.features.fragments.GameFragment;
  * Created by develop on 30.12.2016.
  */
 
+
 public class Controller {
 
     /**
@@ -58,18 +59,18 @@ public class Controller {
     }
 
     public void onDraw(Canvas canvas) {
-        for(int i = 0; i < cube.size(); i++) {
-            cube.get(i).getEndPosition().onDraw(canvas);
-        }
-        for(int i = 0; i < cube.size(); i++) {
-            cube.get(i).onDraw(canvas);
-        }
         for(int i = 0; i < field.getEmptyField().length; i++) {
             for(int j = 0; j < field.getEmptyField().length; j++) {
                 if(field.getEmptyField()[i][j] == 6) {
                     canvas.drawRect(j*field.getWidthCell(), i*field.getWidthCell(), j*field.getWidthCell() + field.getWidthCell(), i*field.getWidthCell() + field.getWidthCell(), paintWall);
                 }
             }
+        }
+        for(int i = 0; i < cube.size(); i++) {
+            cube.get(i).getEndPosition().onDraw(canvas);
+        }
+        for(int i = 0; i < cube.size(); i++) {
+            cube.get(i).onDraw(canvas);
         }
     }
 

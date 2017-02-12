@@ -30,6 +30,7 @@ public class GameFragment extends Fragment {
 
     private RelativeLayout rootGameLayout;
     private Button btnRestart;
+    private Button btnHelp;
     private TextView tvLevel;
     int start_x, start_y, end_x, end_y;
 
@@ -60,6 +61,14 @@ public class GameFragment extends Fragment {
             }
         });
 
+        btnHelp = (Button) view.findViewById(R.id.btnHelp);
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onHelp();
+            }
+        });
+
         onTouch(view);
 
         return view;
@@ -70,6 +79,10 @@ public class GameFragment extends Fragment {
         App.setController(controller);
         controller.startGame();
         tvLevel.setText(String.format("Уровень %d", App.getLevel().getLevel()));
+    }
+
+    public void onHelp() {
+
     }
 
     public void onTouch(View view) {
