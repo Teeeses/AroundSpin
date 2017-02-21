@@ -26,12 +26,6 @@ public class UtilsFieldLevel {
         if(complexity == Level.MEDIUM) {
             getLevelFromMedium(level);
         }
-        if(complexity == Level.HARD) {
-            getLevelFromHard(level);
-        }
-        if(complexity == Level.VERY_HARD) {
-            getLevelFromVeryHard(level);
-        }
     }
 
     private static void getLevelFromEasy(int level) {
@@ -715,17 +709,20 @@ public class UtilsFieldLevel {
 
 
     private static void getLevelFromMedium(int level) {
-
-    }
-
-
-    private static void getLevelFromHard(int level) {
-
-    }
-
-
-    private static void getLevelFromVeryHard(int level) {
-
-
+        if(level == 1) {
+            int[][] mass = new int[][] {
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0}
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(4, 4, Color.RED), new Helper(0, 1)));
+            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN), new Helper(0, 0)));
+            App.getController().setCube(cubeList);
+        }
     }
 }

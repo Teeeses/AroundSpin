@@ -56,7 +56,7 @@ public class Cube {
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;
-        status = Controller.NO_ACTIVE;
+        status = ControllerOne.NO_ACTIVE;
         createPaint();
     }
 
@@ -70,36 +70,36 @@ public class Cube {
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;
-        status = Controller.NO_ACTIVE;
+        status = ControllerOne.NO_ACTIVE;
         createPaint();
     }
 
 
     public void onDraw(Canvas canvas) {
-        if(helper != null) {
-            canvas.drawLine(yPixels + field.getMid(), xPixels + field.getMid(),
-                    helper.getY()*field.getWidthCell() + field.getMid(), helper.getX()*field.getWidthCell() + field.getMid(), paintblackLine);
-        }
         canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+        if(helper != null) {
+            //canvas.drawLine(yPixels + field.getMid(), xPixels + field.getMid(),
+            //        helper.getY()*field.getWidthCell() + field.getMid(), helper.getX()*field.getWidthCell() + field.getMid(), paintblackLine);
+        }
     }
 
     public void onMove() {
         if(numberFrame > 0) {
-            if (status == Controller.UP) {
+            if (status == ControllerOne.UP) {
                 xPixels = xPixels - speed;
             }
-            if (status == Controller.RIGHT) {
+            if (status == ControllerOne.RIGHT) {
                 yPixels = yPixels + speed;
             }
-            if (status == Controller.DOWN) {
+            if (status == ControllerOne.DOWN) {
                 xPixels = xPixels + speed;
             }
-            if (status == Controller.LEFT) {
+            if (status == ControllerOne.LEFT) {
                 yPixels = yPixels - speed;
             }
             numberFrame--;
         } else {
-            status = Controller.NO_ACTIVE;
+            status = ControllerOne.NO_ACTIVE;
             xPixels = x*field.getWidthCell();
             yPixels = y*field.getWidthCell();
         }
@@ -107,20 +107,20 @@ public class Cube {
 
     public void setMoveParams(int move, int count) {
         numberFrame = count * numberFrameCell;
-        if(move == Controller.UP) {
-            status = Controller.UP;
+        if(move == ControllerOne.UP) {
+            status = ControllerOne.UP;
             x = x - count;
         }
-        if(move == Controller.RIGHT) {
-            status = Controller.RIGHT;
+        if(move == ControllerOne.RIGHT) {
+            status = ControllerOne.RIGHT;
             y = y + count;
         }
-        if(move == Controller.DOWN) {
-            status = Controller.DOWN;
+        if(move == ControllerOne.DOWN) {
+            status = ControllerOne.DOWN;
             x = x + count;
         }
-        if(move == Controller.LEFT) {
-            status = Controller.LEFT;
+        if(move == ControllerOne.LEFT) {
+            status = ControllerOne.LEFT;
             y = y - count;
         }
     }

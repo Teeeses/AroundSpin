@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import github.chenupt.springindicator.SpringIndicator;
 import github.chenupt.springindicator.viewpager.ScrollerViewPager;
 import ru.explead.features.Utils.Utils;
+import ru.explead.features.Utils.UtilsBitmaps;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 
@@ -33,9 +34,13 @@ public class LevelsActivity extends AppCompatActivity  {
         activity = this;
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
 
+        UtilsBitmaps bitmaps = new UtilsBitmaps();
+        App.setBitmaps(bitmaps);
+
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
         App.setHeightScreen(displaymetrics.heightPixels);
+
 
 
         viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);

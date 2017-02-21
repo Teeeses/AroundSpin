@@ -2,7 +2,10 @@ package ru.explead.features.app;
 
 import android.app.Application;
 
-import ru.explead.features.logic.Controller;
+import ru.explead.features.Utils.UtilsBitmaps;
+import ru.explead.features.logic.BaseController;
+import ru.explead.features.logic.ControllerOne;
+import ru.explead.features.logic.ControllerTwo;
 import ru.explead.features.logic.Level;
 
 /**
@@ -15,9 +18,9 @@ public class App extends Application {
     private static float heightScreen;
     private static float sizeSurface;
 
-    private static Controller controller;
+    private static BaseController controller;
     private static Level level;
-
+    private static UtilsBitmaps bitmaps;
 
     public static float getWidthScreen() {
         return widthScreen;
@@ -35,11 +38,11 @@ public class App extends Application {
         App.heightScreen = heightScreen;
     }
 
-    public static Controller getController() {
-        return controller;
+    public static BaseController getController() {
+        return level.getComplexity() == Level.EASY ? (ControllerOne)controller : (ControllerTwo)controller;
     }
 
-    public static void setController(Controller controller) {
+    public static void setController(BaseController controller) {
         App.controller = controller;
     }
 
@@ -58,4 +61,13 @@ public class App extends Application {
     public static void setSizeSurface(float sizeSurface) {
         App.sizeSurface = sizeSurface;
     }
+
+    public static UtilsBitmaps getBitmaps() {
+        return bitmaps;
+    }
+
+    public static void setBitmaps(UtilsBitmaps bitmaps) {
+        App.bitmaps = bitmaps;
+    }
+
 }

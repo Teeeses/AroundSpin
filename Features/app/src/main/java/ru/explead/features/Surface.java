@@ -8,7 +8,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import ru.explead.features.app.App;
-import ru.explead.features.logic.Controller;
+import ru.explead.features.logic.ControllerOne;
+import ru.explead.features.logic.ControllerTwo;
+import ru.explead.features.logic.Level;
 
 
 public class Surface extends SurfaceView implements SurfaceHolder.Callback {
@@ -39,7 +41,11 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-        App.getController().onDraw(canvas);
+        if(App.getLevel().getComplexity() == Level.EASY) {
+            ((ControllerOne) App.getController()).onDraw(canvas);
+        } else if(App.getLevel().getComplexity() == Level.MEDIUM) {
+            ((ControllerTwo) App.getController()).onDraw(canvas);
+        }
     }
 
     @SuppressWarnings("deprecation")

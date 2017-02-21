@@ -28,4 +28,9 @@ public class Utils {
             System.out.print(array.get(i) + " ");
         }
     }
+
+    public static float finedHypotenuse(int k1, int k2) {
+        return (float)Math.sqrt(k1*k1 + k2*k2);
+    }
+
 }
