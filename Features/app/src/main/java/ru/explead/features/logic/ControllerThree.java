@@ -81,7 +81,7 @@ public class ControllerThree extends BaseController {
         Log.d("TAG", "SIZE: " + Integer.toString(touchedCells.size()));
         if(touchCube != null) {
             Coordinate coordinate = findCell(end_x, end_y);
-            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray() && checkPlaceCube(coordinate.getX(), coordinate.getY())) {
+            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray() && checkPlaceCube(coordinate.getX(), coordinate.getY()) && checkElseEndPosition(coordinate)) {
                 touchCube = new Cube(coordinate.getX(), coordinate.getY(), touchCube.getColor(), touchCube.getEndPosition());
                 touchedCells.add(touchCube);
             }
@@ -93,6 +93,22 @@ public class ControllerThree extends BaseController {
                 }
             }
         }
+    }
+
+    /**
+     * Чужая конечная точка или на которую можно наехать
+     * @param coordinate
+     * @return
+     */
+    public boolean checkElseEndPosition(Coordinate coordinate) {
+        for(int i = 0; i < cube.size(); i++) {
+            if(coordinate.getX() == cube.get(i).getEndPosition().getX() && coordinate.getY() == cube.get(i).getEndPosition().getY()) {
+                if(touchedCells.get(0).getX() != cube.get(i).getX() && touchedCells.get(0).getY() != cube.get(i).getY()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
