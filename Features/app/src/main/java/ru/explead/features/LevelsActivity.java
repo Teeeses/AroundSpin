@@ -13,6 +13,7 @@ import github.chenupt.springindicator.SpringIndicator;
 import github.chenupt.springindicator.viewpager.ScrollerViewPager;
 import ru.explead.features.Utils.Utils;
 import ru.explead.features.Utils.UtilsBitmaps;
+import ru.explead.features.adapters.MyPagerAdapter;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.BannerFragment;
 

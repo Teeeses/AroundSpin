@@ -47,6 +47,16 @@ public class Cube {
     private int numberFrameCell = 3;
 
 
+    public Cube(int x, int y, int color) {
+        field = App.getController().getField();
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        xPixels = x*field.getWidthCell();
+        yPixels = y*field.getWidthCell();
+        createPaint();
+    }
+
     public Cube(int x, int y, int color, EndPosition endPosition) {
         field = App.getController().getField();
         this.endPosition = endPosition;
@@ -133,6 +143,10 @@ public class Cube {
         paintblackLine.setColor(Color.BLACK);
         paint.setAntiAlias(true);
         paintblackLine.setAntiAlias(true);
+    }
+
+    public int getColor() {
+        return color;
     }
 
     public int getX() {

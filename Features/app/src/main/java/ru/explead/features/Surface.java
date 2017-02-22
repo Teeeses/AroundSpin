@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 import ru.explead.features.app.App;
 import ru.explead.features.logic.ControllerOne;
+import ru.explead.features.logic.ControllerThree;
 import ru.explead.features.logic.ControllerTwo;
 import ru.explead.features.logic.Level;
 
@@ -45,6 +46,8 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
             ((ControllerOne) App.getController()).onDraw(canvas);
         } else if(App.getLevel().getComplexity() == Level.MEDIUM) {
             ((ControllerTwo) App.getController()).onDraw(canvas);
+        } else if(App.getLevel().getComplexity() == Level.HARD) {
+            ((ControllerThree) App.getController()).onDraw(canvas);
         }
     }
 

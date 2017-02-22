@@ -166,10 +166,4 @@ public class ControllerOne extends BaseController {
             }
         }
     }
-
-    private void createPaint() {
-        paintWall = new Paint();
-        paintWall.setColor(LevelsActivity.getActivity().getResources().getColor(R.color.colorPrimary));
-        paintWall.setAntiAlias(true);
-    }
 }

@@ -1,4 +1,4 @@
-package ru.explead.features;
+package ru.explead.features.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +14,12 @@ import ru.explead.features.fragments.TwoFragment;
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private static int NUM_ITEMS = 2;
-    private Fragment[] fragments = {new OneFragment(), new TwoFragment()};
+    private Fragment[] fragments = {
+            new OneFragment(),
+            new TwoFragment(),
+            new ThreeFragment()
+    };
+
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -23,7 +27,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return NUM_ITEMS;
+        return fragments.length;
     }
 
     public String getPageTitle(int position) {

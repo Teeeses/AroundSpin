@@ -26,6 +26,9 @@ public class UtilsFieldLevel {
         if(complexity == Level.MEDIUM) {
             getLevelFromMedium(level);
         }
+        if(complexity == Level.HARD) {
+            getLevelFromHard(level);
+        }
     }
 
     private static void getLevelFromEasy(int level) {
@@ -711,17 +714,56 @@ public class UtilsFieldLevel {
     private static void getLevelFromMedium(int level) {
         if(level == 1) {
             int[][] mass = new int[][] {
+                    {6, 6, 0, 0, 6, 6},
+                    {6, 6, 0, 0, 6, 6},
+                    {0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0},
+                    {6, 6, 0, 0, 6, 6},
+                    {6, 6, 0, 0, 6, 6}
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(0, 2, Color.RED, new EndPosition(3, 0, Color.RED)));
+            cubeList.add(new Cube(5, 3, Color.GREEN, new EndPosition(2, 5, Color.GREEN)));
+            App.getController().setCube(cubeList);
+        }
+
+        if(level == 2) {
+            int[][] mass = new int[][] {
+                    {6, 6, 6, 6, 6, 6, 6, 6},
+                    {6, 0, 6, 0, 0, 0, 6, 6},
+                    {6, 0, 0, 0, 6, 0, 0, 6},
+                    {6, 0, 6, 0, 6, 6, 0, 6},
+                    {6, 0, 6, 0, 3, 0, 0, 6},
+                    {6, 0, 0, 0, 6, 0, 0, 6},
+                    {6, 0, 6, 0, 6, 0, 0, 6},
+                    {6, 6, 6, 6, 6, 6, 6, 6}
+            };
+            Field field = new Field(mass);
+            App.getController().setField(field);
+            ArrayList<Cube> cubeList = new ArrayList<>();
+            cubeList.add(new Cube(5, 2, Color.RED, new EndPosition(4, 4, Color.RED)));
+            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(5, 2, Color.GREEN)));
+            App.getController().setCube(cubeList);
+        }
+    }
+
+    private static void getLevelFromHard(int level) {
+        if(level == 1) {
+            int[][] mass = new int[][] {
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0},
+                    {0, 6, 0, 0, 6},
+                    {0, 6, 6, 0, 0},
                     {0, 0, 0, 0, 0}
             };
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(4, 4, Color.RED), new Helper(0, 1)));
-            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN), new Helper(0, 0)));
+            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(1, 4, Color.RED)));
+            cubeList.add(new Cube(2, 2, Color.GREEN, new EndPosition(4, 4, Color.GREEN)));
+            cubeList.add(new Cube(1, 3, Color.MAGENTA, new EndPosition(3, 4, Color.MAGENTA)));
             App.getController().setCube(cubeList);
         }
     }

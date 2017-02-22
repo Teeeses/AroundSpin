@@ -20,6 +20,7 @@ import ru.explead.features.Surface;
 import ru.explead.features.app.App;
 import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.ControllerOne;
+import ru.explead.features.logic.ControllerThree;
 import ru.explead.features.logic.ControllerTwo;
 import ru.explead.features.logic.Level;
 
@@ -70,8 +71,13 @@ public class GameFragment extends Fragment {
             }
         });
 
-        //onTouch(view);
-        onTouch(surface);
+        if(Level.EASY == App.getLevel().getComplexity()) {
+            onTouchOne(view);
+        } else if(Level.MEDIUM == App.getLevel().getComplexity()) {
+            onTouchTwo(surface);
+        } else if(Level.HARD == App.getLevel().getComplexity()) {
+            onTouchThree(surface);
+        }
 
         return view;
     }
@@ -86,6 +92,11 @@ public class GameFragment extends Fragment {
             App.setController(controller);
             controller.startGame();
         }
+        else if(App.getLevel().getComplexity() == Level.HARD) {
+            ControllerThree controller = new ControllerThree();
+            App.setController(controller);
+            controller.startGame();
+        }
 
         tvLevel.setText(String.format("Уровень %d", App.getLevel().getLevel()));
     }
@@ -94,7 +105,36 @@ public class GameFragment extends Fragment {
 
     }
 
-    public void onTouch(Surface surface) {
+    public void onTouchThree(Surface surface) {
+        surface.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if(App.getController().getStatus() == ControllerOne.ACTIVE_GAME) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            start_x = (int) event.getX();
+                            start_y = (int) event.getY();
+                            ((ControllerThree) App.getController()).checkTouchOnCube(start_x, start_y);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            int x = (int) event.getX();
+                            int y = (int) event.getY();
+                            ((ControllerThree) App.getController()).logicMove(x, y);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            ((ControllerThree) App.getController()).onUpFinger();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                return true;
+            }
+        });
+    }
+
+    public void onTouchTwo(Surface surface) {
         surface.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -107,11 +147,7 @@ public class GameFragment extends Fragment {
                         case MotionEvent.ACTION_UP:
                             end_x = (int) event.getX();
                             end_y = (int) event.getY();
-                            if(App.getLevel().getComplexity() == Level.EASY) {
-                                ((ControllerOne) App.getController()).logicMove(start_x, start_y, end_x, end_y);
-                            } else if(App.getLevel().getComplexity() == Level.MEDIUM) {
-                                ((ControllerTwo) App.getController()).logicMove(start_x, start_y, end_x, end_y);
-                            }
+                            ((ControllerTwo) App.getController()).logicMove(start_x, start_y, end_x, end_y);
                             break;
                         default:
                             break;
@@ -123,7 +159,7 @@ public class GameFragment extends Fragment {
         });
     }
 
-    public void onTouch(View view) {
+    public void onTouchOne(View view) {
         view.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -136,11 +172,7 @@ public class GameFragment extends Fragment {
                         case MotionEvent.ACTION_UP:
                             end_x = (int) event.getX();
                             end_y = (int) event.getY();
-                            if(App.getLevel().getComplexity() == Level.EASY) {
-                                ((ControllerOne) App.getController()).logicMove(start_x, start_y, end_x, end_y);
-                            } else if(App.getLevel().getComplexity() == Level.MEDIUM) {
-                                ((ControllerTwo) App.getController()).logicMove(start_x, start_y, end_x, end_y);
-                            }
+                            ((ControllerOne) App.getController()).logicMove(start_x, start_y, end_x, end_y);
                             break;
                         default:
                             break;

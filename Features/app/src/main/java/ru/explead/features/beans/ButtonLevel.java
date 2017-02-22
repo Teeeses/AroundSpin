@@ -31,6 +31,10 @@ public class ButtonLevel {
             int medium_current_level = LevelsActivity.getPref().getInt(Utils.MEDIUM_CURRENT_LEVEL, 1);
             installStatus(medium_current_level);
         }
+        if(complexity == Level.HARD) {
+            int hard_current_level = LevelsActivity.getPref().getInt(Utils.HARD_CURRENT_LEVEL, 1);
+            installStatus(hard_current_level);
+        }
     }
 
     private void installStatus(int current) {

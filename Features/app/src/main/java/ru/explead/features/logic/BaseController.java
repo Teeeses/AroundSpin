@@ -4,7 +4,9 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 
+import ru.explead.features.LevelsActivity;
 import ru.explead.features.MainActivity;
+import ru.explead.features.R;
 import ru.explead.features.Utils.UtilsFieldLevel;
 import ru.explead.features.app.App;
 import ru.explead.features.fragments.GameFragment;
@@ -33,6 +35,12 @@ public class BaseController {
         level = App.getLevel();
         UtilsFieldLevel.getDataLevel(level.getLevel(), level.getComplexity());
         status = ACTIVE_GAME;
+    }
+
+    public void createPaint() {
+        paintWall = new Paint();
+        paintWall.setColor(LevelsActivity.getActivity().getResources().getColor(R.color.colorPrimary));
+        paintWall.setAntiAlias(true);
     }
 
     /**

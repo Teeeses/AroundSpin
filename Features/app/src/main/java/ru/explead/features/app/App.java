@@ -5,6 +5,7 @@ import android.app.Application;
 import ru.explead.features.Utils.UtilsBitmaps;
 import ru.explead.features.logic.BaseController;
 import ru.explead.features.logic.ControllerOne;
+import ru.explead.features.logic.ControllerThree;
 import ru.explead.features.logic.ControllerTwo;
 import ru.explead.features.logic.Level;
 
@@ -39,7 +40,16 @@ public class App extends Application {
     }
 
     public static BaseController getController() {
-        return level.getComplexity() == Level.EASY ? (ControllerOne)controller : (ControllerTwo)controller;
+        if(level.getComplexity() == Level.EASY) {
+            return (ControllerOne)controller;
+        }
+        if(level.getComplexity() == Level.MEDIUM) {
+            return (ControllerTwo)controller;
+        }
+        if(level.getComplexity() == Level.HARD) {
+            return (ControllerThree)controller;
+        }
+        return null;
     }
 
     public static void setController(BaseController controller) {
