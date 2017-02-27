@@ -49,9 +49,9 @@ public class LevelsActivity extends AppCompatActivity  {
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-        viewPager.fixScrollSpeed();
+        //viewPager.fixScrollSpeed();
 
-        springIndicator.setViewPager(viewPager);
+        //springIndicator.setViewPager(viewPager);
     }
 
     public void openBannerFragment() {
@@ -63,11 +63,17 @@ public class LevelsActivity extends AppCompatActivity  {
 
     public void setCurrentEasyLevel(int currentLevel) {
         System.out.println("Сохранение нового текущего уровня");
+        SharedPreferences.Editor editor = sPref.edit();
         if(currentLevel == sPref.getInt(Utils.EASY_CURRENT_LEVEL, 1)) {
-            SharedPreferences.Editor editor = sPref.edit();
             editor.putInt(Utils.EASY_CURRENT_LEVEL, currentLevel + 1);
-            editor.apply();
         }
+        if(currentLevel == sPref.getInt(Utils.MEDIUM_CURRENT_LEVEL, 1)) {
+            editor.putInt(Utils.MEDIUM_CURRENT_LEVEL, currentLevel + 1);
+        }
+        if(currentLevel == sPref.getInt(Utils.HARD_CURRENT_LEVEL, 1)) {
+            editor.putInt(Utils.HARD_CURRENT_LEVEL, currentLevel + 1);
+        }
+        editor.apply();
     }
 
     public static SharedPreferences getPref() {

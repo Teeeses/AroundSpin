@@ -57,13 +57,13 @@ public class GridAdapter extends BaseAdapter {
         final ButtonLevel buttonLevel = (ButtonLevel) getItem(position);
         viewHolder.tvLevel.setText(Integer.toString(buttonLevel.getNumber()));
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.green_circle));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CLOSE) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.gray_circle));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.purple_circle));
+            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
         }
 
 
