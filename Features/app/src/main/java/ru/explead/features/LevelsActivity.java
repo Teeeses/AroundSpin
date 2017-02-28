@@ -3,8 +3,10 @@ package ru.explead.features;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -22,10 +24,11 @@ public class LevelsActivity extends AppCompatActivity  {
 
     private static Activity activity;
     private static Fragment fragment;
-    private ScrollerViewPager viewPager;
+    private ViewPager viewPager;
     private MyPagerAdapter adapter;
 
     private static SharedPreferences sPref;
+    private static Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class LevelsActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_levels);
 
         activity = this;
+        res = this.getResources();
         sPref = getSharedPreferences(Utils.APP_PREFERENCES, MODE_PRIVATE);
 
         UtilsBitmaps bitmaps = new UtilsBitmaps();
@@ -45,7 +49,7 @@ public class LevelsActivity extends AppCompatActivity  {
 
 
         viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
-        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
+        //SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
@@ -89,4 +93,7 @@ public class LevelsActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
+    public static Resources getRes() {
+        return res;
+    }
 }

@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
+    <!--
     <github.chenupt.springindicator.SpringIndicator
         app:siTextSize="18sp"
         app:siIndicatorColors="@array/indicator_colors"
@@ -27,4 +28,5 @@
         android:layout_height="88dp"
         android:padding="16dp"
         android:layout_alignParentBottom="true" />
+        -->
 </RelativeLayout>

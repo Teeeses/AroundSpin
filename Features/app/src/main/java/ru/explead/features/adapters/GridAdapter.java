@@ -1,6 +1,9 @@
 package ru.explead.features.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +33,22 @@ public class GridAdapter extends BaseAdapter {
 
     private int widthCell;
 
+    private Drawable imageOpen;
+
     public GridAdapter(ArrayList<ButtonLevel> array){
         this.array.clear();
         this.array.addAll(array);
         lInflater = (LayoutInflater) LevelsActivity.getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         widthCell = (int)(App.getWidthScreen() - LevelsActivity.getActivity().getResources().getDimension(R.dimen.standard_margin)*8)/3;
+        imageOpen = LevelsActivity.getRes().getDrawable(R.drawable.circle_level);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        Log.d("TAG", "getItem");
+
         if (convertView == null) {
             convertView = lInflater.inflate(R.layout.item_level, parent, false);
             viewHolder = new ViewHolder();
@@ -57,13 +66,13 @@ public class GridAdapter extends BaseAdapter {
         final ButtonLevel buttonLevel = (ButtonLevel) getItem(position);
         viewHolder.tvLevel.setText(Integer.toString(buttonLevel.getNumber()));
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
+            viewHolder.ivLevel.setBackgroundDrawable(imageOpen);
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CLOSE) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
+            viewHolder.ivLevel.setBackgroundDrawable(imageOpen);
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN) {
-            viewHolder.ivLevel.setBackgroundDrawable(LevelsActivity.getActivity().getResources().getDrawable(R.drawable.circle_level));
+            viewHolder.ivLevel.setBackgroundDrawable(imageOpen);
         }
 
 
