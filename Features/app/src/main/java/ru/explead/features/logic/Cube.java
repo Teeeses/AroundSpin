@@ -184,4 +184,8 @@ public class Cube {
     public int getNumberFrameCell() {
         return numberFrameCell;
     }
+
+    public Paint getPaint() {
+        return paint;
+    }
 }

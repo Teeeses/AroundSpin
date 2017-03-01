@@ -37,7 +37,7 @@ public class EndPosition {
 
     public void onDraw(Canvas canvas) {
         canvas.drawRect(yPixels + field.getWidthCell()*0.25f, xPixels + field.getWidthCell()*0.25f,
-                yPixels + field.getWidthCell() - field.getWidthCell()*0.25f, xPixels + field.getWidthCell() - field.getWidthCell()*0.25f, paint);
+                yPixels + field.getWidthCell()*0.75f, xPixels + field.getWidthCell()*0.75f, paint);
     }
 
     public void createPaint() {

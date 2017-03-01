@@ -38,14 +38,53 @@ public class ControllerThree extends BaseController {
             cube.get(i).getEndPosition().onDraw(canvas);
         }
         for(int i = 0; i < cube.size(); i++) {
-            cube.get(i).onDraw(canvas);
+            canvas.drawRect(cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                    cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getPaint());
         }
-        for(int i = 0; i < touchedCells.size(); i++) {
-            touchedCells.get(i).onDraw(canvas);
+        for(int i = 0; i < touchedCells.size() - 1; i++) {
+            canvas.drawRect(touchedCells.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, touchedCells.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                    touchedCells.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, touchedCells.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, touchedCells.get(i).getPaint());
+            Cube cubeOne = touchedCells.get(i);
+            Cube cubeTwo = touchedCells.get(i+1);
+            if(cubeOne.getX() > cubeTwo.getX()) {
+                canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                        cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+            }
+            if(cubeOne.getX() < cubeTwo.getX()) {
+                canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                        cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+            }
+            if(cubeOne.getY() > cubeTwo.getY()) {
+                canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
+                        cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+            }
+            if(cubeOne.getY() < cubeTwo.getY()) {
+                canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
+                        cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+            }
         }
         for(int i = 0; i < allPath.size(); i++) {
-            for(int j = 0; j < allPath.get(i).size(); j++) {
-                allPath.get(i).get(j).onDraw(canvas);
+            for(int j = 0; j < allPath.get(i).size() - 1; j++) {
+                canvas.drawRect(allPath.get(i).get(j).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, allPath.get(i).get(j).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                        allPath.get(i).get(j).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, allPath.get(i).get(j).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, allPath.get(i).get(j).getPaint());
+                Cube cubeOne = allPath.get(i).get(j);
+                Cube cubeTwo = allPath.get(i).get(j+1);
+                if(cubeOne.getX() > cubeTwo.getX()) {
+                    canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                            cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+                }
+                if(cubeOne.getX() < cubeTwo.getX()) {
+                    canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+                            cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+                }
+                if(cubeOne.getY() > cubeTwo.getY()) {
+                    canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
+                            cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+                }
+                if(cubeOne.getY() < cubeTwo.getY()) {
+                    canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
+                            cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+                }
             }
         }
     }
