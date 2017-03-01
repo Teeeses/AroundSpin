@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
+import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
 import ru.explead.features.beans.ButtonLevel;
 import ru.explead.features.logic.Level;
@@ -47,7 +48,6 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d("TAG", "getItem");
 
         if (convertView == null) {
             convertView = lInflater.inflate(R.layout.item_level, parent, false);
@@ -58,6 +58,7 @@ public class GridAdapter extends BaseAdapter {
             viewHolder.ivLevel = (ImageView) convertView.findViewById(R.id.ivLevel);
             viewHolder.tvLevel = (TextView) convertView.findViewById(R.id.tvLevel);
 
+            viewHolder.tvLevel.setTypeface(Utils.getTypeFaceLevel());
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

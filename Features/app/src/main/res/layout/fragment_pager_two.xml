@@ -2,18 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/brown"
+                android:background="@drawable/i"
                 android:clickable="true"
                 android:orientation="vertical">
+
+
 
     <GridView
         android:id="@+id/gvMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/standard_margin"
         android:scrollbars="none"
         android:paddingLeft="@dimen/standard_margin"
-        android:paddingRight="@dimen/standard_margin"
-        android:paddingBottom="88dp" />
+        android:paddingRight="@dimen/standard_margin" />
+
+
+    <ImageView
+        android:id="@+id/bottomImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_winter_layout"
+        android:adjustViewBounds="true"/>
 
 </RelativeLayout>

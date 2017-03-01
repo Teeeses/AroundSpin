@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/background_winter"
                 android:clickable="true"
                 android:orientation="vertical">
 
@@ -10,16 +11,19 @@
         android:id="@+id/gvMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/standard_margin"
-        android:background="@drawable/winter_background"
         android:scrollbars="none"
-        android:padding="@dimen/standard_margin" />
+        android:paddingLeft="@dimen/standard_margin"
+        android:paddingRight="@dimen/standard_margin"
+        android:paddingBottom="160dp"
+        android:paddingTop="@dimen/standard_margin"
+        android:clipToPadding="false" />
 
     <ImageView
+        android:id="@+id/bottomImage"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_winter_layout"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true" />
 
 </RelativeLayout>

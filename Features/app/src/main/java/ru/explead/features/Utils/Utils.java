@@ -1,7 +1,10 @@
 package ru.explead.features.Utils;
+import android.graphics.Typeface;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import ru.explead.features.LevelsActivity;
 
 /**
  * Created by develop on 16.12.2016.
@@ -34,4 +37,8 @@ public class Utils {
         return (float)Math.sqrt(k1*k1 + k2*k2);
     }
 
+
+    public static Typeface getTypeFaceLevel() {
+        return Typeface.createFromAsset(LevelsActivity.getActivity().getAssets(),"fonts/level_personal.ttf");
+    }
 }
