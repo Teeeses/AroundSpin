@@ -14,8 +14,6 @@ import ru.explead.features.beans.EndPosition;
 
 public class Cube {
 
-    private int id;
-
     private int x;
     private int y;
 
@@ -46,16 +44,6 @@ public class Cube {
      */
     private int numberFrameCell = 3;
 
-
-    public Cube(int x, int y, int color) {
-        field = App.getController().getField();
-        this.x = x;
-        this.y = y;
-        this.color = color;
-        xPixels = x*field.getWidthCell();
-        yPixels = y*field.getWidthCell();
-        createPaint();
-    }
 
     public Cube(int x, int y, int color, EndPosition endPosition) {
         field = App.getController().getField();
@@ -92,6 +80,29 @@ public class Cube {
             //        helper.getY()*field.getWidthCell() + field.getMid(), helper.getX()*field.getWidthCell() + field.getMid(), paintblackLine);
         }
     }
+
+    public void onDrawSmall(Canvas canvas, Cube cubeOne, Cube cubeTwo) {
+        canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
+                cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+        if(cubeOne.getX() > cubeTwo.getX()) {
+            canvas.drawRect(cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
+                    cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+        }
+        if(cubeOne.getX() < cubeTwo.getX()) {
+            canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
+                    cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
+        }
+        if(cubeOne.getY() > cubeTwo.getY()) {
+            canvas.drawRect(cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.25f,
+                    cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+        }
+        if(cubeOne.getY() < cubeTwo.getY()) {
+            canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.25f,
+                    cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
+        }
+    }
+
+
 
     public void onMove() {
         if(numberFrame > 0) {
@@ -169,20 +180,8 @@ public class Cube {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setNumberFrame(int numberFrame) {
-        this.numberFrame = numberFrame;
-    }
-
     public EndPosition getEndPosition() {
         return endPosition;
-    }
-
-    public int getNumberFrameCell() {
-        return numberFrameCell;
     }
 
     public Paint getPaint() {

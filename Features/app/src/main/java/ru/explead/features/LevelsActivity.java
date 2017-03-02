@@ -24,7 +24,7 @@ public class LevelsActivity extends AppCompatActivity  {
 
     private static Activity activity;
     private static Fragment fragment;
-    private ViewPager viewPager;
+    private ScrollerViewPager viewPager;
     private MyPagerAdapter adapter;
 
     private static SharedPreferences sPref;
@@ -49,13 +49,13 @@ public class LevelsActivity extends AppCompatActivity  {
 
 
         viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
-        //SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
+        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-        //viewPager.fixScrollSpeed();
+        viewPager.fixScrollSpeed();
 
-        //springIndicator.setViewPager(viewPager);
+        springIndicator.setViewPager(viewPager);
     }
 
     public void openBannerFragment() {

@@ -40,6 +40,12 @@ public class EndPosition {
                 yPixels + field.getWidthCell()*0.75f, xPixels + field.getWidthCell()*0.75f, paint);
     }
 
+    public void onDrawNormal(Canvas canvas) {
+        canvas.drawRect(yPixels, xPixels,
+                yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+    }
+
+
     public void createPaint() {
         paint = new Paint();
         paint.setColor(color);
@@ -52,5 +58,13 @@ public class EndPosition {
 
     public int getY() {
         return y;
+    }
+
+    public float getxPixels() {
+        return xPixels;
+    }
+
+    public float getyPixels() {
+        return yPixels;
     }
 }

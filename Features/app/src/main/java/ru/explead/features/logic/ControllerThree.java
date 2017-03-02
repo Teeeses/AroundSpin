@@ -16,7 +16,6 @@ import ru.explead.features.fragments.GameFragment;
 public class ControllerThree extends BaseController {
 
 
-    private Cube touchCube;
     private ArrayList<Cube> touchedCells = new ArrayList<>();
 
     private ArrayList<ArrayList<Cube>> allPath = new ArrayList<>();
@@ -35,56 +34,20 @@ public class ControllerThree extends BaseController {
             }
         }
         for(int i = 0; i < cube.size(); i++) {
-            cube.get(i).getEndPosition().onDraw(canvas);
+            cube.get(i).getEndPosition().onDrawNormal(canvas);
         }
         for(int i = 0; i < cube.size(); i++) {
-            canvas.drawRect(cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                    cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getPaint());
+            //canvas.drawRect(cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
+            //        cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getPaint());
+            cube.get(i).onDraw(canvas);
         }
-        for(int i = 0; i < touchedCells.size() - 1; i++) {
-            canvas.drawRect(touchedCells.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, touchedCells.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                    touchedCells.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, touchedCells.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, touchedCells.get(i).getPaint());
-            Cube cubeOne = touchedCells.get(i);
-            Cube cubeTwo = touchedCells.get(i+1);
-            if(cubeOne.getX() > cubeTwo.getX()) {
-                canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                        cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
-            }
-            if(cubeOne.getX() < cubeTwo.getX()) {
-                canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                        cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
-            }
-            if(cubeOne.getY() > cubeTwo.getY()) {
-                canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
-                        cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
-            }
-            if(cubeOne.getY() < cubeTwo.getY()) {
-                canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
-                        cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
-            }
+        for(int i = 0; i < touchedCells.size(); i++) {
+            touchedCells.get(i).onDraw(canvas);
         }
         for(int i = 0; i < allPath.size(); i++) {
             for(int j = 0; j < allPath.get(i).size() - 1; j++) {
-                canvas.drawRect(allPath.get(i).get(j).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, allPath.get(i).get(j).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                        allPath.get(i).get(j).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, allPath.get(i).get(j).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, allPath.get(i).get(j).getPaint());
-                Cube cubeOne = allPath.get(i).get(j);
-                Cube cubeTwo = allPath.get(i).get(j+1);
-                if(cubeOne.getX() > cubeTwo.getX()) {
-                    canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                            cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
-                }
-                if(cubeOne.getX() < cubeTwo.getX()) {
-                    canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-                            cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
-                }
-                if(cubeOne.getY() > cubeTwo.getY()) {
-                    canvas.drawRect(cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
-                            cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
-                }
-                if(cubeOne.getY() < cubeTwo.getY()) {
-                    canvas.drawRect(cubeOne.getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*getField().getWidthCell() + field.getWidthCell()*0.25f,
-                            cubeTwo.getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*getField().getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
-                }
+                //allPath.get(i).get(j).onDrawSmall(canvas, allPath.get(i).get(j), allPath.get(i).get(j+1));
+                allPath.get(i).get(j).onDraw(canvas);
             }
         }
     }
@@ -96,14 +59,14 @@ public class ControllerThree extends BaseController {
         Coordinate coordinate = findCell(start_x, start_y);
         if(checkSamePath(coordinate)) {
             for (int i = 0; i < cube.size(); i++) {
-                if (cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY()) {
-                    touchCube = new Cube(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getColor(), cube.get(i).getEndPosition());
-                    touchedCells.add(touchCube);
+                if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY()) ||
+                        (cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
+                    touchedCells.add(new Cube(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getColor(), cube.get(i).getEndPosition()));
                     return;
                 }
             }
         }
-        touchCube = null;
+        touchedCells.clear();
     }
 
     /**
@@ -117,12 +80,11 @@ public class ControllerThree extends BaseController {
     }
 
     public void logicMove(int end_x, int end_y) {
-        Log.d("TAG", "SIZE: " + Integer.toString(touchedCells.size()));
-        if(touchCube != null) {
+        Log.d("TAG", Integer.toString(touchedCells.size()));
+        if(touchedCells.size() != 0) {
             Coordinate coordinate = findCell(end_x, end_y);
-            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray() && checkPlaceCube(coordinate.getX(), coordinate.getY()) && checkElseEndPosition(coordinate)) {
-                touchCube = new Cube(coordinate.getX(), coordinate.getY(), touchCube.getColor(), touchCube.getEndPosition());
-                touchedCells.add(touchCube);
+            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) /*&& !checkEndPositionInArray() && checkPlaceCube(coordinate.getX(), coordinate.getY()) && checkElseEndPosition(coordinate)*/) {
+                touchedCells.add(new Cube(coordinate.getX(), coordinate.getY(), touchedCells.get(0).getColor(), touchedCells.get(0).getEndPosition()));
             }
 
             //Удаляем, если мы возвращаемся по цепочки
@@ -156,7 +118,8 @@ public class ControllerThree extends BaseController {
      */
     public boolean checkSamePath(Coordinate coordinate) {
         for(int i = 0; i < allPath.size(); i++) {
-            if(allPath.get(i).get(0).getX() == coordinate.getX() && allPath.get(i).get(0).getY() == coordinate.getY()) {
+            if((allPath.get(i).get(0).getX() == coordinate.getX() && allPath.get(i).get(0).getY() == coordinate.getY()) ||
+                    (allPath.get(i).get(0).getEndPosition().getX() == coordinate.getX() && allPath.get(i).get(0).getEndPosition().getY() == coordinate.getY())) {
                 return false;
             }
         }
@@ -170,7 +133,8 @@ public class ControllerThree extends BaseController {
      */
     public boolean checkEmployedCell(Coordinate coordinate) {
         for(int i = 0; i < touchedCells.size(); i++) {
-            if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY()) {
+            if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY() ||
+                    touchedCells.get(i).getEndPosition().getX() == coordinate.getX() && touchedCells.get(i).getEndPosition().getY() == coordinate.getY()) {
                 return false;
             }
         }
@@ -180,7 +144,7 @@ public class ControllerThree extends BaseController {
     /**
      * Можно ли захватить клетку над которой палец, находиться ли она слева, справа, сверхе или снизу предыдущей
      * @param coordinate - соординаты клетки над которой палец
-     * @return
+     * @return - true - можно
      */
     public boolean checkCurrentCellNearLastCell(Coordinate coordinate) {
         if(touchedCells.size() != 0) {
@@ -222,7 +186,6 @@ public class ControllerThree extends BaseController {
                 allPath.add(copyList);
             }
         }
-        touchCube = null;
         touchedCells.clear();
 
         checkWin();
@@ -236,4 +199,5 @@ public class ControllerThree extends BaseController {
         }
         return false;
     }
+
 }

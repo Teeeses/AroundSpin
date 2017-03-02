@@ -16,7 +16,6 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     private Fragment[] fragments = {
             new OneFragment(),
-            new TwoFragment(),
             new ThreeFragment()
     };
 
