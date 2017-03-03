@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
 import ru.explead.features.logic.Field;
 
@@ -17,7 +18,7 @@ public class EndPosition {
     private int y;
     private Field field;
 
-    private int color;
+    private int id;
     private Paint paint;
 
 
@@ -25,14 +26,12 @@ public class EndPosition {
     private float yPixels;
 
 
-    public EndPosition(int x, int y, int color) {
+    public EndPosition(int x, int y) {
         field = App.getController().getField();
         this.x = x;
         this.y = y;
-        this.color = color;
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
-        createPaint();
     }
 
     public void onDraw(Canvas canvas) {
@@ -45,11 +44,12 @@ public class EndPosition {
                 yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
     }
 
+    public void findDraweble() {
+        paint = Utils.getDrawableCube(id);
+    }
 
-    public void createPaint() {
-        paint = new Paint();
-        paint.setColor(color);
-        paint.setAntiAlias(true);
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getX() {

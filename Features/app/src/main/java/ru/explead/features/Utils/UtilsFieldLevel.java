@@ -43,8 +43,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(2, 3, Color.RED), new Helper(0, 1)));
-            cubeList.add(new Cube(2, 3, Color.GREEN, new EndPosition(0, 0, Color.GREEN), new Helper(0, 0)));
+            cubeList.add(new Cube(0, 0, new EndPosition(2, 3), 1));
+            cubeList.add(new Cube(2, 3, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -59,8 +59,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(4, 0, Color.RED, new EndPosition(4, 1, Color.RED)));
-            cubeList.add(new Cube(4, 1, Color.GREEN, new EndPosition(4, 0, Color.GREEN)));
+            cubeList.add(new Cube(4, 0, new EndPosition(4, 1), 1));
+            cubeList.add(new Cube(4, 1, new EndPosition(4, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -75,8 +75,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(4, 4, Color.RED, new EndPosition(4, 1, Color.RED)));
-            cubeList.add(new Cube(4, 1, Color.GREEN, new EndPosition(4, 4, Color.GREEN)));
+            cubeList.add(new Cube(4, 4, new EndPosition(4, 1), 1));
+            cubeList.add(new Cube(4, 1, new EndPosition(4, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -91,8 +91,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 4, Color.RED, new EndPosition(4, 4, Color.RED)));
-            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(1, 4, Color.GREEN)));
+            cubeList.add(new Cube(1, 4, new EndPosition(4, 4), 1));
+            cubeList.add(new Cube(4, 4, new EndPosition(1, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -108,8 +108,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(5, 2, Color.RED, new EndPosition(4, 2, Color.RED)));
-            cubeList.add(new Cube(4, 2, Color.GREEN, new EndPosition(5, 2, Color.GREEN)));
+            cubeList.add(new Cube(5, 2, new EndPosition(4, 2), 1));
+            cubeList.add(new Cube(4, 2, new EndPosition(5, 2), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -124,8 +124,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(0, 4, Color.RED)));
-            cubeList.add(new Cube(0, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(0, 4), 1));
+            cubeList.add(new Cube(0, 4, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -142,8 +142,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(2, 0, Color.RED, new EndPosition(2, 3, Color.RED)));
-            cubeList.add(new Cube(2, 3, Color.GREEN, new EndPosition(2, 0, Color.GREEN)));
+            cubeList.add(new Cube(2, 0, new EndPosition(2, 3), 1));
+            cubeList.add(new Cube(2, 3, new EndPosition(2, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -158,8 +158,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(2, 3, Color.RED)));
-            cubeList.add(new Cube(2, 3, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(2, 3), 1));
+            cubeList.add(new Cube(2, 3, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -175,8 +175,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(2, 4, Color.RED, new EndPosition(2, 2, Color.RED)));
-            cubeList.add(new Cube(2, 2, Color.GREEN, new EndPosition(2, 4, Color.GREEN)));
+            cubeList.add(new Cube(2, 4, new EndPosition(2, 2), 1));
+            cubeList.add(new Cube(2, 2, new EndPosition(2, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -192,8 +192,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 5, Color.RED, new EndPosition(0, 2, Color.RED)));
-            cubeList.add(new Cube(0, 2, Color.GREEN, new EndPosition(1, 5, Color.GREEN)));
+            cubeList.add(new Cube(1, 5, new EndPosition(0, 2), 1));
+            cubeList.add(new Cube(0, 2, new EndPosition(1, 5), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -210,8 +210,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 6, Color.RED, new EndPosition(6, 6, Color.RED)));
-            cubeList.add(new Cube(6, 6, Color.GREEN, new EndPosition(1, 6, Color.GREEN)));
+            cubeList.add(new Cube(1, 6, new EndPosition(6, 6), 1));
+            cubeList.add(new Cube(6, 6, new EndPosition(1, 6), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -227,8 +227,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(2, 3, Color.RED)));
-            cubeList.add(new Cube(2, 3, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(2, 3), 1));
+            cubeList.add(new Cube(2, 3, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -243,8 +243,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 4, Color.RED, new EndPosition(4, 2, Color.RED)));
-            cubeList.add(new Cube(4, 2, Color.GREEN, new EndPosition(0, 4, Color.GREEN)));
+            cubeList.add(new Cube(0, 4, new EndPosition(4, 2), 1));
+            cubeList.add(new Cube(4, 2, new EndPosition(0, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -260,8 +260,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 4, Color.RED, new EndPosition(5, 0, Color.RED)));
-            cubeList.add(new Cube(5, 0, Color.GREEN, new EndPosition(0, 4, Color.GREEN)));
+            cubeList.add(new Cube(0, 4, new EndPosition(5, 0), 1));
+            cubeList.add(new Cube(5, 0, new EndPosition(0, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -276,8 +276,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(2, 0, Color.RED, new EndPosition(4, 4, Color.RED)));
-            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(2, 0, Color.GREEN)));
+            cubeList.add(new Cube(2, 0, new EndPosition(4, 4), 1));
+            cubeList.add(new Cube(4, 4, new EndPosition(2, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -296,8 +296,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(4, 8, Color.RED)));
-            cubeList.add(new Cube(4, 8, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(4, 8), 1));
+            cubeList.add(new Cube(4, 8, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -316,8 +316,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 2, Color.RED, new EndPosition(5, 5, Color.RED)));
-            cubeList.add(new Cube(5, 5, Color.GREEN, new EndPosition(1, 2, Color.GREEN)));
+            cubeList.add(new Cube(1, 2, new EndPosition(5, 5), 1));
+            cubeList.add(new Cube(5, 5, new EndPosition(1, 2), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -332,8 +332,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(0, 4, Color.RED)));
-            cubeList.add(new Cube(0, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(0, 4), 1));
+            cubeList.add(new Cube(0, 4, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -351,8 +351,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(7, 2, Color.RED, new EndPosition(6, 6, Color.RED)));
-            cubeList.add(new Cube(6, 6, Color.GREEN, new EndPosition(7, 2, Color.GREEN)));
+            cubeList.add(new Cube(7, 2, new EndPosition(6, 6), 1));
+            cubeList.add(new Cube(6, 6, new EndPosition(7, 2), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -371,8 +371,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(7, 3, Color.RED, new EndPosition(3, 8, Color.RED)));
-            cubeList.add(new Cube(3, 8, Color.GREEN, new EndPosition(7, 3, Color.GREEN)));
+            cubeList.add(new Cube(7, 3, new EndPosition(3, 8), 1));
+            cubeList.add(new Cube(3, 8, new EndPosition(7, 3), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -390,8 +390,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 0, Color.RED, new EndPosition(7, 6, Color.RED)));
-            cubeList.add(new Cube(7, 6, Color.GREEN, new EndPosition(1, 0, Color.GREEN)));
+            cubeList.add(new Cube(1, 0, new EndPosition(7, 6), 1));
+            cubeList.add(new Cube(7, 6, new EndPosition(1, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -410,8 +410,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 8, Color.RED, new EndPosition(8, 6, Color.RED)));
-            cubeList.add(new Cube(8, 6, Color.GREEN, new EndPosition(0, 8, Color.GREEN)));
+            cubeList.add(new Cube(0, 8, new EndPosition(8, 6), 1));
+            cubeList.add(new Cube(8, 6, new EndPosition(0, 8), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -427,8 +427,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 1, Color.RED, new EndPosition(1, 5, Color.RED)));
-            cubeList.add(new Cube(1, 5, Color.GREEN, new EndPosition(0, 1, Color.GREEN)));
+            cubeList.add(new Cube(0, 1, new EndPosition(1, 5), 1));
+            cubeList.add(new Cube(1, 5, new EndPosition(0, 1), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -443,8 +443,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(4, 4, Color.RED)));
-            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(4, 4), 1));
+            cubeList.add(new Cube(4, 4, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -461,8 +461,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 0, Color.RED, new EndPosition(6, 4, Color.RED)));
-            cubeList.add(new Cube(6, 4, Color.GREEN, new EndPosition(1, 0, Color.GREEN)));
+            cubeList.add(new Cube(1, 0, new EndPosition(6, 4), 1));
+            cubeList.add(new Cube(6, 4, new EndPosition(1, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -479,8 +479,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(6, 5, Color.RED)));
-            cubeList.add(new Cube(6, 5, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(6, 5), 1));
+            cubeList.add(new Cube(6, 5, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -497,8 +497,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 0, Color.RED, new EndPosition(0, 4, Color.RED)));
-            cubeList.add(new Cube(0, 4, Color.GREEN, new EndPosition(1, 0, Color.GREEN)));
+            cubeList.add(new Cube(1, 0, new EndPosition(0, 4), 1));
+            cubeList.add(new Cube(0, 4, new EndPosition(1, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -516,8 +516,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(7, 7, Color.RED, new EndPosition(7, 4, Color.RED)));
-            cubeList.add(new Cube(7, 4, Color.GREEN, new EndPosition(7, 7, Color.GREEN)));
+            cubeList.add(new Cube(7, 7, new EndPosition(7, 4), 1));
+            cubeList.add(new Cube(7, 4, new EndPosition(7, 7), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -534,8 +534,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(4, 1, Color.RED, new EndPosition(0, 5, Color.RED)));
-            cubeList.add(new Cube(0, 5, Color.GREEN, new EndPosition(4, 1, Color.GREEN)));
+            cubeList.add(new Cube(4, 1, new EndPosition(0, 5), 1));
+            cubeList.add(new Cube(0, 5, new EndPosition(4, 1), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -552,8 +552,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(6, 0, Color.RED, new EndPosition(6, 6, Color.RED)));
-            cubeList.add(new Cube(6, 6, Color.GREEN, new EndPosition(6, 0, Color.GREEN)));
+            cubeList.add(new Cube(6, 0, new EndPosition(6, 6), 1));
+            cubeList.add(new Cube(6, 6, new EndPosition(6, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -569,8 +569,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(3, 4, Color.RED)));
-            cubeList.add(new Cube(3, 4, Color.GREEN, new EndPosition(0, 0, Color.GREEN)));
+            cubeList.add(new Cube(0, 0, new EndPosition(3, 4), 1));
+            cubeList.add(new Cube(3, 4, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -587,8 +587,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(4, 1, Color.RED, new EndPosition(4, 5, Color.RED)));
-            cubeList.add(new Cube(4, 5, Color.GREEN, new EndPosition(4, 1, Color.GREEN)));
+            cubeList.add(new Cube(4, 1, new EndPosition(4, 5), 1));
+            cubeList.add(new Cube(4, 5, new EndPosition(4, 1), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -604,8 +604,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(3, 0, Color.RED, new EndPosition(5, 5, Color.RED)));
-            cubeList.add(new Cube(5, 5, Color.GREEN, new EndPosition(3, 0, Color.GREEN)));
+            cubeList.add(new Cube(3, 0, new EndPosition(5, 5), 1));
+            cubeList.add(new Cube(5, 5, new EndPosition(3, 0), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -624,8 +624,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(2, 3, Color.RED, new EndPosition(3, 7, Color.RED)));
-            cubeList.add(new Cube(3, 7, Color.GREEN, new EndPosition(2, 3, Color.GREEN)));
+            cubeList.add(new Cube(2, 3, new EndPosition(3, 7), 1));
+            cubeList.add(new Cube(3, 7, new EndPosition(2, 3), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -643,8 +643,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(6, 4, Color.RED, new EndPosition(6, 6, Color.RED)));
-            cubeList.add(new Cube(6, 6, Color.GREEN, new EndPosition(6, 4, Color.GREEN)));
+            cubeList.add(new Cube(6, 4, new EndPosition(6, 6), 1));
+            cubeList.add(new Cube(6, 6, new EndPosition(6, 4), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -663,8 +663,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(3, 3, Color.RED, new EndPosition(7, 1, Color.RED)));
-            cubeList.add(new Cube(7, 1, Color.GREEN, new EndPosition(3, 3, Color.GREEN)));
+            cubeList.add(new Cube(3, 3, new EndPosition(7, 1), 1));
+            cubeList.add(new Cube(7, 1, new EndPosition(3, 3), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -683,8 +683,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(2, 8, Color.RED, new EndPosition(6, 8, Color.RED)));
-            cubeList.add(new Cube(6, 8, Color.GREEN, new EndPosition(2, 8, Color.GREEN)));
+            cubeList.add(new Cube(2, 8, new EndPosition(6, 8), 1));
+            cubeList.add(new Cube(6, 8, new EndPosition(2, 8), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -704,8 +704,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(8, 4, Color.RED, new EndPosition(6, 8, Color.RED)));
-            cubeList.add(new Cube(6, 8, Color.GREEN, new EndPosition(8, 4, Color.GREEN)));
+            cubeList.add(new Cube(8, 4, new EndPosition(6, 8), 1));
+            cubeList.add(new Cube(6, 8, new EndPosition(8, 4), 2));
             App.getController().setCube(cubeList);
         }
     }
@@ -724,8 +724,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 2, Color.RED, new EndPosition(3, 0, Color.RED)));
-            cubeList.add(new Cube(5, 3, Color.GREEN, new EndPosition(2, 5, Color.GREEN)));
+            cubeList.add(new Cube(0, 2, new EndPosition(3, 0), 1));
+            cubeList.add(new Cube(5, 3, new EndPosition(2, 5), 2));
             App.getController().setCube(cubeList);
         }
 
@@ -743,8 +743,8 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(5, 2, Color.RED, new EndPosition(4, 4, Color.RED)));
-            cubeList.add(new Cube(4, 4, Color.GREEN, new EndPosition(5, 2, Color.GREEN)));
+            cubeList.add(new Cube(5, 2, new EndPosition(4, 4), 1));
+            cubeList.add(new Cube(4, 4, new EndPosition(5, 2), 2));
             App.getController().setCube(cubeList);
         }
     }
@@ -761,9 +761,9 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(0, 0, Color.RED, new EndPosition(1, 4, Color.RED)));
-            cubeList.add(new Cube(2, 2, Color.GREEN, new EndPosition(4, 4, Color.GREEN)));
-            cubeList.add(new Cube(1, 3, Color.MAGENTA, new EndPosition(3, 4, Color.MAGENTA)));
+            cubeList.add(new Cube(0, 0, new EndPosition(1, 4), 1));
+            cubeList.add(new Cube(2, 2, new EndPosition(4, 4), 2));
+            cubeList.add(new Cube(1, 3, new EndPosition(3, 4), 3));
             App.getController().setCube(cubeList);
         }
         if(level == 2) {
@@ -778,9 +778,9 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(5, 0, Color.RED, new EndPosition(4, 4, Color.RED)));
-            cubeList.add(new Cube(1, 1, Color.GREEN, new EndPosition(3, 2, Color.GREEN)));
-            cubeList.add(new Cube(4, 2, Color.MAGENTA, new EndPosition(4, 5, Color.MAGENTA)));
+            cubeList.add(new Cube(5, 0, new EndPosition(4, 4), 1));
+            cubeList.add(new Cube(1, 1, new EndPosition(3, 2), 2));
+            cubeList.add(new Cube(4, 2, new EndPosition(4, 5), 3));
             App.getController().setCube(cubeList);
         }
 
@@ -797,10 +797,10 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(4, 3, Color.RED, new EndPosition(1, 4, Color.RED)));
-            cubeList.add(new Cube(2, 5, Color.GREEN, new EndPosition(3, 2, Color.GREEN)));
-            cubeList.add(new Cube(4, 2, Color.MAGENTA, new EndPosition(4, 5, Color.MAGENTA)));
-            cubeList.add(new Cube(0, 2, Color.CYAN, new EndPosition(4, 4, Color.CYAN)));
+            cubeList.add(new Cube(4, 3, new EndPosition(1, 4), 1));
+            cubeList.add(new Cube(2, 5, new EndPosition(3, 2), 2));
+            cubeList.add(new Cube(4, 2, new EndPosition(4, 5), 3));
+            cubeList.add(new Cube(0, 2, new EndPosition(4, 4), 4));
             App.getController().setCube(cubeList);
         }
 
@@ -818,10 +818,10 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(6, 0, Color.RED, new EndPosition(5, 6, Color.RED)));
-            cubeList.add(new Cube(6, 1, Color.GREEN, new EndPosition(2, 4, Color.GREEN)));
-            cubeList.add(new Cube(4, 1, Color.MAGENTA, new EndPosition(2, 6, Color.MAGENTA)));
-            cubeList.add(new Cube(2, 3, Color.CYAN, new EndPosition(6, 4, Color.CYAN)));
+            cubeList.add(new Cube(6, 0, new EndPosition(5, 6), 1));
+            cubeList.add(new Cube(6, 1, new EndPosition(2, 4), 2));
+            cubeList.add(new Cube(4, 1, new EndPosition(2, 6), 3));
+            cubeList.add(new Cube(2, 3, new EndPosition(6, 4), 4));
             App.getController().setCube(cubeList);
         }
 
@@ -839,10 +839,10 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(3, 2, Color.RED, new EndPosition(2, 5, Color.RED)));
-            cubeList.add(new Cube(5, 6, Color.GREEN, new EndPosition(1, 1, Color.GREEN)));
-            cubeList.add(new Cube(5, 1, Color.MAGENTA, new EndPosition(1, 6, Color.MAGENTA)));
-            cubeList.add(new Cube(4, 3, Color.CYAN, new EndPosition(6, 0, Color.CYAN)));
+            cubeList.add(new Cube(3, 2, new EndPosition(2, 5), 1));
+            cubeList.add(new Cube(5, 6, new EndPosition(1, 1), 2));
+            cubeList.add(new Cube(5, 1, new EndPosition(1, 6), 3));
+            cubeList.add(new Cube(4, 3, new EndPosition(6, 0), 4));
             App.getController().setCube(cubeList);
         }
 
@@ -860,10 +860,10 @@ public class UtilsFieldLevel {
             Field field = new Field(mass);
             App.getController().setField(field);
             ArrayList<Cube> cubeList = new ArrayList<>();
-            cubeList.add(new Cube(1, 1, Color.RED, new EndPosition(6, 6, Color.RED)));
-            cubeList.add(new Cube(4, 0, Color.GREEN, new EndPosition(2, 7, Color.GREEN)));
-            cubeList.add(new Cube(5, 1, Color.MAGENTA, new EndPosition(1, 5, Color.MAGENTA)));
-            cubeList.add(new Cube(0, 3, Color.CYAN, new EndPosition(4, 6, Color.CYAN)));
+            cubeList.add(new Cube(1, 1, new EndPosition(6, 6), 1));
+            cubeList.add(new Cube(4, 0, new EndPosition(2, 7), 2));
+            cubeList.add(new Cube(5, 1, new EndPosition(1, 5), 3));
+            cubeList.add(new Cube(0, 3, new EndPosition(4, 6), 4));
             App.getController().setCube(cubeList);
         }
 

@@ -1,11 +1,13 @@
 package ru.explead.features.logic;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 import ru.explead.features.MainActivity;
+import ru.explead.features.Utils.Utils;
 import ru.explead.features.fragments.GameFragment;
 
 
@@ -16,14 +18,28 @@ import ru.explead.features.fragments.GameFragment;
 public class ControllerThree extends BaseController {
 
 
-    private ArrayList<Cube> touchedCells = new ArrayList<>();
+    private ArrayList<SnakeCoordinate> touchedCells = new ArrayList<>();
 
-    private ArrayList<ArrayList<Cube>> allPath = new ArrayList<>();
+    private ArrayList<ArrayList<SnakeCoordinate>> allPath = new ArrayList<>();
+
+    private Coordinate endPosition;
+
+    private int[][] mass;
 
     public ControllerThree() {
         createPaint();
     }
 
+
+    @Override
+    public void startGame() {
+        super.startGame();
+        for(int i = 0; i < cube.size(); i++) {
+            field.getEmptyField()[cube.get(i).getX()][cube.get(i).getY()] = cube.get(i).getId();
+            field.getEmptyField()[cube.get(i).getEndPosition().getX()][cube.get(i).getEndPosition().getY()] = cube.get(i).getId();
+        }
+        Utils.writeTable(field.getEmptyField());
+    }
 
     public void onDraw(Canvas canvas) {
         for(int i = 0; i < field.getEmptyField().length; i++) {
@@ -37,17 +53,16 @@ public class ControllerThree extends BaseController {
             cube.get(i).getEndPosition().onDrawNormal(canvas);
         }
         for(int i = 0; i < cube.size(); i++) {
-            //canvas.drawRect(cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.75f,
-            //        cube.get(i).getY()*getField().getWidthCell() + field.getWidthCell()*0.75f, cube.get(i).getX()*getField().getWidthCell() + field.getWidthCell()*0.25f, cube.get(i).getPaint());
             cube.get(i).onDraw(canvas);
         }
         for(int i = 0; i < touchedCells.size(); i++) {
-            touchedCells.get(i).onDraw(canvas);
+            canvas.drawRect(touchedCells.get(i).getY()*field.getWidthCell(), touchedCells.get(i).getX()*field.getWidthCell(),
+                    touchedCells.get(i).getY()*field.getWidthCell() + field.getWidthCell(), touchedCells.get(i).getY()*field.getWidthCell() + field.getWidthCell(), touchedCells.get(i).getPaint());
         }
         for(int i = 0; i < allPath.size(); i++) {
             for(int j = 0; j < allPath.get(i).size() - 1; j++) {
-                //allPath.get(i).get(j).onDrawSmall(canvas, allPath.get(i).get(j), allPath.get(i).get(j+1));
-                allPath.get(i).get(j).onDraw(canvas);
+                canvas.drawRect(allPath.get(i).get(j).getY()*field.getWidthCell(), allPath.get(i).get(j).getX()*field.getWidthCell(),
+                        allPath.get(i).get(j).getY()*field.getWidthCell() + field.getWidthCell(), allPath.get(i).get(j).getY()*field.getWidthCell() + field.getWidthCell(), allPath.get(i).get(j).getPaint());
             }
         }
     }
@@ -59,14 +74,39 @@ public class ControllerThree extends BaseController {
         Coordinate coordinate = findCell(start_x, start_y);
         if(checkSamePath(coordinate)) {
             for (int i = 0; i < cube.size(); i++) {
-                if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY()) ||
-                        (cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
-                    touchedCells.add(new Cube(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getColor(), cube.get(i).getEndPosition()));
+                if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY())) {
+                    touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
+                    endPosition = new Coordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY());
+                    return;
+                }
+                if((cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
+                    touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
+                    endPosition = new Coordinate(cube.get(i).getX(), cube.get(i).getY());
                     return;
                 }
             }
         }
         touchedCells.clear();
+    }
+
+
+    public void logicMove(int end_x, int end_y) {
+        Log.d("TAG", Integer.toString(touchedCells.size()));
+        if(touchedCells.size() != 0) {
+            Coordinate coordinate = findCell(end_x, end_y);
+            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate)) {
+                int id = touchedCells.get(0).getId();
+                touchedCells.add(new SnakeCoordinate(coordinate.getX(), coordinate.getY(), id));
+                mass[coordinate.getX()][coordinate.getX()] = id;
+            }
+
+            //Удаляем, если мы возвращаемся по цепочки
+            if(touchedCells.size() > 1) {
+                if(touchedCells.get(touchedCells.size()-2).getX() == coordinate.getX() && touchedCells.get(touchedCells.size()-2).getY() == coordinate.getY()) {
+                    touchedCells.remove(touchedCells.size()-1);
+                }
+            }
+        }
     }
 
     /**
@@ -77,23 +117,6 @@ public class ControllerThree extends BaseController {
      */
     private Coordinate findCell(int start_x, int start_y) {
         return new Coordinate((int)(start_y/field.getWidthCell()), (int)(start_x/field.getWidthCell()));
-    }
-
-    public void logicMove(int end_x, int end_y) {
-        Log.d("TAG", Integer.toString(touchedCells.size()));
-        if(touchedCells.size() != 0) {
-            Coordinate coordinate = findCell(end_x, end_y);
-            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) /*&& !checkEndPositionInArray() && checkPlaceCube(coordinate.getX(), coordinate.getY()) && checkElseEndPosition(coordinate)*/) {
-                touchedCells.add(new Cube(coordinate.getX(), coordinate.getY(), touchedCells.get(0).getColor(), touchedCells.get(0).getEndPosition()));
-            }
-
-            //Удаляем, если мы возвращаемся по цепочки
-            if(touchedCells.size() > 1) {
-                if(touchedCells.get(touchedCells.size()-2).getX() == coordinate.getX() && touchedCells.get(touchedCells.size()-2).getY() == coordinate.getY()) {
-                    touchedCells.remove(touchedCells.size()-1);
-                }
-            }
-        }
     }
 
     /**
@@ -119,7 +142,7 @@ public class ControllerThree extends BaseController {
     public boolean checkSamePath(Coordinate coordinate) {
         for(int i = 0; i < allPath.size(); i++) {
             if((allPath.get(i).get(0).getX() == coordinate.getX() && allPath.get(i).get(0).getY() == coordinate.getY()) ||
-                    (allPath.get(i).get(0).getEndPosition().getX() == coordinate.getX() && allPath.get(i).get(0).getEndPosition().getY() == coordinate.getY())) {
+                    (allPath.get(i).get(allPath.get(i).size()-1).getX() == coordinate.getX() && allPath.get(i).get(allPath.get(i).size()-1).getY() == coordinate.getY()) ) {
                 return false;
             }
         }
@@ -133,8 +156,7 @@ public class ControllerThree extends BaseController {
      */
     public boolean checkEmployedCell(Coordinate coordinate) {
         for(int i = 0; i < touchedCells.size(); i++) {
-            if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY() ||
-                    touchedCells.get(i).getEndPosition().getX() == coordinate.getX() && touchedCells.get(i).getEndPosition().getY() == coordinate.getY()) {
+            if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY()) {
                 return false;
             }
         }
@@ -149,7 +171,7 @@ public class ControllerThree extends BaseController {
     public boolean checkCurrentCellNearLastCell(Coordinate coordinate) {
         if(touchedCells.size() != 0) {
             if(coordinate.getX() >= 0 && coordinate.getX() < field.getEmptyField().length && coordinate.getY() >= 0 && coordinate.getY() < field.getEmptyField().length) {
-                Cube lastCube = touchedCells.get(touchedCells.size() - 1);
+                SnakeCoordinate lastCube = touchedCells.get(touchedCells.size() - 1);
                 if ((lastCube.getX() == coordinate.getX() && Math.abs(lastCube.getY() - coordinate.getY()) == 1 ||
                         (Math.abs(lastCube.getX() - coordinate.getX()) == 1 && lastCube.getY() == coordinate.getY()))) {
                     return true;
@@ -166,7 +188,7 @@ public class ControllerThree extends BaseController {
      */
     public boolean checkEndPositionInArray() {
         if(touchedCells.size() != 0){
-            if (touchedCells.get(touchedCells.size() - 1).getX() == touchedCells.get(0).getEndPosition().getX() && touchedCells.get(touchedCells.size() - 1).getY() == touchedCells.get(0).getEndPosition().getY()) {
+            if (touchedCells.get(touchedCells.size() - 1).getX() == endPosition.getX() && touchedCells.get(touchedCells.size() - 1).getY() == endPosition.getY()) {
                 return true;
             }
         }
@@ -179,7 +201,7 @@ public class ControllerThree extends BaseController {
     public void onUpFinger() {
         if(touchedCells.size() != 0) {
             if(checkEndPositionInArray()) {
-                ArrayList<Cube> copyList = new ArrayList<>();
+                ArrayList<SnakeCoordinate> copyList = new ArrayList<>();
                 for(int i = 0; i < touchedCells.size(); i++) {
                     copyList.add(touchedCells.get(i));
                 }
@@ -198,6 +220,41 @@ public class ControllerThree extends BaseController {
             return true;
         }
         return false;
+    }
+
+
+
+
+    class SnakeCoordinate {
+
+        private int x;
+        private int y;
+        private int id;
+
+        private Paint paint;
+
+        public SnakeCoordinate(int x, int y, int id) {
+            this.x = x;
+            this.y = y;
+            this.id = id;
+            paint = Utils.getDrawableCube(id);
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public Paint getPaint() {
+            return paint;
+        }
     }
 
 }

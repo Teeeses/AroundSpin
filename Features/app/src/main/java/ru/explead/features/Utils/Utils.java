@@ -1,4 +1,6 @@
 package ru.explead.features.Utils;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
 
@@ -40,5 +42,26 @@ public class Utils {
 
     public static Typeface getTypeFaceLevel() {
         return Typeface.createFromAsset(LevelsActivity.getActivity().getAssets(),"fonts/level_personal.ttf");
+    }
+
+    public static Paint getDrawableCube(int id) {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        if(id == 1) {
+            paint.setColor(Color.RED);
+        }
+        if(id == 2) {
+            paint.setColor(Color.GREEN);
+        }
+        if(id == 3) {
+            paint.setColor(Color.MAGENTA);
+        }
+        if(id == 4) {
+            paint.setColor(Color.MAGENTA);
+        }
+        if(id == 5) {
+            paint.setColor(Color.CYAN);
+        }
+        return paint;
     }
 }
