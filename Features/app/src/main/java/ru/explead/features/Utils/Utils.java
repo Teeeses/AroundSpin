@@ -57,7 +57,7 @@ public class Utils {
             paint.setColor(Color.MAGENTA);
         }
         if(id == 4) {
-            paint.setColor(Color.MAGENTA);
+            paint.setColor(Color.YELLOW);
         }
         if(id == 5) {
             paint.setColor(Color.CYAN);

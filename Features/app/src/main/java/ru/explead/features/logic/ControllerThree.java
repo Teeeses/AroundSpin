@@ -64,19 +64,22 @@ public class ControllerThree extends BaseController {
      */
     public void checkTouchOnCube(int start_x, int start_y) {
         Coordinate coordinate = findCell(start_x, start_y);
-        if(checkSamePath(coordinate)) {
-            for (int i = 0; i < cube.size(); i++) {
-                if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY())) {
-                    touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
-                    endPosition = new Coordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY());
-                    startPosition = coordinate;
-                    return;
-                }
-                if((cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
-                    touchedCells.add(new SnakeCoordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY(), cube.get(i).getId()));
-                    endPosition = new Coordinate(cube.get(i).getX(), cube.get(i).getY());
-                    startPosition = coordinate;
-                    return;
+
+        if(coordinate.getX() >= 0 && coordinate.getX() < field.getEmptyField().length && coordinate.getY() >= 0 && coordinate.getY() < field.getEmptyField().length) {
+            if (checkSamePath(coordinate)) {
+                for (int i = 0; i < cube.size(); i++) {
+                    if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY())) {
+                        touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
+                        endPosition = new Coordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY());
+                        startPosition = coordinate;
+                        return;
+                    }
+                    if ((cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
+                        touchedCells.add(new SnakeCoordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY(), cube.get(i).getId()));
+                        endPosition = new Coordinate(cube.get(i).getX(), cube.get(i).getY());
+                        startPosition = coordinate;
+                        return;
+                    }
                 }
             }
         }
@@ -87,15 +90,17 @@ public class ControllerThree extends BaseController {
     public void logicMove(int end_x, int end_y) {
         if(touchedCells.size() != 0) {
             Coordinate coordinate = findCell(end_x, end_y);
-            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray()) {
-                int id = touchedCells.get(0).getId();
-                touchedCells.add(new SnakeCoordinate(coordinate.getX(), coordinate.getY(), id));
-            }
+            if(coordinate.getX() >= 0 && coordinate.getX() < field.getEmptyField().length && coordinate.getY() >= 0 && coordinate.getY() < field.getEmptyField().length) {
+                if (checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray() && !checkNearEndPositionInArray()) {
+                    int id = touchedCells.get(0).getId();
+                    touchedCells.add(new SnakeCoordinate(coordinate.getX(), coordinate.getY(), id));
+                }
 
-            //Удаляем, если мы возвращаемся по цепочки
-            if(touchedCells.size() > 1) {
-                if(touchedCells.get(touchedCells.size()-2).getX() == coordinate.getX() && touchedCells.get(touchedCells.size()-2).getY() == coordinate.getY()) {
-                    touchedCells.remove(touchedCells.size()-1);
+                //Удаляем, если мы возвращаемся по цепочки
+                if (touchedCells.size() > 1) {
+                    if (touchedCells.get(touchedCells.size() - 2).getX() == coordinate.getX() && touchedCells.get(touchedCells.size() - 2).getY() == coordinate.getY()) {
+                        touchedCells.remove(touchedCells.size() - 1);
+                    }
                 }
             }
         }
@@ -131,20 +136,27 @@ public class ControllerThree extends BaseController {
      * @return - true - если на эту клетку можно вступить
      */
     public boolean checkEmployedCell(Coordinate coordinate) {
-        //Если клетка - это коненая наша цель
+        //Если мы на конечной клетке, то можем на нее вступить
         if(endPosition.getX() == coordinate.getX() && endPosition.getY() == coordinate.getY()) {
             return true;
+        }
+        //Если это стена
+        if(field.getEmptyField()[coordinate.getX()][coordinate.getY()] == 6) {
+            return false;
         }
         for(int i = 0; i < touchedCells.size(); i++) {
             if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY()) {
                 return false;
             }
         }
-        for(int i = 0; i < cube.size(); i++) {
-            //Если мы на конечной клетке, то можем на нее вступить
-            if(coordinate.getX() == endPosition.getX() && coordinate.getY() == endPosition.getY()) {
-                return true;
+        for(int i = 0; i < allPath.size(); i++) {
+            for(int j = 0; j < allPath.get(i).size(); j++) {
+                if (allPath.get(i).get(j).getX() == coordinate.getX() && allPath.get(i).get(j).getY() == coordinate.getY()) {
+                    return false;
+                }
             }
+        }
+        for(int i = 0; i < cube.size(); i++) {
             //Если мы на какой-то другой клетке, то нельзя
             if(coordinate.getX() == cube.get(i).getX() && coordinate.getY() == cube.get(i).getY() ||
                     coordinate.getX() == cube.get(i).getEndPosition().getX() && coordinate.getY() == cube.get(i).getEndPosition().getY()) {
@@ -187,11 +199,25 @@ public class ControllerThree extends BaseController {
     }
 
     /**
+     * Проверка, рядом с конечной или нет
+     * @return - true - если рядом
+     */
+    public boolean checkNearEndPositionInArray() {
+        if(touchedCells.size() != 0){
+            if ((endPosition.getX() == touchedCells.get(touchedCells.size() - 1).getX() && Math.abs(endPosition.getY() - touchedCells.get(touchedCells.size() - 1).getY()) == 1 ||
+                    (Math.abs(endPosition.getX() - touchedCells.get(touchedCells.size() - 1).getX()) == 1 && endPosition.getY() == touchedCells.get(touchedCells.size() - 1).getY()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Вызывается при отпускании пальца
      */
     public void onUpFinger() {
         if(touchedCells.size() != 0) {
-            if(checkEndPositionInArray()) {
+            if(checkEndPositionInArray() || checkNearEndPositionInArray()) {
                 ArrayList<SnakeCoordinate> copyList = new ArrayList<>();
                 for(int i = 0; i < touchedCells.size(); i++) {
                     copyList.add(touchedCells.get(i));
