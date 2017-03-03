@@ -22,23 +22,12 @@ public class ControllerThree extends BaseController {
 
     private ArrayList<ArrayList<SnakeCoordinate>> allPath = new ArrayList<>();
 
+    private Coordinate startPosition;
     private Coordinate endPosition;
 
-    private int[][] mass;
 
     public ControllerThree() {
         createPaint();
-    }
-
-
-    @Override
-    public void startGame() {
-        super.startGame();
-        for(int i = 0; i < cube.size(); i++) {
-            field.getEmptyField()[cube.get(i).getX()][cube.get(i).getY()] = cube.get(i).getId();
-            field.getEmptyField()[cube.get(i).getEndPosition().getX()][cube.get(i).getEndPosition().getY()] = cube.get(i).getId();
-        }
-        Utils.writeTable(field.getEmptyField());
     }
 
     public void onDraw(Canvas canvas) {
@@ -55,15 +44,18 @@ public class ControllerThree extends BaseController {
         for(int i = 0; i < cube.size(); i++) {
             cube.get(i).onDraw(canvas);
         }
-        for(int i = 0; i < touchedCells.size(); i++) {
-            canvas.drawRect(touchedCells.get(i).getY()*field.getWidthCell(), touchedCells.get(i).getX()*field.getWidthCell(),
-                    touchedCells.get(i).getY()*field.getWidthCell() + field.getWidthCell(), touchedCells.get(i).getY()*field.getWidthCell() + field.getWidthCell(), touchedCells.get(i).getPaint());
-        }
         for(int i = 0; i < allPath.size(); i++) {
-            for(int j = 0; j < allPath.get(i).size() - 1; j++) {
-                canvas.drawRect(allPath.get(i).get(j).getY()*field.getWidthCell(), allPath.get(i).get(j).getX()*field.getWidthCell(),
-                        allPath.get(i).get(j).getY()*field.getWidthCell() + field.getWidthCell(), allPath.get(i).get(j).getY()*field.getWidthCell() + field.getWidthCell(), allPath.get(i).get(j).getPaint());
+            for(int j = 0; j < allPath.get(i).size(); j++) {
+                int x = allPath.get(i).get(j).getX();
+                int y = allPath.get(i).get(j).getY();
+                canvas.drawRect(y*field.getWidthCell(), x*field.getWidthCell(), y*field.getWidthCell() + field.getWidthCell(), x*field.getWidthCell() + field.getWidthCell(), allPath.get(i).get(j).getPaint());
             }
+        }
+        for(int i = 0; i < touchedCells.size(); i++) {
+            int x = touchedCells.get(i).getX();
+            int y = touchedCells.get(i).getY();
+            canvas.drawRect(y*field.getWidthCell(), x*field.getWidthCell(),
+                    y*field.getWidthCell() + field.getWidthCell(), x*field.getWidthCell() + field.getWidthCell(), touchedCells.get(i).getPaint());
         }
     }
 
@@ -77,11 +69,13 @@ public class ControllerThree extends BaseController {
                 if ((cube.get(i).getX() == coordinate.getX() && cube.get(i).getY() == coordinate.getY())) {
                     touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
                     endPosition = new Coordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY());
+                    startPosition = coordinate;
                     return;
                 }
                 if((cube.get(i).getEndPosition().getX() == coordinate.getX() && cube.get(i).getEndPosition().getY() == coordinate.getY())) {
-                    touchedCells.add(new SnakeCoordinate(cube.get(i).getX(), cube.get(i).getY(), cube.get(i).getId()));
+                    touchedCells.add(new SnakeCoordinate(cube.get(i).getEndPosition().getX(), cube.get(i).getEndPosition().getY(), cube.get(i).getId()));
                     endPosition = new Coordinate(cube.get(i).getX(), cube.get(i).getY());
+                    startPosition = coordinate;
                     return;
                 }
             }
@@ -91,13 +85,11 @@ public class ControllerThree extends BaseController {
 
 
     public void logicMove(int end_x, int end_y) {
-        Log.d("TAG", Integer.toString(touchedCells.size()));
         if(touchedCells.size() != 0) {
             Coordinate coordinate = findCell(end_x, end_y);
-            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate)) {
+            if(checkEmployedCell(coordinate) && checkCurrentCellNearLastCell(coordinate) && !checkEndPositionInArray()) {
                 int id = touchedCells.get(0).getId();
                 touchedCells.add(new SnakeCoordinate(coordinate.getX(), coordinate.getY(), id));
-                mass[coordinate.getX()][coordinate.getX()] = id;
             }
 
             //Удаляем, если мы возвращаемся по цепочки
@@ -120,22 +112,6 @@ public class ControllerThree extends BaseController {
     }
 
     /**
-     * Чужая конечная точка или на которую можно наехать
-     * @param coordinate
-     * @return
-     */
-    public boolean checkElseEndPosition(Coordinate coordinate) {
-        for(int i = 0; i < cube.size(); i++) {
-            if(coordinate.getX() == cube.get(i).getEndPosition().getX() && coordinate.getY() == cube.get(i).getEndPosition().getY()) {
-                if(touchedCells.get(0).getX() != cube.get(i).getX() && touchedCells.get(0).getY() != cube.get(i).getY()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Проверка, можно ли начать цепочку из этого кубика(был он или нет)
      * @return - true - можно
      */
@@ -150,13 +126,28 @@ public class ControllerThree extends BaseController {
     }
 
     /**
-     * Проверка, проходили мы эту клетку или нет
+     * Проверка, можно ли вступить на клетку
      * @param coordinate - координаты клетки на которой сейчас находимся
-     * @return - true - если на эту клетку мы еще не наступали
+     * @return - true - если на эту клетку можно вступить
      */
     public boolean checkEmployedCell(Coordinate coordinate) {
+        //Если клетка - это коненая наша цель
+        if(endPosition.getX() == coordinate.getX() && endPosition.getY() == coordinate.getY()) {
+            return true;
+        }
         for(int i = 0; i < touchedCells.size(); i++) {
             if(touchedCells.get(i).getX() == coordinate.getX() && touchedCells.get(i).getY() == coordinate.getY()) {
+                return false;
+            }
+        }
+        for(int i = 0; i < cube.size(); i++) {
+            //Если мы на конечной клетке, то можем на нее вступить
+            if(coordinate.getX() == endPosition.getX() && coordinate.getY() == endPosition.getY()) {
+                return true;
+            }
+            //Если мы на какой-то другой клетке, то нельзя
+            if(coordinate.getX() == cube.get(i).getX() && coordinate.getY() == cube.get(i).getY() ||
+                    coordinate.getX() == cube.get(i).getEndPosition().getX() && coordinate.getY() == cube.get(i).getEndPosition().getY()) {
                 return false;
             }
         }

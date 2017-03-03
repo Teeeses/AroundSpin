@@ -87,7 +87,6 @@ public class Cube {
     }
 
 
-
     public void onMove() {
         if(numberFrame > 0) {
             if (status == ControllerOne.UP) {
