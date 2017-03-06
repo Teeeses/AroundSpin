@@ -25,7 +25,7 @@ public class ThreeFragment  extends LevelsFragment {
         View view = inflater.inflate(R.layout.fragment_pager_three, container, false);
 
         gvMain = (GridView) view.findViewById(R.id.gvMain);
-        createButtons(8, Level.HARD);
+        createButtons(20, Level.HARD);
 
         return view;
     }

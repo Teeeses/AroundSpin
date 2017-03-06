@@ -218,6 +218,13 @@ public class ControllerThree extends BaseController {
     public void onUpFinger() {
         if(touchedCells.size() != 0) {
             if(checkEndPositionInArray() || checkNearEndPositionInArray()) {
+
+                SnakeCoordinate lastCoordinate = touchedCells.get(touchedCells.size()-1);
+                if(lastCoordinate.getX() != endPosition.getX() || lastCoordinate.getY() != endPosition.getY()) {
+                    int id = touchedCells.get(0).getId();
+                    touchedCells.add(new SnakeCoordinate(endPosition.getX(), endPosition.getY(), id));
+                }
+
                 ArrayList<SnakeCoordinate> copyList = new ArrayList<>();
                 for(int i = 0; i < touchedCells.size(); i++) {
                     copyList.add(touchedCells.get(i));
