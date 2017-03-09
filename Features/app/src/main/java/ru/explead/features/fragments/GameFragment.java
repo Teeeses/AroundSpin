@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ public class GameFragment extends Fragment {
     private Button btnHelp;
     private TextView tvLevel;
     private int start_x, start_y, end_x, end_y;
+    private long startTouch = 0l, endTouch = 0l;
 
     private Surface surface;
 
@@ -114,6 +116,7 @@ public class GameFragment extends Fragment {
                         case MotionEvent.ACTION_DOWN:
                             start_x = (int) event.getX();
                             start_y = (int) event.getY();
+                            startTouch = System.currentTimeMillis();
                             ((ControllerThree) App.getController()).checkTouchOnCube(start_x, start_y);
                             break;
                         case MotionEvent.ACTION_MOVE:
@@ -122,6 +125,11 @@ public class GameFragment extends Fragment {
                             ((ControllerThree) App.getController()).logicMove(x, y);
                             break;
                         case MotionEvent.ACTION_UP:
+                            endTouch = System.currentTimeMillis();
+                            if(endTouch - startTouch > 800l) {
+                                Log.d("TAG", "Long touch");
+                                ((ControllerThree) App.getController()).onDeletePath((int) event.getX(), (int) event.getY());
+                            }
                             ((ControllerThree) App.getController()).onUpFinger();
                             break;
                         default:

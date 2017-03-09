@@ -247,6 +247,18 @@ public class ControllerThree extends BaseController {
     }
 
 
+    public void onDeletePath(int x, int y) {
+        Coordinate coordinateTouch = findCell(x, y);
+        for(int i = 0; i < allPath.size(); i++) {
+            for(int j = 0; j < allPath.get(i).size(); j++) {
+                if(allPath.get(i).get(j).getX() == coordinateTouch.getX() && allPath.get(i).get(j).getY() == coordinateTouch.getY()) {
+                    allPath.remove(i);
+                    return;
+                }
+            }
+        }
+    }
+
 
 
     class SnakeCoordinate {
