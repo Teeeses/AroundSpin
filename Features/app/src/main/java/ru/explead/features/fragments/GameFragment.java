@@ -126,7 +126,7 @@ public class GameFragment extends Fragment {
                             break;
                         case MotionEvent.ACTION_UP:
                             endTouch = System.currentTimeMillis();
-                            if(endTouch - startTouch > 800l) {
+                            if(endTouch - startTouch > 500l && ((ControllerThree) App.getController()).getTouchedCells().size() == 0) {
                                 Log.d("TAG", "Long touch");
                                 ((ControllerThree) App.getController()).onDeletePath((int) event.getX(), (int) event.getY());
                             }

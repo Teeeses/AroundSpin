@@ -259,7 +259,9 @@ public class ControllerThree extends BaseController {
         }
     }
 
-
+    public ArrayList<SnakeCoordinate> getTouchedCells() {
+        return touchedCells;
+    }
 
     class SnakeCoordinate {
 
