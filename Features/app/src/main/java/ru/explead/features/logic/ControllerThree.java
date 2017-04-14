@@ -275,7 +275,7 @@ public class ControllerThree extends BaseController {
             this.x = x;
             this.y = y;
             this.id = id;
-            paint = Utils.getDrawableCube(id);
+            paint = Utils.getPaintCube(id);
         }
 
         public int getId() {

@@ -3,6 +3,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,13 +36,14 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void init() {
-        createBitmap();
+        this.setBackgroundColor(Color.TRANSPARENT);
+        this.setZOrderOnTop(true); //necessary
+        getHolder().setFormat(PixelFormat.TRANSPARENT);
         getHolder().addCallback(this);
     }
 
 
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.WHITE);
         if(App.getLevel().getComplexity() == Level.EASY) {
             ((ControllerOne) App.getController()).onDraw(canvas);
         } else if(App.getLevel().getComplexity() == Level.MEDIUM) {
@@ -49,10 +51,6 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
         } else if(App.getLevel().getComplexity() == Level.HARD) {
             ((ControllerThree) App.getController()).onDraw(canvas);
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    private void createBitmap() {
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {

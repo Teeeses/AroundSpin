@@ -1,12 +1,10 @@
 package ru.explead.features.logic;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 
 import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
-import ru.explead.features.app.Helper;
 import ru.explead.features.beans.EndPosition;
 
 /**
@@ -23,7 +21,7 @@ public class Cube {
     private float xPixels;
     private float yPixels;
 
-    private Paint paint;
+    private Bitmap bitmap;
 
     private Field field;
     private EndPosition endPosition;
@@ -51,22 +49,24 @@ public class Cube {
         this.x = x;
         this.y = y;
         this.id = id;
-        this.paint = Utils.getDrawableCube(id);
+        this.bitmap = Utils.getDrawableCube(id);
         xPixels = x*field.getWidthCell();
         yPixels = y*field.getWidthCell();
         speed = field.getWidthCell()/numberFrameCell;
         status = ControllerOne.NO_ACTIVE;
         endPosition.setId(id);
-        endPosition.findDraweble();
+        endPosition.findDrawable();
     }
 
 
     public void onDraw(Canvas canvas) {
-        canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+        //canvas.drawRect(yPixels, xPixels, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+        canvas.drawBitmap(bitmap, yPixels, xPixels, null);
+
     }
 
     public void onDrawSmall(Canvas canvas, Cube cubeOne, Cube cubeTwo) {
-        canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
+        /*canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
                 cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeOne.getPaint());
         if(cubeOne.getX() > cubeTwo.getX()) {
             canvas.drawRect(cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.75f,
@@ -83,7 +83,7 @@ public class Cube {
         if(cubeOne.getY() < cubeTwo.getY()) {
             canvas.drawRect(cubeOne.getY()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getX()*field.getWidthCell() + field.getWidthCell()*0.25f,
                     cubeTwo.getY()*field.getWidthCell() + field.getWidthCell()*0.25f, cubeTwo.getX()*field.getWidthCell() + field.getWidthCell()*0.75f, cubeOne.getPaint());
-        }
+        }*/
     }
 
 
@@ -149,7 +149,7 @@ public class Cube {
         return endPosition;
     }
 
-    public Paint getPaint() {
-        return paint;
+    public Bitmap getPaint() {
+        return bitmap;
     }
 }

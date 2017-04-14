@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 import ru.explead.features.Surface;
+import ru.explead.features.Utils.Utils;
 import ru.explead.features.app.App;
 import ru.explead.features.dialog.DialogMenu;
 import ru.explead.features.logic.ControllerOne;
@@ -31,8 +33,9 @@ import ru.explead.features.logic.Level;
 public class GameFragment extends Fragment {
 
     private RelativeLayout rootGameLayout;
-    private Button btnRestart;
-    private Button btnHelp;
+    private ImageView btnRestart;
+    private ImageView btnHelp;
+    private TextView tvNumberLevel;
     private TextView tvLevel;
     private int start_x, start_y, end_x, end_y;
     private long startTouch = 0l, endTouch = 0l;
@@ -44,20 +47,19 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         rootGameLayout = (RelativeLayout) view.findViewById(R.id.rootGameLayout);
+        tvNumberLevel = (TextView) view.findViewById(R.id.tvNumberLevel);
         tvLevel = (TextView) view.findViewById(R.id.tvLevel);
+        tvNumberLevel.setTypeface(Utils.getTypeFaceLevel());
+        tvLevel.setTypeface(Utils.getTypeFaceLevel());
 
-        int size = (int)App.getWidthScreen() - 30;
-        App.setSizeSurface(size);
+        createSurface();
         startGame();
 
-        surface = new Surface(getActivity());
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        surface.setLayoutParams(params);
+
 
         rootGameLayout.addView(surface);
 
-        btnRestart = (Button) view.findViewById(R.id.btnRestart);
+        btnRestart = (ImageView) view.findViewById(R.id.btnRestart);
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +67,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        btnHelp = (Button) view.findViewById(R.id.btnHelp);
+        btnHelp = (ImageView) view.findViewById(R.id.btnHelp);
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +86,22 @@ public class GameFragment extends Fragment {
         return view;
     }
 
+    public void createSurface() {
+        int size = (int)App.getWidthScreen() - (int)getActivity().getResources().getDimension(R.dimen.big_margin);
+        // marginTop = (int)(App.getHeightScreen()*0.75) - (int)(size*0.85);
+        App.setSizeSurface(size);
+
+        surface = new Surface(getActivity());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        //params.setMargins(0, marginTop, 0, 0);
+        surface.setLayoutParams(params);
+    }
+
+    public void createViews() {
+
+    }
+
     public void startGame() {
         if(App.getLevel().getComplexity() == Level.EASY) {
             ControllerOne controller = new ControllerOne();
@@ -100,7 +118,7 @@ public class GameFragment extends Fragment {
             controller.startGame();
         }
 
-        tvLevel.setText(String.format("Уровень %d", App.getLevel().getLevel()));
+        tvNumberLevel.setText(String.format("%d", App.getLevel().getLevel()));
     }
 
     public void onHelp() {

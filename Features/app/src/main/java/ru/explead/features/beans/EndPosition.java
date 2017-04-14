@@ -1,5 +1,6 @@
 package ru.explead.features.beans;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,7 +20,7 @@ public class EndPosition {
     private Field field;
 
     private int id;
-    private Paint paint;
+    private Bitmap bitmap;
 
 
     private float xPixels;
@@ -35,17 +36,20 @@ public class EndPosition {
     }
 
     public void onDraw(Canvas canvas) {
-        canvas.drawRect(yPixels + field.getWidthCell()*0.25f, xPixels + field.getWidthCell()*0.25f,
-                yPixels + field.getWidthCell()*0.75f, xPixels + field.getWidthCell()*0.75f, paint);
+        //canvas.drawRect(yPixels + field.getWidthCell()*0.25f, xPixels + field.getWidthCell()*0.25f,
+                //yPixels + field.getWidthCell()*0.75f, xPixels + field.getWidthCell()*0.75f, paint);
+
+        canvas.drawBitmap(bitmap, yPixels, xPixels, null);
     }
 
     public void onDrawNormal(Canvas canvas) {
-        canvas.drawRect(yPixels, xPixels,
-                yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+        //canvas.drawRect(yPixels, xPixels,
+                //yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
+        canvas.drawBitmap(bitmap, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), null);
     }
 
-    public void findDraweble() {
-        paint = Utils.getDrawableCube(id);
+    public void findDrawable() {
+        bitmap = Utils.getEndPositionDrawable(id);
     }
 
     public void setId(int id) {

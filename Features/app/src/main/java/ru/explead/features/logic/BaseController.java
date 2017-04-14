@@ -15,7 +15,7 @@ import ru.explead.features.fragments.GameFragment;
  * Created by develop on 21.02.2017.
  */
 
-public class BaseController {
+public abstract class BaseController {
 
     /**
      * левый нижний угол - (0, *), координаты.
@@ -29,7 +29,7 @@ public class BaseController {
     protected Field field;
     protected ArrayList<Cube> cube = new ArrayList<>();
 
-    protected Paint paintWall;
+    protected Paint paintWall = new Paint();
 
     public void startGame() {
         level = App.getLevel();
@@ -38,8 +38,7 @@ public class BaseController {
     }
 
     public void createPaint() {
-        paintWall = new Paint();
-        paintWall.setColor(LevelsActivity.getActivity().getResources().getColor(R.color.colorPrimary));
+        paintWall.setColor(LevelsActivity.getActivity().getResources().getColor(android.R.color.transparent));
         paintWall.setAntiAlias(true);
     }
 
