@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.Toast;
 
 import ru.explead.features.app.App;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGameFragment() {
+        Log.d("TIME", "Open Game Fragment: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
+        App.setTestTime(System.currentTimeMillis());
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();
         transaction.replace(R.id.fragmentContainer, fragment);

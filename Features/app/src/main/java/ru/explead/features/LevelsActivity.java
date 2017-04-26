@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import github.chenupt.springindicator.SpringIndicator;
 import github.chenupt.springindicator.viewpager.ScrollerViewPager;
@@ -89,6 +90,8 @@ public class LevelsActivity extends AppCompatActivity  {
     }
 
     public void openNewActivity() {
+        App.setTestTime(System.currentTimeMillis());
+        Log.d("TIME", "Open New Activity: " + Long.toString(App.getTestTime()));
         Intent intent = new Intent(LevelsActivity.this, MainActivity.class);
         startActivity(intent);
     }

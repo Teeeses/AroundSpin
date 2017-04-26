@@ -87,6 +87,10 @@ public class GameFragment extends Fragment {
     }
 
     public void createSurface() {
+
+        Log.d("TIME", "Create Surface: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
+        App.setTestTime(System.currentTimeMillis());
+
         int size = (int)App.getWidthScreen() - (int)getActivity().getResources().getDimension(R.dimen.big_margin);
         // marginTop = (int)(App.getHeightScreen()*0.75) - (int)(size*0.85);
         App.setSizeSurface(size);
@@ -98,11 +102,10 @@ public class GameFragment extends Fragment {
         surface.setLayoutParams(params);
     }
 
-    public void createViews() {
-
-    }
-
     public void startGame() {
+        Log.d("TIME", "Start Game: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
+        App.setTestTime(System.currentTimeMillis());
+
         if(App.getLevel().getComplexity() == Level.EASY) {
             ControllerOne controller = new ControllerOne();
             App.setController(controller);

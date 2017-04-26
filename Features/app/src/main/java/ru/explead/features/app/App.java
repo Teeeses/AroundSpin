@@ -23,6 +23,8 @@ public class App extends Application {
     private static Level level;
     private static UtilsBitmaps bitmaps;
 
+    private static long testTime;
+
     public static float getWidthScreen() {
         return widthScreen;
     }
@@ -80,4 +82,11 @@ public class App extends Application {
         App.bitmaps = bitmaps;
     }
 
+    public static long getTestTime() {
+        return testTime;
+    }
+
+    public static void setTestTime(long testTime) {
+        App.testTime = testTime;
+    }
 }

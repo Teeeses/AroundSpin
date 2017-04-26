@@ -1,6 +1,7 @@
 package ru.explead.features.logic;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,10 @@ public abstract class BaseController {
     protected Paint paintWall = new Paint();
 
     public void startGame() {
+
+        Log.d("TIME", "Start Game In Controller: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
+        App.setTestTime(System.currentTimeMillis());
+
         level = App.getLevel();
         UtilsFieldLevel.getDataLevel(level.getLevel(), level.getComplexity());
         status = ACTIVE_GAME;

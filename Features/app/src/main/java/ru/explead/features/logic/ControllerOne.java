@@ -2,6 +2,7 @@ package ru.explead.features.logic;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +10,7 @@ import java.util.Comparator;
 import ru.explead.features.LevelsActivity;
 import ru.explead.features.R;
 import ru.explead.features.Utils.Utils;
+import ru.explead.features.app.App;
 
 /**
  * Created by develop on 30.12.2016.
@@ -34,6 +36,7 @@ public class ControllerOne extends BaseController {
     }
 
     public void onDraw(Canvas canvas) {
+
         int dark_or_light = -1;
         for(int i = 0; i < field.getEmptyField().length; i++) {
             for(int j = 0; j < field.getEmptyField().length; j++) {
@@ -57,6 +60,7 @@ public class ControllerOne extends BaseController {
         for(int i = 0; i < cube.size(); i++) {
             cube.get(i).onDraw(canvas);
         }
+
     }
 
     public void onMoveUp() {
