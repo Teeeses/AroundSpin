@@ -28,6 +28,7 @@ public class Utils {
     public static Bitmap red_cube;
     public static Bitmap inside_blue_cube;
     public static Bitmap inside_red_cube;
+    //public static Bitmap large;
 
     public static void writeTable(int[][] table) {
         System.out.println();
@@ -57,16 +58,18 @@ public class Utils {
     public static void createCubeBitmap(int size, int complexity) {
         if(complexity == Level.EASY) {
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPurgeable = true;
+            //options.inPurgeable = true;
             blue_cube = BitmapFactory.decodeResource(MainActivity.getRes(), R.drawable.icon_blue_cube, options);
             red_cube = BitmapFactory.decodeResource(MainActivity.getRes(), R.drawable.icon_red_cube, options);
             inside_blue_cube = BitmapFactory.decodeResource(MainActivity.getRes(), R.drawable.icon_inside_blue_cube, options);
             inside_red_cube = BitmapFactory.decodeResource(MainActivity.getRes(), R.drawable.icon_inside_red_cube, options);
+            //large = BitmapFactory.decodeResource(MainActivity.getRes(), R.drawable.large, options);
 
             blue_cube = Bitmap.createScaledBitmap(blue_cube, size, size, true);
             red_cube = Bitmap.createScaledBitmap(red_cube, size, size, true);
             inside_blue_cube = Bitmap.createScaledBitmap(inside_blue_cube, size, size, true);
             inside_red_cube = Bitmap.createScaledBitmap(inside_red_cube, size, size, true);
+            //large = Bitmap.createScaledBitmap(large, size, size, true);
         }
     }
 
@@ -76,18 +79,14 @@ public class Utils {
         if(id == 1) {
             //paint.setColor(Color.RED);
             return red_cube;
-        }
-        if(id == 2) {
+        }else if(id == 2) {
             //paint.setColor(Color.GREEN);
             return blue_cube;
-        }
-        if(id == 3) {
+        }else if(id == 3) {
             paint.setColor(Color.MAGENTA);
-        }
-        if(id == 4) {
+        }else if(id == 4) {
             paint.setColor(Color.YELLOW);
-        }
-        if(id == 5) {
+        }else if(id == 5) {
             paint.setColor(Color.CYAN);
         }
         return null;
@@ -96,8 +95,7 @@ public class Utils {
     public static Bitmap getEndPositionDrawable(int id) {
         if(id == 1) {
             return inside_red_cube;
-        }
-        if(id == 2) {
+        } else if(id == 2) {
             return inside_blue_cube;
         }
         return null;
@@ -108,19 +106,19 @@ public class Utils {
         paint.setAntiAlias(true);
         if(id == 1) {
             paint.setColor(Color.RED);
-        }
-        if(id == 2) {
+        } else if(id == 2) {
             paint.setColor(Color.GREEN);
-        }
-        if(id == 3) {
+        } else if(id == 3) {
             paint.setColor(Color.MAGENTA);
-        }
-        if(id == 4) {
+        } else if(id == 4) {
             paint.setColor(Color.YELLOW);
-        }
-        if(id == 5) {
+        } else if(id == 5) {
             paint.setColor(Color.CYAN);
         }
         return null;
     }
+
+    /*public static Bitmap getLarge() {
+        return large;
+    }*/
 }

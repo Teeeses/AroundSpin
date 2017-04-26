@@ -40,10 +40,10 @@ public class DialogMenu extends Dialog {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dismiss();
                 Level level = App.getLevel();
                 App.setLevel(new Level(level.getComplexity(), level.getLevel() + 1));
                 ((GameFragment)MainActivity.getFragment()).startGame();
-                dismiss();
             }
         });
     }

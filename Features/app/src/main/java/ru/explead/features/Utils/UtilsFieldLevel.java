@@ -47,9 +47,6 @@ public class UtilsFieldLevel {
             cubeList.add(new Cube(0, 0, new EndPosition(2, 3), 1));
             cubeList.add(new Cube(2, 3, new EndPosition(0, 0), 2));
             App.getController().setCube(cubeList);
-
-            Log.d("TIME", "Create Level: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
-            App.setTestTime(System.currentTimeMillis());
         }
 
         else if(level == 2) {

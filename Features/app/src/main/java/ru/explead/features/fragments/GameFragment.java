@@ -52,13 +52,6 @@ public class GameFragment extends Fragment {
         tvNumberLevel.setTypeface(Utils.getTypeFaceLevel());
         tvLevel.setTypeface(Utils.getTypeFaceLevel());
 
-        createSurface();
-        startGame();
-
-
-
-        rootGameLayout.addView(surface);
-
         btnRestart = (ImageView) view.findViewById(R.id.btnRestart);
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +59,6 @@ public class GameFragment extends Fragment {
                 startGame();
             }
         });
-
         btnHelp = (ImageView) view.findViewById(R.id.btnHelp);
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,28 +75,26 @@ public class GameFragment extends Fragment {
             onTouchThree(surface);
         }
 
+        createSurface();
+        startGame();
+
         return view;
     }
 
     public void createSurface() {
 
-        Log.d("TIME", "Create Surface: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
-        App.setTestTime(System.currentTimeMillis());
-
-        int size = (int)App.getWidthScreen() - (int)getActivity().getResources().getDimension(R.dimen.big_margin);
-        // marginTop = (int)(App.getHeightScreen()*0.75) - (int)(size*0.85);
-        App.setSizeSurface(size);
-
         surface = new Surface(getActivity());
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(App.getSizeSurface(), App.getSizeSurface());
         params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        //params.setMargins(0, marginTop, 0, 0);
         surface.setLayoutParams(params);
+
+        rootGameLayout.addView(surface);
     }
 
     public void startGame() {
-        Log.d("TIME", "Start Game: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
-        App.setTestTime(System.currentTimeMillis());
+
+        //createSurface();
+        //rootGameLayout.removeViewAt(3);
 
         if(App.getLevel().getComplexity() == Level.EASY) {
             ControllerOne controller = new ControllerOne();
@@ -121,7 +111,7 @@ public class GameFragment extends Fragment {
             controller.startGame();
         }
 
-        tvNumberLevel.setText(String.format("%d", App.getLevel().getLevel()));
+        tvNumberLevel.setText(Integer.toString(App.getLevel().getLevel()));
     }
 
     public void onHelp() {
@@ -214,11 +204,11 @@ public class GameFragment extends Fragment {
     }
 
     public void onWin() {
+        Log.d("TAG", "WIN");
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(1000);
-                System.out.println("WIN");
+                SystemClock.sleep(500);
                 Toast.makeText(getActivity(), "Победа", Toast.LENGTH_SHORT).show();
                 ((LevelsActivity)LevelsActivity.getActivity()).setCurrentEasyLevel(App.getLevel().getLevel());
                 DialogMenu dialog = new DialogMenu(getActivity());

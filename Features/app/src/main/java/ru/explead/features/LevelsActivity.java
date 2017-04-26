@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import github.chenupt.springindicator.SpringIndicator;
 import github.chenupt.springindicator.viewpager.ScrollerViewPager;
@@ -46,8 +47,6 @@ public class LevelsActivity extends AppCompatActivity  {
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         App.setWidthScreen(displaymetrics.widthPixels);
         App.setHeightScreen(displaymetrics.heightPixels);
-
-
 
         viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
         SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
@@ -90,8 +89,6 @@ public class LevelsActivity extends AppCompatActivity  {
     }
 
     public void openNewActivity() {
-        App.setTestTime(System.currentTimeMillis());
-        Log.d("TIME", "Open New Activity: " + Long.toString(App.getTestTime()));
         Intent intent = new Intent(LevelsActivity.this, MainActivity.class);
         startActivity(intent);
     }

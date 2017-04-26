@@ -9,6 +9,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import ru.explead.features.app.App;
+import ru.explead.features.logic.BaseController;
 import ru.explead.features.logic.ControllerOne;
 import ru.explead.features.logic.ControllerThree;
 import ru.explead.features.logic.ControllerTwo;
@@ -35,7 +36,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
         init();
     }
 
-    private void init() {
+    public void init() {
         this.setBackgroundColor(Color.TRANSPARENT);
         this.setZOrderOnTop(true); //necessary
         getHolder().setFormat(PixelFormat.TRANSPARENT);
@@ -101,7 +102,7 @@ public class Surface extends SurfaceView implements SurfaceHolder.Callback {
                         onDraw(canvas);
                     }
                 }
-                catch (Exception e) { }
+                catch (Exception e) {}
                 finally {
                     if (canvas != null) {
                         try {

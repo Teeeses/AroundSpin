@@ -2,6 +2,7 @@ package ru.explead.features.app;
 
 import android.app.Application;
 
+import ru.explead.features.Surface;
 import ru.explead.features.Utils.UtilsBitmaps;
 import ru.explead.features.logic.BaseController;
 import ru.explead.features.logic.ControllerOne;
@@ -17,7 +18,8 @@ public class App extends Application {
 
     private static float widthScreen;
     private static float heightScreen;
-    private static float sizeSurface;
+    private static int sizeSurface;
+    private static  Surface surface;
 
     private static BaseController controller;
     private static Level level;
@@ -66,11 +68,11 @@ public class App extends Application {
         App.level = level;
     }
 
-    public static float getSizeSurface() {
+    public static int getSizeSurface() {
         return sizeSurface;
     }
 
-    public static void setSizeSurface(float sizeSurface) {
+    public static void setSizeSurface(int sizeSurface) {
         App.sizeSurface = sizeSurface;
     }
 
@@ -82,11 +84,11 @@ public class App extends Application {
         App.bitmaps = bitmaps;
     }
 
-    public static long getTestTime() {
-        return testTime;
+    public static Surface getSurface() {
+        return surface;
     }
 
-    public static void setTestTime(long testTime) {
-        App.testTime = testTime;
+    public static void setSurface(Surface surface) {
+        App.surface = surface;
     }
 }

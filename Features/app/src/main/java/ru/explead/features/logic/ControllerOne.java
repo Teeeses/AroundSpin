@@ -1,6 +1,7 @@
 package ru.explead.features.logic;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -36,20 +37,25 @@ public class ControllerOne extends BaseController {
     }
 
     public void onDraw(Canvas canvas) {
+        boolean dark_or_light = false;
+        int size = field.getEmptyField().length;
+        float sizeCell = field.getWidthCell();
 
-        int dark_or_light = -1;
-        for(int i = 0; i < field.getEmptyField().length; i++) {
-            for(int j = 0; j < field.getEmptyField().length; j++) {
-                dark_or_light++;
+        for(int i = 0; i < size; i++) {
+            dark_or_light = (size % 2 == 0 ? !dark_or_light : dark_or_light);
+            for(int j = 0; j < size; j++) {
+                dark_or_light = !dark_or_light;
                 //Рисуем клетки стенки
                 if(field.getEmptyField()[i][j] == 6) {
-                    canvas.drawRect(j*field.getWidthCell(), i*field.getWidthCell(), j*field.getWidthCell() + field.getWidthCell(), i*field.getWidthCell() + field.getWidthCell(), paintWall);
+                    canvas.drawRect(j*sizeCell, i*sizeCell, j*sizeCell + sizeCell, i*sizeCell + sizeCell, paintWall);
+
+                    //canvas.drawBitmap(Utils.getLarge(), j*sizeCell, i*sizeCell, null);
                 } else {
                     //Рисуем пустую клетку
-                    if(dark_or_light % 2 == 0) {
-                        canvas.drawRect(j * field.getWidthCell(), i * field.getWidthCell(), j * field.getWidthCell() + field.getWidthCell(), i * field.getWidthCell() + field.getWidthCell(), paintDarkCell);
+                    if(dark_or_light) {
+                        canvas.drawRect(j * sizeCell, i * sizeCell, j * sizeCell + sizeCell, i * sizeCell + sizeCell, paintDarkCell);
                     } else {
-                        canvas.drawRect(j * field.getWidthCell(), i * field.getWidthCell(), j * field.getWidthCell() + field.getWidthCell(), i * field.getWidthCell() + field.getWidthCell(), paintLightCell);
+                        canvas.drawRect(j * sizeCell, i * sizeCell, j * sizeCell + sizeCell, i * sizeCell + sizeCell, paintLightCell);
                     }
                 }
             }

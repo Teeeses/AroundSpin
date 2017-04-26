@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private static Fragment fragment;
     private static Resources res;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +32,13 @@ public class MainActivity extends AppCompatActivity {
         activity = this;
         res = getResources();
 
-        DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
-        App.setWidthScreen(displaymetrics.widthPixels);
-        App.setHeightScreen(displaymetrics.heightPixels);
+        int size = (int)App.getWidthScreen() - (int)this.getResources().getDimension(R.dimen.big_margin);
+        App.setSizeSurface(size);
 
         openGameFragment();
     }
 
     public void openGameFragment() {
-        Log.d("TIME", "Open Game Fragment: " + Long.toString(System.currentTimeMillis() - App.getTestTime()));
-        App.setTestTime(System.currentTimeMillis());
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new GameFragment();

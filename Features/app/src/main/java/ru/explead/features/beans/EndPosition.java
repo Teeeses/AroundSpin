@@ -36,15 +36,10 @@ public class EndPosition {
     }
 
     public void onDraw(Canvas canvas) {
-        //canvas.drawRect(yPixels + field.getWidthCell()*0.25f, xPixels + field.getWidthCell()*0.25f,
-                //yPixels + field.getWidthCell()*0.75f, xPixels + field.getWidthCell()*0.75f, paint);
-
         canvas.drawBitmap(bitmap, yPixels, xPixels, null);
     }
 
     public void onDrawNormal(Canvas canvas) {
-        //canvas.drawRect(yPixels, xPixels,
-                //yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), paint);
         canvas.drawBitmap(bitmap, yPixels + field.getWidthCell(), xPixels + field.getWidthCell(), null);
     }
 

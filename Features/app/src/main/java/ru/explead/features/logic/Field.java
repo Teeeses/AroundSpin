@@ -10,30 +10,16 @@ import ru.explead.features.app.App;
 public class Field {
 
     /**
-     * Длинна поля
-     */
-    private float width;
-    /**
      * Длинна клетки
      */
     private float widthCell;
 
-    /**
-     * Длинна пол клетки
-     */
-    private float mid;
 
     private int[][] emptyField;
 
     public Field(int[][] emptyField) {
         this.emptyField = emptyField;
-        this.width = App.getSizeSurface();
-        widthCell = width/ emptyField.length;
-    }
-
-
-    public float getMid() {
-        return mid;
+        widthCell = App.getSizeSurface()/ emptyField.length;
     }
 
     public float getWidthCell() {
